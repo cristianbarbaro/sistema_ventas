@@ -52,7 +52,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 # Another Gems to have nice day:
 
 # Gem of Bootstrap SASS
-gem 'bootstrap-sass', '~> 3.3.1'
+gem 'bootstrap-sass', '~> 3.3.6'
 # Bootstrap uses autoprefixer to add browser vendor prefixes automatically.
 gem 'autoprefixer-rails'
 # Gem to forms, Simple Form
