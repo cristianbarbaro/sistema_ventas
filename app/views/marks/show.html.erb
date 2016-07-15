@@ -1,9 +1,17 @@
-<p id="notice"><%= notice %></p>
+<div class="container col-md-4 col-md-offset-4">
+    <p id="notice"><%= notice %></p>
+</div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @mark.name %>
-</p>
 
-<%= link_to 'Edit', edit_mark_path(@mark) %> |
-<%= link_to 'Back', marks_path %>
+<div class="container col-md-4 col-md-offset-4">
+    <h3 class="text-center">Información de marca:</h3>
+    <p>
+        <strong>Name:</strong>
+        <%= @mark.name %>
+    </p>
+
+    <div class="pull-right">
+        <%= link_to 'Edit', edit_mark_path(@mark), class: "btn btn-success" %>
+        <%= link_to 'Back', marks_path, class: "btn btn-default" %>
+    </div>
+</div>
