@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<h3 class="text-center">Categorías</h3>
+
+<div class="col-md-6 col-md-offset-3">
+    <table class="table table-condensed">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @categories.each do |category| %>
+          <tr>
+            <td><%= category.name %></td>
+            <td><%= link_to 'Show', category %></td>
+            <td><%= link_to 'Edit', edit_category_path(category) %></td>
+            <td><%= link_to 'Destroy', category, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <br>
+    <div class="pull-right">
+        <%= link_to 'New Category', new_category_path, class: "btn btn-success" %>
+    </div>
+</div>
