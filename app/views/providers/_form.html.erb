@@ -1,0 +1,14 @@
+<%= simple_form_for(@provider) do |f| %>
+    <div class="container col-md-6 col-md-offset-3">
+        <%= f.error_notification %>
+
+    <div class="form-group">
+        <%= f.hidden_field :provider_id, value: @provider.id %>
+        <%= f.input :name %>
+        <%= f.input :category_id, :collection => Category.all.collect {|c| [ c.name, c.id ] }, as: :select %>
+    </div>
+  <div class="pull-right">
+    <%= link_to 'Back', :back, class: "btn btn-default" %>
+    <%= f.button :submit, class: "btn-success" %>
+  </div>
+ <% end %>
