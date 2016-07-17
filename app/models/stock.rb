@@ -1,5 +1,6 @@
 class Stock < ApplicationRecord
-    belongs_to :category
+    belongs_to :article, inverse_of: :stock
+    validates_presence_of :article
 
-    validates :article_id, :current_amount, :minimum_amount, presence: true
+    validates :current_amount, :minimum_amount, presence: true
 end
