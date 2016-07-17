@@ -1,10 +1,11 @@
 class CreateArticles < ActiveRecord::Migration[5.0]
   def change
     create_table :articles do |t|
+        t.string :code, unique: true, null: false
         t.string :name, null: false
         t.string :description, null: false
         t.integer :percentage, null: false
-        t.decimal :price, null: false
+        t.decimal :cost_price, null: false
         t.integer :mark_id, null: false
         t.integer :category_id, null: false
 

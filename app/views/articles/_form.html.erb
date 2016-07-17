@@ -1,0 +1,42 @@
+<%= simple_form_for(@article) do |f| %>
+    <div class="container col-md-6 col-md-offset-3">
+        <%= f.error_notification %>
+        <div class="form-group">
+            <%= f.input :code %>
+        </div>
+        <div class="form-group">
+            <%= f.input :name %>
+        </div>
+        <div class="form-group">
+            <%= f.input :cost_price %>
+        </div>
+        <div class="form-group">
+            <%= f.input :percentage, input_html: {value: @article.percentage || 0, min: 0, max: 100} %>
+        </div>
+        <div class="form-group">
+            <%= f.input :description %>
+        </div>
+        <div class="form-group">
+            <%= f.input :mark_id, :collection => Mark.all.collect { |m| [ m.name, m.id ] }, as: :select %>
+        </div>
+        <div class="form-group">
+            <%= f.input :category_id, :collection => Category.all.collect { |c| [ c.name, c.id ] }, as: :select %>
+        </div>
+        <%= f.fields_for :stock do |ff| %>
+            <div class="form-group">
+                <%= ff.input :current_amount, as: :numeric, input_html: {value: @article.stock.current_amount || 0, min: 0} %>
+            </div>
+            <div class="form-group">
+                <%= ff.input :minimum_amount, as: :numeric, input_html: {value: @article.stock.minimum_amount || 0, min: 0} %>
+            </div>
+            <%= ff.hidden_field :id %>
+            <%= ff.hidden_field :article_id %>
+        <% end %>
+
+        <div class="pull-right">
+            <%= link_to 'Back', articles_path, class: "btn btn-default" %>
+            <%= f.button :submit, class: "btn btn-success" %>
+        </div>
+    </div>
+
+<% end %>

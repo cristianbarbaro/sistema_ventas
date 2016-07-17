@@ -10,17 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160715114818) do
+ActiveRecord::Schema.define(version: 20160716142146) do
 
   create_table "articles", force: :cascade do |t|
+    t.string   "code",        null: false
     t.string   "name",        null: false
     t.string   "description", null: false
     t.integer  "percentage",  null: false
-    t.decimal  "price",       null: false
+    t.decimal  "cost_price",  null: false
     t.integer  "mark_id",     null: false
     t.integer  "category_id", null: false
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+  end
+
+  create_table "articles_providers", id: false, force: :cascade do |t|
+    t.integer "article_id"
+    t.integer "provider_id"
+    t.index ["article_id"], name: "index_articles_providers_on_article_id"
+    t.index ["provider_id"], name: "index_articles_providers_on_provider_id"
   end
 
   create_table "categories", force: :cascade do |t|
