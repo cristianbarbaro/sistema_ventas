@@ -63,3 +63,7 @@ gem 'rails-i18n', '~> 4.0.0'
 gem 'nested_form_fields'
 # Validates dates.
 gem 'date_validator'
+# Paginator.
+gem 'will_paginate', '~> 3.1.0'
+# Integration with Bootstrap.
+gem 'will_paginate-bootstrap'
