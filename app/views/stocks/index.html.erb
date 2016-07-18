@@ -1,2 +1,32 @@
-<h1>Stocks#index</h1>
-<p>Find me in app/views/stocks/index.html.erb</p>
+<p id="notice"><%= notice %></p>
+
+<h3 class="text-center">Stock</h3>
+
+<div class="col-md-6 col-md-offset-3">
+    <table class="table table-condensed">
+      <thead>
+        <tr>
+          <th>Artículo</th>
+          <th>Código de artículo</th>
+          <th>Stock actual</th>
+          <th>Stock mínimo</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @stocks.each do |s| %>
+        <tr class="<%= get_difference(s) <= 0 ? 'danger' : '' %>">
+            <td><%= get_article(s.article_id).name %></td>
+            <td><%= link_to get_article(s.article_id).code, get_article(s.article_id) %></td>
+            <td><%= s.current_amount %></td>
+            <td><%= s.minimum_amount %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <br>
+    <div class="pull-right">
+        <%= link_to 'Inicio', root_path, class: "btn btn-success" %>
+    </div>
+</div>

@@ -1,22 +1,5 @@
 class StocksController < ApplicationController
-  def index
-  end
-
-  def show
-  end
-
-  def new
-  end
-
-  def edit
-  end
-
-  def create
-  end
-
-  def update
-  end
-
-  def destroy
-  end
+    def index
+        @stocks = Stock.paginate(:page => params[:page]).order("current_amount - minimum_amount")
+    end
 end
