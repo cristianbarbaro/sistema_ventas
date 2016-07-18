@@ -23,7 +23,8 @@ class ArticlesController < ApplicationController
 
     def create
         @article = Article.new(article_params)
-        if @article.save!
+        if @article.save
+            create_historic
             flash[:success] = 'El artículo se ha creado exitosamente.'
             redirect_to @article
         else
@@ -32,7 +33,13 @@ class ArticlesController < ApplicationController
     end
 
     def update
+        old_price = @article.cost_price
         if @article.update(article_params)
+            # Historic.create!({cost_price: params.require(:article)[:cost_price], article_id: @article.id})
+            # @article.historics.create!({cost_price: params.require(:article)[:cost_price], article_id: @article.id})
+            if old_price != @article.cost_price
+                create_historic
+            end
             flash[:success] = 'El artículo se ha actualizado correctamente.'
             redirect_to @article
         else
@@ -63,5 +70,10 @@ class ArticlesController < ApplicationController
 
         def stock_params
             params.require(:stock).permit(:current_stock, :minimum_stock)
+        end
+
+        def create_historic
+            # Active Model Dirty before save (don't works after).
+            Historic.create!({cost_price: params.require(:article)[:cost_price], article_id: @article.id})
         end
 end

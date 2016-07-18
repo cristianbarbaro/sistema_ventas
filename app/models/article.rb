@@ -3,7 +3,6 @@ class Article < ApplicationRecord
     belongs_to :mark
     has_one :stock, inverse_of: :article, dependent: :destroy
     has_many :historics, dependent: :destroy
-    has_many :historics
     has_many :lines
     has_many :sales, through: :lines
     has_and_belongs_to_many :providers

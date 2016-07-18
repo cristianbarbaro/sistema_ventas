@@ -21,6 +21,10 @@
         $ <%= @article.cost_price %>
     </p>
     <p>
+        <strong>Historial de precios:</strong>
+        <%= link_to 'Historial', article_historics_path(@article) %>
+    </p>
+    <p>
         <strong>Porcentaje:</strong>
         <%= @article.percentage %> %
     </p>
