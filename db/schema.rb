@@ -38,11 +38,10 @@ ActiveRecord::Schema.define(version: 20160716142146) do
   end
 
   create_table "historics", force: :cascade do |t|
-    t.date     "discharge_date", null: false
-    t.decimal  "cost_price",     null: false
-    t.integer  "article_id",     null: false
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.decimal  "cost_price", null: false
+    t.integer  "article_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "lines", force: :cascade do |t|
