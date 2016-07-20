@@ -13,15 +13,15 @@
 ActiveRecord::Schema.define(version: 20160716142146) do
 
   create_table "articles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "code",                       null: false
-    t.string   "name",                       null: false
-    t.string   "description",                null: false
-    t.integer  "percentage",                 null: false
-    t.decimal  "cost_price",  precision: 10, null: false
-    t.integer  "mark_id",                    null: false
-    t.integer  "category_id",                null: false
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.string   "code",                                null: false
+    t.string   "name",                                null: false
+    t.string   "description",                         null: false
+    t.integer  "percentage",                          null: false
+    t.decimal  "cost_price",  precision: 9, scale: 2, null: false
+    t.integer  "mark_id",                             null: false
+    t.integer  "category_id",                         null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
     t.index ["category_id"], name: "index_articles_on_category_id", using: :btree
     t.index ["mark_id"], name: "index_articles_on_mark_id", using: :btree
   end
@@ -40,20 +40,20 @@ ActiveRecord::Schema.define(version: 20160716142146) do
   end
 
   create_table "historics", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.decimal  "cost_price", precision: 10, null: false
-    t.integer  "article_id",                null: false
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.decimal  "cost_price", precision: 9, scale: 2, null: false
+    t.integer  "article_id",                         null: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
     t.index ["article_id"], name: "index_historics_on_article_id", using: :btree
   end
 
   create_table "lines", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "sale_id",                                 null: false
-    t.integer  "article_id",                              null: false
-    t.integer  "article_amount",                          null: false
-    t.decimal  "article_final_price_unit", precision: 10, null: false
-    t.datetime "created_at",                              null: false
-    t.datetime "updated_at",                              null: false
+    t.integer  "sale_id",                                          null: false
+    t.integer  "article_id",                                       null: false
+    t.integer  "article_amount",                                   null: false
+    t.decimal  "article_final_price_unit", precision: 9, scale: 2, null: false
+    t.datetime "created_at",                                       null: false
+    t.datetime "updated_at",                                       null: false
     t.index ["article_id"], name: "index_lines_on_article_id", using: :btree
     t.index ["sale_id"], name: "index_lines_on_sale_id", using: :btree
   end
@@ -74,9 +74,9 @@ ActiveRecord::Schema.define(version: 20160716142146) do
   end
 
   create_table "sales", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.decimal  "total_price", precision: 10, null: false
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.decimal  "total_price", precision: 9, scale: 2, null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
   end
 
   create_table "stocks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
