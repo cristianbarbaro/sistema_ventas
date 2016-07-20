@@ -16,6 +16,7 @@
         <% @providers.each do |provider| %>
           <tr>
             <td><%= provider.name %></td>
+            <td><%= provider.contact %></td>
             <td><%= get_category_name(provider.category_id) %></td>
             <td><%= link_to 'Show', provider %></td>
             <td><%= link_to 'Edit', edit_provider_path(provider) %></td>

@@ -50,6 +50,6 @@ class ProvidersController < ApplicationController
         end
 
         def provider_params
-            params.require(:provider).permit(:name, :category_id)
+            params.require(:provider).permit(:name, :contact, :category_id)
         end
 end

@@ -5,6 +5,7 @@
     <div class="form-group">
         <%= f.hidden_field :provider_id, value: @provider.id %>
         <%= f.input :name %>
+        <%= f.input :contact %>
         <%= f.input :category_id, :collection => Category.all.collect {|c| [ c.name, c.id ] }, as: :select %>
     </div>
   <div class="pull-right">
