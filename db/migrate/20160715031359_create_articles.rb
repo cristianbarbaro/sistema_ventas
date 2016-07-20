@@ -6,11 +6,8 @@ class CreateArticles < ActiveRecord::Migration[5.0]
         t.string :description, null: false
         t.integer :percentage, null: false
         t.decimal :cost_price, null: false
-        t.integer :mark_id, null: false
-        t.integer :category_id, null: false
-
-        add_foreign_key :articles, :marks
-        add_foreign_key :articles, :categories
+        t.belongs_to :mark, null: false
+        t.belongs_to :category, null: false
         t.timestamps
     end
   end

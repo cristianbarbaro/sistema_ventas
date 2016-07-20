@@ -12,72 +12,80 @@
 
 ActiveRecord::Schema.define(version: 20160716142146) do
 
-  create_table "articles", force: :cascade do |t|
-    t.string   "code",        null: false
-    t.string   "name",        null: false
-    t.string   "description", null: false
-    t.integer  "percentage",  null: false
-    t.decimal  "cost_price",  null: false
-    t.integer  "mark_id",     null: false
-    t.integer  "category_id", null: false
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+  create_table "articles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "code",                       null: false
+    t.string   "name",                       null: false
+    t.string   "description",                null: false
+    t.integer  "percentage",                 null: false
+    t.decimal  "cost_price",  precision: 10, null: false
+    t.integer  "mark_id",                    null: false
+    t.integer  "category_id",                null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.index ["category_id"], name: "index_articles_on_category_id", using: :btree
+    t.index ["mark_id"], name: "index_articles_on_mark_id", using: :btree
   end
 
-  create_table "articles_providers", id: false, force: :cascade do |t|
+  create_table "articles_providers", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "article_id"
     t.integer "provider_id"
-    t.index ["article_id"], name: "index_articles_providers_on_article_id"
-    t.index ["provider_id"], name: "index_articles_providers_on_provider_id"
+    t.index ["article_id"], name: "index_articles_providers_on_article_id", using: :btree
+    t.index ["provider_id"], name: "index_articles_providers_on_provider_id", using: :btree
   end
 
-  create_table "categories", force: :cascade do |t|
+  create_table "categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name",       null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "historics", force: :cascade do |t|
-    t.decimal  "cost_price", null: false
-    t.integer  "article_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table "historics", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.decimal  "cost_price", precision: 10, null: false
+    t.integer  "article_id",                null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.index ["article_id"], name: "index_historics_on_article_id", using: :btree
   end
 
-  create_table "lines", force: :cascade do |t|
-    t.integer  "sale_id",                  null: false
-    t.integer  "article_id",               null: false
-    t.integer  "article_amount",           null: false
-    t.decimal  "article_final_price_unit", null: false
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+  create_table "lines", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "sale_id",                                 null: false
+    t.integer  "article_id",                              null: false
+    t.integer  "article_amount",                          null: false
+    t.decimal  "article_final_price_unit", precision: 10, null: false
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
+    t.index ["article_id"], name: "index_lines_on_article_id", using: :btree
+    t.index ["sale_id"], name: "index_lines_on_sale_id", using: :btree
   end
 
-  create_table "marks", force: :cascade do |t|
+  create_table "marks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name",       null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "providers", force: :cascade do |t|
+  create_table "providers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name",        null: false
+    t.string   "contact"
     t.integer  "category_id", null: false
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.index ["category_id"], name: "index_providers_on_category_id", using: :btree
   end
 
-  create_table "sales", force: :cascade do |t|
-    t.decimal  "total_price", null: false
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+  create_table "sales", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.decimal  "total_price", precision: 10, null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
-  create_table "stocks", force: :cascade do |t|
+  create_table "stocks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "current_amount", null: false
     t.integer  "minimum_amount", null: false
     t.integer  "article_id",     null: false
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.index ["article_id"], name: "index_stocks_on_article_id", using: :btree
   end
 
 end
