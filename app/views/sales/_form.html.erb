@@ -26,7 +26,7 @@
                         <input type="text" class="form-control" id="searchArt" autofocus="autofocus" onkeypress="searchArticle(event);">
                     </td>
                     <td>
-                        <input type="number" class="form-control" id="amountArt"
+                        <input type="number" class="form-control" id="amountArt" min="1"
                             onkeypress="addArticle(event);" onfocus="this.select();" readonly>
                     </td>
                     <td>
@@ -36,10 +36,10 @@
                         <input type="text" class="form-control" id="descriptionArt" onkeypress="addArticle(event);" readonly>
                     </td>
                     <td>
-                        <input type="number" class="form-control" id="priceArt" onkeypress="addArticle(event);" readonly>
+                        <input type="number" class="form-control" id="priceArt" min="0" onkeypress="addArticle(event);" readonly>
                     </td>
                     <td>
-                        <input type="number" class="form-control" id="totalPriceArt" onkeypress="addArticle(event);" readonly>
+                        <input type="number" class="form-control" id="totalPriceArt" min="0" onkeypress="addArticle(event);" readonly>
                     </td>
                     <td></td>
                 </tr>
