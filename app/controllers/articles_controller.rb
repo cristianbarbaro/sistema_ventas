@@ -51,7 +51,7 @@ class ArticlesController < ApplicationController
     def update
         old_price = @article.cost_price
         if @article.update(article_params)
-            @article.providers.create(params.require(:providers))
+            # @article.providers.create(params.require(:providers))
             # Historic.create!({cost_price: params.require(:article)[:cost_price], article_id: @article.id})
             # @article.historics.create!({cost_price: params.require(:article)[:cost_price], article_id: @article.id})
             if old_price != @article.cost_price
