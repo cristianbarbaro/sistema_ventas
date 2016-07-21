@@ -11,8 +11,9 @@ class SalesController < ApplicationController
         if @sale.save!
             # create_lines
             flash[:success] = 'La venta se ha guardado exitosamente.'
-            redirect_to :back
+            redirect_to :root
         else
+            flash[:errors] = "Hubo errores al intentar guardar la venta."
             redirect_to :edit
         end
     end

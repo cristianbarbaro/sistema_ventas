@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-    root 'home#index'
+    root 'sales#new'
 
     resources :marks
     resources :categories
@@ -8,6 +8,6 @@ Rails.application.routes.draw do
     end
     resources :providers
     resources :stocks, only: [:index]
-    resources :sales
+    resources :sales, only: [:new, :create]
     # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
