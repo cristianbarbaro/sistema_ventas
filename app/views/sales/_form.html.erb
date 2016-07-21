@@ -23,23 +23,23 @@
                     <input type="hidden" id="totalLines" value="0">
                     <input type="hidden" id="article_id" value="">
                     <td>
-                        <input type="text" class="form-control" id="searchArt" onkeypress="searchArticle(event);">
+                        <input type="text" class="form-control" id="searchArt" autofocus="autofocus" onkeypress="searchArticle(event);">
                     </td>
                     <td>
                         <input type="number" class="form-control" id="amountArt"
-                            onkeypress="addArticle(event);" onfocus="this.select();">
+                            onkeypress="addArticle(event);" onfocus="this.select();" readonly>
                     </td>
                     <td>
-                        <input type="textarea" class="form-control" id="nameArt" onkeypress="addArticle(event);">
+                        <input type="textarea" class="form-control" id="nameArt" onkeypress="addArticle(event);" readonly>
                     </td>
                     <td>
-                        <input type="text" class="form-control" id="descriptionArt" onkeypress="addArticle(event);">
+                        <input type="text" class="form-control" id="descriptionArt" onkeypress="addArticle(event);" readonly>
                     </td>
                     <td>
-                        <input type="number" class="form-control" id="priceArt" onkeypress="addArticle(event);">
+                        <input type="number" class="form-control" id="priceArt" onkeypress="addArticle(event);" readonly>
                     </td>
                     <td>
-                        <input type="number" class="form-control" id="totalPriceArt" onkeypress="addArticle(event);">
+                        <input type="number" class="form-control" id="totalPriceArt" onkeypress="addArticle(event);" readonly>
                     </td>
                     <td></td>
                 </tr>
@@ -47,7 +47,7 @@
         </table>
 
         <div class="pull-right">
-            <%= link_to 'Cancelar', "#", class: "btn btn-danger" %>
+            <%= link_to 'Cancelar', root_path, class: "btn btn-danger", data: {confirm: "¿Está seguro que desea cancelar?"} %>
             <input name="commit" type="submit" value="Aceptar" class="btn btn-success", onclick='saveLines();'>
         </div>
 

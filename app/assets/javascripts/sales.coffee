@@ -1,4 +1,5 @@
 @disableInputsSales = () ->
+    document.getElementById("searchArt").focus()
     document.getElementById("nameArt").readOnly = true
     document.getElementById("descriptionArt").readOnly = true
     document.getElementById("priceArt").readOnly = true
@@ -7,30 +8,12 @@
 
 
 @enableInputsSales = () ->
+    document.getElementById("amountArt").focus()
     document.getElementById("nameArt").readOnly = false
     document.getElementById("descriptionArt").readOnly = false
     document.getElementById("priceArt").readOnly = false
     document.getElementById("amountArt").readOnly = false
     document.getElementById("totalPriceArt").readOnly = false
-
-
-@saveLines = () ->
-    lines_array = localStorage.getItem("lines") || "[]"
-    localStorage.removeItem("lines")
-    lines_array = JSON.parse(lines_array)
-    to_ret = []
-    for line, i in lines_array
-        to_ret.push(JSON.parse(localStorage.getItem(line)))
-        localStorage.removeItem(line)
-    # return to_ret
-    $.ajax
-    type: 'post'
-    url: '/articles.json'
-    dataType: 'json'
-    data: to_ret
-    success: (result) ->
-        console.log JSON.stringify(to_ret)
-        # return
 
 
 @searchArticle = (e) ->
@@ -56,10 +39,8 @@
                 document.getElementById("amountArt").value = 1
                 document.getElementById("totalPriceArt").value = final_price_unit
                 enableInputsSales()
-                document.getElementById("amountArt").focus()
             # else
-            #     alert "Producto no encontrado"
-                #Aquí intentar habilitar el enter para los otros campos, sino no hacerlo
+            #     TODO: alert "Producto no encontrado"
     xhttp.open("GET", "/articles.json?q=" + article_code, true)
     xhttp.send()
 
@@ -72,14 +53,13 @@ cleanInputs = ->
     document.getElementById("amountArt").value = ""
     document.getElementById("totalPriceArt").value = ""
     document.getElementById("searchArt").value = ""
-    document.getElementById("searchArt").focus()
 
 
 updateTotalPriceSale = (valueToAdd) ->
     val = document.getElementById("totalSalePrice").value
     console.log(valueToAdd)
     partialPrice = parseFloat(val)
-    document.getElementById("totalSalePrice").value = partialPrice + parseFloat(valueToAdd)
+    document.getElementById("totalSalePrice").value = partialPrice + valueToAdd
 
 
 updateNumberLine = ->
@@ -89,12 +69,8 @@ updateNumberLine = ->
     return old
 
 
-# saveLineStorage = (line) ->
-#     #TODO
-
-
 @updateValues = ->
-    # Revisar el tema de que haya algún artículo que fue buscadon y evitar agregar esa fila a la tabla si no es el caso.
+    # TODO: Revisar el tema de que haya algún artículo que fue buscadon y evitar agregar esa fila a la tabla si no es el caso.
     line = updateNumberLine()
     article_id = document.getElementById("article_id").value
     code = document.getElementById("searchArt").value
@@ -105,7 +81,6 @@ updateNumberLine = ->
     total = document.getElementById("totalPriceArt").value
     html =
         "
-        <input type='hidden' id='line_number' value='#{line}'/>
         <input type='hidden' id='art_id' type='number' name='sale[sale_lines_attributes][#{line}][article_id]' value='#{article_id}'/>
         <td id='code'><input value='#{code}' style='border-width: 0px' ></td>
         <td id='amount'><input value='#{amount}' type='number' name='sale[sale_lines_attributes][#{line}][article_amount]' style='border-width: 0px' ></td>
@@ -113,27 +88,21 @@ updateNumberLine = ->
         <td id='desc'><input value='#{desc}' style='border-width: 0px' ></td>
         <td id='price'><input value='#{price}' type='number' name='sale[sale_lines_attributes][#{line}][article_final_price_unit]' style='border-width: 0px' ></td>
         <td id='total'>#{total}</td>
-        <td><span class='glyphicon glyphicon-trash'></span></td>
+        <td><span id='delete' class='glyphicon glyphicon-trash' onclick='deleteLine(this, #{line});'></span></td>
         "
-    obj = {
-        'article_id': article_id,
-        'article_amount': amount,
-        'article_final_price_unit': price
-    }
-    # Se almanena la línea y en un arreglo se lleva el control de los nros de líneas almancenados para su posterior iteración.
-    lines = localStorage.getItem("lines") || "[]"
-    lines = JSON.parse(lines)
-    lines.push(line)
-    localStorage.setItem("lines", JSON.stringify(lines))
-    localStorage.setItem(line, JSON.stringify(obj))
-    # Fin de ese procesamiento.
     node = document.createElement("tr")
     node.id = line
     node.innerHTML = html
     document.getElementById("showArt").appendChild(node)
-    updateTotalPriceSale(total)
-    # saveLineStorage(line)
-    cleanInputs()
+    updateTotalPriceSale(parseFloat(total))
+
+
+@deleteLine = (element, line_number) ->
+    line = document.getElementById(line_number)
+    # TODO: Mejorar esta línea usando id y esas cosas de javascript.
+    totalArticle = parseFloat(line.children[6].innerText)
+    line.remove()
+    updateTotalPriceSale(totalArticle*(-1))
 
 
 @addArticle = (e)->
@@ -145,3 +114,4 @@ updateNumberLine = ->
         document.getElementById("totalPriceArt").value = totalPriceArt
         disableInputsSales()
         updateValues()
+        cleanInputs()
