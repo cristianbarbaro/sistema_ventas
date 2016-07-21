@@ -28,15 +28,42 @@
               </div>
           </div>
       </nav>
+
       <div class="container col-md-12">
           <!-- Showing errors/alerts messages -->
           <% if flash[:success] %>
-              <p id="success" class="alert bg-success text-center"><%= flash[:success] %></p>
+            <div class="alert alert-success dismissable text-center" role="alert">
+                <span><%= flash[:success] %></span>
+      			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      		  	    <span aria-hidden="true">&times;</span>
+      			</button>
+  		    </div>
           <% end %>
           <% if flash[:alert] %>
-              <p id="alert" class="alert bg-danger text-center"><%= flash[:alert] %></p>
+              <div class="alert alert-danger text-center dismissable text-center" role="alert">
+                  <span><%= flash[:alert] %></span>
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        		  	<span aria-hidden="true">&times;</span>
+        		  </button>
+              </div>
           <% end %>
+          <!-- End of errors/alerts messages -->
           <%= yield %>
       </div>
   </body>
+
+  <!-- Quitar la notificación -->
+  <script type="text/javascript">
+      jQuery(function($){
+          if ($('.alert').hasClass('dismissable')) {
+              setTimeout(function(){
+                  $('.alert').fadeOut();
+              }, 7500);
+              $('.alert').click(function(){
+                  $('.alert').fadeOut();
+              });
+          }
+      });
+  </script>
+
 </html>
