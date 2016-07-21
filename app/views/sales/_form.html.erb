@@ -1,0 +1,66 @@
+
+<div class="col-lg-12">
+    <!-- <input type="text" name="name" id="searchArt" value="" onkeypress="searchArticle(event);"> -->
+    <form class="" id="new_sale" action="/sales" method="post">
+        <div class="container-fluid pull-left">
+            <h3>Total: $ <input id="totalSalePrice" value="0" type='number' name="sale[total_price]" style="border-width: 0px" readonly ></h3>
+        </div>
+        <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+        <table class="table table-condensed table-responsive" id="linesList">
+            <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Cantidad</th>
+                    <th>Artículo</th>
+                    <th>Descripción</th>
+                    <th>Precio unitario</th>
+                    <th>Precio total</th>
+                    <th colspan="1"></th>
+                </tr>
+            </thead>
+            <tbody id="showArt">
+                <tr>
+                    <input type="hidden" id="totalLines" value="0">
+                    <input type="hidden" id="article_id" value="">
+                    <td>
+                        <input type="text" class="form-control" id="searchArt" onkeypress="searchArticle(event);">
+                    </td>
+                    <td>
+                        <input type="number" class="form-control" id="amountArt"
+                            onkeypress="addArticle(event);" onfocus="this.select();">
+                    </td>
+                    <td>
+                        <input type="textarea" class="form-control" id="nameArt" onkeypress="addArticle(event);">
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" id="descriptionArt" onkeypress="addArticle(event);">
+                    </td>
+                    <td>
+                        <input type="number" class="form-control" id="priceArt" onkeypress="addArticle(event);">
+                    </td>
+                    <td>
+                        <input type="number" class="form-control" id="totalPriceArt" onkeypress="addArticle(event);">
+                    </td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="pull-right">
+            <%= link_to 'Cancelar', "#", class: "btn btn-danger" %>
+            <input name="commit" type="submit" value="Aceptar" class="btn btn-success", onclick='saveLines();'>
+        </div>
+
+    </form>
+
+    <script type="text/javascript">
+    $('#new_sale').on('keyup keypress', function(e) {
+        var keyCode = e.keyCode || e.which;
+        if (keyCode === 13) {
+        e.preventDefault();
+        return false;
+        }
+        });
+    </script>
+
+</div>

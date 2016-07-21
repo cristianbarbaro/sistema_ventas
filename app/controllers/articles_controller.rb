@@ -3,7 +3,23 @@ class ArticlesController < ApplicationController
     helper ArticlesHelper
 
     def index
-        @articles = Article.paginate(:page => params[:page]).order(:name)
+        respond_to do |format|
+            format.html { @articles = Article.paginate(:page => params[:page]).order(:name) }
+            format.json {
+                # En formato JSON, verifico si se realiza consulta por el código de barra,
+                # sino es así, retorno todos los artículos como se hiciera por defecto. ¿Es esta la mejor solución?
+                if not params[:q].nil?
+                    @article = Article.find_by(code: params[:q])
+                    if @article.nil?
+                        render json: {errors: :not_found!}, status: :unprocessable_entity
+                    else
+                        @article
+                    end
+                else
+                    @articles = Article.paginate(:page => params[:page]).order(:name)
+                end
+            }
+        end
     end
 
     def show
@@ -35,6 +51,7 @@ class ArticlesController < ApplicationController
     def update
         old_price = @article.cost_price
         if @article.update(article_params)
+            @article.providers.create(params.require(:providers))
             # Historic.create!({cost_price: params.require(:article)[:cost_price], article_id: @article.id})
             # @article.historics.create!({cost_price: params.require(:article)[:cost_price], article_id: @article.id})
             if old_price != @article.cost_price

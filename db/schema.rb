@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160716142146) do
+ActiveRecord::Schema.define(version: 20160721012533) do
 
   create_table "articles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "code",                                null: false
@@ -47,17 +47,6 @@ ActiveRecord::Schema.define(version: 20160716142146) do
     t.index ["article_id"], name: "index_historics_on_article_id", using: :btree
   end
 
-  create_table "lines", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "sale_id",                                          null: false
-    t.integer  "article_id",                                       null: false
-    t.integer  "article_amount",                                   null: false
-    t.decimal  "article_final_price_unit", precision: 9, scale: 2, null: false
-    t.datetime "created_at",                                       null: false
-    t.datetime "updated_at",                                       null: false
-    t.index ["article_id"], name: "index_lines_on_article_id", using: :btree
-    t.index ["sale_id"], name: "index_lines_on_sale_id", using: :btree
-  end
-
   create_table "marks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name",       null: false
     t.datetime "created_at", null: false
@@ -71,6 +60,17 @@ ActiveRecord::Schema.define(version: 20160716142146) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.index ["category_id"], name: "index_providers_on_category_id", using: :btree
+  end
+
+  create_table "sale_lines", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "sale_id",                                          null: false
+    t.integer  "article_id",                                       null: false
+    t.integer  "article_amount",                                   null: false
+    t.decimal  "article_final_price_unit", precision: 9, scale: 2, null: false
+    t.datetime "created_at",                                       null: false
+    t.datetime "updated_at",                                       null: false
+    t.index ["article_id"], name: "index_sale_lines_on_article_id", using: :btree
+    t.index ["sale_id"], name: "index_sale_lines_on_sale_id", using: :btree
   end
 
   create_table "sales", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
