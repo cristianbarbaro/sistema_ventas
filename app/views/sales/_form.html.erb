@@ -48,7 +48,7 @@
 
         <div class="pull-right">
             <%= link_to 'Cancelar', root_path, class: "btn btn-danger", data: {confirm: "¿Está seguro que desea cancelar?"} %>
-            <input name="commit" type="submit" value="Aceptar" class="btn btn-success", onclick='saveLines();'>
+            <input id="commitBtn"name="commit" type="submit" value="Aceptar" class="btn btn-success", onclick='saveLines();' disabled>
         </div>
 
     </form>

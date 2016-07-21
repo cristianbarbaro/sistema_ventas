@@ -55,11 +55,22 @@ cleanInputs = ->
     document.getElementById("searchArt").value = ""
 
 
+checkAmountLines = ->
+    length = document.getElementById("showArt").children.length
+    if length > 1
+        document.getElementById("commitBtn").disabled = false
+    else
+        document.getElementById("commitBtn").disabled = true
+
+
 updateTotalPriceSale = (valueToAdd) ->
     val = document.getElementById("totalSalePrice").value
     console.log(valueToAdd)
     partialPrice = parseFloat(val)
     document.getElementById("totalSalePrice").value = partialPrice + valueToAdd
+    # Cada vez que actualice el total, verifico si hay líneas suficientes para habilitar o no los botones.
+    # Una medida de seguridad para no enviar formularios vacíos. Se desea evitar eso lo más posible.
+    checkAmountLines()
 
 
 updateNumberLine = ->
