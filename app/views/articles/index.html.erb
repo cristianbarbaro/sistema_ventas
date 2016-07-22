@@ -21,12 +21,10 @@
                 <td style="text-overflow:ellipsis;overflow:hidden;white-space:nowrap"><%= article.description %></td>
                 <td><%= get_mark_name(article.mark_id) %></td>
                 <td>$ <%= article.final_price %></td>
-                <td style="padding: 2px;">
-                    <div class="btn-group">
-                        <%= link_to '', article, class:'glyphicon glyphicon-eye-open btn btn-sm btn-default', title: 'Ver' %>
-                        <%= link_to '', edit_article_path(article), class:'glyphicon glyphicon-pencil btn btn-sm btn-default', title: 'Editar' %>
-                        <%= link_to '', article, class:'glyphicon glyphicon-trash btn btn-sm btn-danger', method: :delete, data: { confirm: 'Are you sure?' }, title: 'Borrar' %>
-                    </div>
+                <td>
+                    <%= link_to '', article, class:'glyphicon glyphicon-eye-open btn btn-xs btn-default', title: 'Ver' %>
+                    <%= link_to '', edit_article_path(article), class:'glyphicon glyphicon-pencil btn btn-xs btn-default', title: 'Editar' %>
+                    <%= link_to '', article, class:'glyphicon glyphicon-trash btn btn-xs btn-danger', method: :delete, data: { confirm: 'Are you sure?' }, title: 'Borrar' %>
                 </td>
             </tr>
             <% end %>

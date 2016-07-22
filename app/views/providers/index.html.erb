@@ -17,12 +17,10 @@
             <td><%= provider.name %></td>
             <td><%= provider.contact %></td>
             <td><%= get_category_name(provider.category_id) %></td>
-            <td style="padding: 2px;">
-                <div class="btn-group">
-                    <%= link_to '', provider, class:'glyphicon glyphicon-eye-open btn btn-sm btn-default', title: 'Ver' %>
-                    <%= link_to '', edit_provider_path(provider), class:'glyphicon glyphicon-pencil btn btn-sm btn-default', title: 'Editar' %>
-                    <%= link_to '', provider, class:'glyphicon glyphicon-trash btn btn-sm btn-danger', title: 'Borrar', method: :delete, data: { confirm: 'Are you sure?' } %>
-                </div>
+            <td>
+                <%= link_to '', provider, class:'glyphicon glyphicon-eye-open btn btn-xs btn-default', title: 'Ver' %>
+                <%= link_to '', edit_provider_path(provider), class:'glyphicon glyphicon-pencil btn btn-xs btn-default', title: 'Editar' %>
+                <%= link_to '', provider, class:'glyphicon glyphicon-trash btn btn-xs btn-danger', title: 'Borrar', method: :delete, data: { confirm: 'Are you sure?' } %>
             </td>
           </tr>
         <% end %>
