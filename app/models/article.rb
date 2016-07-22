@@ -12,6 +12,7 @@ class Article < ApplicationRecord
     accepts_nested_attributes_for :stock, allow_destroy: true
     validates :code, :name, :cost_price, :percentage, :description, :mark_id, :category_id, presence: true
     validates :cost_price, numericality: { greater_than_or_equal_to: 0 }
+    validates :final_price, numericality: { greater_than_or_equal_to: 0 }
     validates :percentage, numericality: { only_integer: true, greater_than_or_equal_to: 0, less_than_or_equal_to: 100 }
     validates_uniqueness_of :code
 

@@ -10,8 +10,4 @@ module ArticlesHelper
     def get_mark_name(mark_id)
         Mark.find(mark_id).name
     end
-
-    def get_public_price(cost, percentage)
-        (cost * percentage / 100) + cost
-    end
 end

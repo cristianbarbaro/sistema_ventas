@@ -22,6 +22,7 @@ es:
           description: Descripción
           percentage: Porcentaje
           cost_price: Precio de costo
+          final_price: Precio de venta
           mark_id: Marca
           category_id: Categoría
       category:

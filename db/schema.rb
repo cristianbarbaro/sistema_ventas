@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 20160722002241) do
     t.string   "description",                         null: false
     t.integer  "percentage",                          null: false
     t.decimal  "cost_price",  precision: 9, scale: 2, null: false
+    t.decimal  "final_price", precision: 9, scale: 2, null: false
     t.integer  "mark_id",                             null: false
     t.integer  "category_id",                         null: false
     t.datetime "created_at",                          null: false

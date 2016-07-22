@@ -16,6 +16,12 @@
     document.getElementById("totalPriceArt").readOnly = false
 
 
+setPrecision = (number) ->
+    number = parseFloat(number)
+    number = number.toFixed(2)
+    return parseFloat(number)
+
+
 @searchArticle = (e) ->
     if window.XMLHttpRequest
         # code for modern browsers
@@ -31,18 +37,17 @@
         xhttp.onreadystatechange = ->
             if xhttp.readyState == 4 && xhttp.status == 200
                 x = JSON.parse(xhttp.response)
-                final_price_unit = parseFloat(x.cost_price) + parseFloat(x.cost_price * x.percentage / 100)
                 document.getElementById("article_id").value = x.id
                 document.getElementById("nameArt").value = x.name
                 document.getElementById("descriptionArt").value = x.description
-                document.getElementById("priceArt").value = final_price_unit
+                document.getElementById("priceArt").value = setPrecision(x.final_price)
                 document.getElementById("amountArt").value = 1
-                document.getElementById("totalPriceArt").value = final_price_unit
+                document.getElementById("totalPriceArt").value = setPrecision(x.final_price)
                 enableInputsSales()
             # else
             #     TODO: alert "Producto no encontrado"
-    xhttp.open("GET", "/articles.json?q=" + article_code, true)
-    xhttp.send()
+        xhttp.open("GET", "/articles.json?q=" + article_code, true)
+        xhttp.send()
 
 
 cleanInputs = ->
@@ -64,10 +69,8 @@ checkAmountLines = ->
 
 
 updateTotalPriceSale = (valueToAdd) ->
-    val = document.getElementById("totalSalePrice").value
-    console.log(valueToAdd)
-    partialPrice = parseFloat(val)
-    document.getElementById("totalSalePrice").value = partialPrice + valueToAdd
+    partialPrice = document.getElementById("totalSalePrice").value
+    document.getElementById("totalSalePrice").value = setPrecision(partialPrice) + setPrecision(valueToAdd)
     # Cada vez que actualice el total, verifico si hay líneas suficientes para habilitar o no los botones.
     # Una medida de seguridad para no enviar formularios vacíos. Se desea evitar eso lo más posible.
     checkAmountLines()
@@ -105,13 +108,13 @@ updateNumberLine = ->
     node.id = line
     node.innerHTML = html
     document.getElementById("showArt").appendChild(node)
-    updateTotalPriceSale(parseFloat(total))
+    updateTotalPriceSale(setPrecision(total))
 
 
 @deleteLine = (element, line_number) ->
     line = document.getElementById(line_number)
     # TODO: Mejorar esta línea usando id y esas cosas de javascript.
-    totalArticle = parseFloat(line.children[6].innerText)
+    totalArticle = setPrecision(line.children[6].innerText)
     line.remove()
     updateTotalPriceSale(totalArticle*(-1))
 

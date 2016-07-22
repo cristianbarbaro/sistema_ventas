@@ -29,6 +29,10 @@
         <%= @article.percentage %> %
     </p>
     <p>
+        <strong>Precio venta:</strong>
+        $ <%= @article.final_price %>
+    </p>
+    <p>
         <strong>Categoría:</strong>
         <%= get_category_name(@article.category_id) %>
     </p>
