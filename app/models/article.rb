@@ -8,7 +8,7 @@ class Article < ApplicationRecord
     has_many :article_providers, dependent: :destroy, inverse_of: :article
     has_many :providers, through: :article_providers
 
-    accepts_nested_attributes_for :article_providers
+    accepts_nested_attributes_for :article_providers, allow_destroy: true
     accepts_nested_attributes_for :stock, allow_destroy: true
     validates :code, :name, :cost_price, :percentage, :description, :mark_id, :category_id, presence: true
     validates :cost_price, numericality: { greater_than_or_equal_to: 0 }
