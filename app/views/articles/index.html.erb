@@ -39,6 +39,6 @@
         </div>
     </div>
     <div class="text-center">
-        <%= will_paginate @articles, renderer: BootstrapPagination::Rails %>
+        <%= will_paginate @articles, previous_label: :Anterior, next_label: :Siguiente, renderer: BootstrapPagination::Rails %>
     </div>
 </div>

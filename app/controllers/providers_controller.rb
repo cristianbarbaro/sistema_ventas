@@ -3,7 +3,7 @@ class ProvidersController < ApplicationController
     helper ProvidersHelper
 
     def index
-        @providers = Provider.all
+        @providers = Provider.paginate(page: params[:page])
     end
 
     def show

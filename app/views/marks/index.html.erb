@@ -25,4 +25,7 @@
     <div class="pull-right">
         <%= link_to 'Nueva marca', new_mark_path, class: "btn btn-success" %>
     </div>
+    <div class="text-center">
+        <%= will_paginate @marks, previous_label: :Anterior, next_label: :Siguiente, renderer: BootstrapPagination::Rails %>
+    </div>
 </div>
