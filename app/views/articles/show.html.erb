@@ -42,11 +42,11 @@
     </p>
     <p>
         <strong>Proveedores del artículo:</strong>
-        <ol>
-            <% get_providers(@article.id) do |provider| %>
+        <ul>
+            <% @article.providers.each do |provider| %>
                 <li><%= provider.name %></li>
             <% end %>
-        </ol>
+        </ul>
     </p>
 
     <div class="pull-right">

@@ -47,6 +47,29 @@ lacteos = Category.create!({
         name: "Lacteos"
     })
 
+### Proveedores
+uno = Provider.create!({
+        name: "Uno",
+        contact: "2215529657",
+        category_id: almacen.id
+    })
+
+dos = Provider.create!({
+        name: "Dos",
+        category_id: lacteos.id
+    })
+
+tres = Provider.create!({
+        name: "Tres",
+        contact: "También podemos meter una dirección.",
+        category_id: almacen.id
+    })
+
+cuatro = Provider.create!({
+        name: "Cuatro",
+        category_id: cigarrillos.id
+    })
+
 #### Artículos
 
 gaseosa = Article.create!({
@@ -56,10 +79,13 @@ gaseosa = Article.create!({
         code: 1234,
         description: "Medio litro. 500ml.",
         mark_id: secco.id,
-        category_id: bebidas.id
+        category_id: bebidas.id,
     })
 gaseosa.historics.create({
         cost_price: gaseosa.cost_price,
+    })
+gaseosa.article_providers.create!({
+        provider_id: uno.id
     })
 
 pan = Article.create!({
@@ -69,10 +95,13 @@ pan = Article.create!({
         code: 1235,
         description: "Un kilo de mucho amor, mandale manteca.",
         mark_id: panaderia.id,
-        category_id: almacen.id
+        category_id: almacen.id,
     })
 pan.historics.create!({
         cost_price: pan.cost_price
+    })
+pan.article_providers.create!({
+        provider_id: dos.id
     })
 
 manteca = Article.create!({
@@ -82,10 +111,13 @@ manteca = Article.create!({
         code: 1236,
         description: "Brve descripcion",
         mark_id: sancor.id,
-        category_id: lacteos.id
+        category_id: lacteos.id,
     })
 manteca.historics.create!({
         cost_price: manteca.cost_price
+    })
+manteca.article_providers.create!({
+        provider_id: tres.id
     })
 
 leche = Article.create!({
@@ -95,10 +127,13 @@ leche = Article.create!({
         code: 1237,
         description: "Mmm, rico rico",
         mark_id: sancor.id,
-        category_id: lacteos.id
+        category_id: lacteos.id,
     })
 leche.historics.create!({
         cost_price: leche.cost_price
+    })
+leche.article_providers.create!({
+        provider_id: cuatro.id
     })
 
 #### Stocks.
@@ -124,26 +159,4 @@ leche_stock = Stock.create!({
     article_id: leche.id,
     minimum_amount: 10,
     current_amount: 10
-    })
-
-uno = Provider.create!({
-        name: "Uno",
-        contact: "2215529657",
-        category_id: almacen.id
-    })
-
-dos = Provider.create!({
-        name: "Dos",
-        category_id: lacteos.id
-    })
-
-tres = Provider.create!({
-        name: "Tres",
-        contact: "También podemos meter una dirección.",
-        category_id: almacen.id
-    })
-
-cuatro = Provider.create!({
-        name: "Cuatro",
-        category_id: cigarrillos.id
     })

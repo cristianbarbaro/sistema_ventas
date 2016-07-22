@@ -23,18 +23,16 @@ class ArticlesController < ApplicationController
     end
 
     def show
-        @providers = @article.providers
     end
 
     def new
         @article = Article.new
         @article.build_stock
         @providers = Provider.all
-        @article.providers.build
+        @article.article_providers.build
     end
 
     def edit
-        @providers = @article.providers
     end
 
     def create
@@ -51,8 +49,6 @@ class ArticlesController < ApplicationController
     def update
         old_price = @article.cost_price
         if @article.update(article_params)
-            # @article.providers.create(params.require(:providers))
-            # Historic.create!({cost_price: params.require(:article)[:cost_price], article_id: @article.id})
             # @article.historics.create!({cost_price: params.require(:article)[:cost_price], article_id: @article.id})
             if old_price != @article.cost_price
                 create_historic
@@ -81,12 +77,8 @@ class ArticlesController < ApplicationController
         def article_params
             params.require(:article).permit(:name, :cost_price, :percentage, :description,
                                     :mark_id, :category_id, :code,
-                                    providers_attributes: [:article_id, :provider_id, :_destroy],
+                                    article_providers_attributes: [:id, :article_id, :provider_id, :_destroy],
                                     stock_attributes: [:id, :article_id, :current_amount, :minimum_amount])
-        end
-
-        def stock_params
-            params.require(:stock).permit(:current_stock, :minimum_stock)
         end
 
         def create_historic

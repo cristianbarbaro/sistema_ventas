@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160721012533) do
+ActiveRecord::Schema.define(version: 20160722002241) do
+
+  create_table "article_providers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "article_id"
+    t.integer  "provider_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["article_id"], name: "index_article_providers_on_article_id", using: :btree
+    t.index ["provider_id"], name: "index_article_providers_on_provider_id", using: :btree
+  end
 
   create_table "articles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "code",                                null: false
@@ -24,13 +33,6 @@ ActiveRecord::Schema.define(version: 20160721012533) do
     t.datetime "updated_at",                          null: false
     t.index ["category_id"], name: "index_articles_on_category_id", using: :btree
     t.index ["mark_id"], name: "index_articles_on_mark_id", using: :btree
-  end
-
-  create_table "articles_providers", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "article_id"
-    t.integer "provider_id"
-    t.index ["article_id"], name: "index_articles_providers_on_article_id", using: :btree
-    t.index ["provider_id"], name: "index_articles_providers_on_provider_id", using: :btree
   end
 
   create_table "categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

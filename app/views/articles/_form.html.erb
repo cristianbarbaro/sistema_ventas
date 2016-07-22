@@ -33,6 +33,15 @@
             <%= ff.hidden_field :article_id %>
         <% end %>
 
+        <%= f.nested_fields_for :article_providers do |pp| %>
+            <%= pp.input :provider_id, :collection => Provider.all.collect {|p| [p.name, p.id] }, label: "Proveedor", as: :select %>
+            <%= pp.hidden_field :id %>
+            <%= pp.hidden_field :article_id %>
+            <%= pp.remove_nested_fields_link 'Eliminar proveedor', class: "btn btn-danger", data: { confirm: "¿Estás seguro que quieres eliminar este proveedor?"} %>
+            <hr>
+        <% end %>
+        <%= f.add_nested_fields_link :article_providers, "Agregar proveedor", class: "btn btn-success" %>
+
         <div class="pull-right">
             <%= link_to 'Articles', articles_path, class: "btn btn-default" %>
             <%= f.button :submit, class: "btn btn-success" %>
