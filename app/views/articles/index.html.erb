@@ -1,6 +1,6 @@
 <h3 class="text-center">Artículos</h3>
 
-<div class="col-md-6 col-md-offset-3">
+<div class="col-md-10 col-md-offset-1">
     <table class="table table-condensed">
         <thead>
             <tr>
@@ -8,10 +8,8 @@
                 <th>Nombre</th>
                 <th>Descripción</th>
                 <th>Marca</th>
-                <th>Precio costo</th>
-                <th>Porcentaje</th>
                 <th>Precio público</th>
-                <th colspan="3"></th>
+                <th>Acciones</th>
             </tr>
         </thead>
 
@@ -20,14 +18,16 @@
             <tr>
                 <td><%= article.code %></td>
                 <td><%= article.name %></td>
-                <td><%= article.description %></td>
+                <td style="text-overflow:ellipsis;overflow:hidden;white-space:nowrap"><%= article.description %></td>
                 <td><%= get_mark_name(article.mark_id) %></td>
-                <td><%= article.cost_price %></td>
-                <td><%= article.percentage %></td>
-                <td><%= article.get_public_price %></td>
-                <td><%= link_to 'Show', article %></td>
-                <td><%= link_to 'Edit', edit_article_path(article) %></td>
-                <td><%= link_to 'Destroy', article, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                <td>$ <%= article.final_price %></td>
+                <td style="padding: 2px;">
+                    <div class="btn-group">
+                        <%= link_to '', article, class:'glyphicon glyphicon-eye-open btn btn-sm btn-default', title: 'Ver' %>
+                        <%= link_to '', edit_article_path(article), class:'glyphicon glyphicon-pencil btn btn-sm btn-default', title: 'Editar' %>
+                        <%= link_to '', article, class:'glyphicon glyphicon-trash btn btn-sm btn-danger', method: :delete, data: { confirm: 'Are you sure?' }, title: 'Borrar' %>
+                    </div>
+                </td>
             </tr>
             <% end %>
         </tbody>
