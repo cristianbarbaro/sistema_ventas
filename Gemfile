@@ -59,7 +59,7 @@ gem 'autoprefixer-rails'
 # Gem to forms, Simple Form
 gem 'simple_form'
 # Rails i18n
-gem 'rails-i18n', '~> 4.0.0'
+gem 'rails-i18n', '~> 5.0.0'
 # To add and remove fields form in nested attributes.
 gem 'nested_form_fields'
 # Validates dates.

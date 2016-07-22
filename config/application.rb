@@ -12,6 +12,7 @@ module Src
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
     config.web_console.whitelisted_ips = '10.0.0.1'
+    config.i18n.default_locale = :es
   end
 end
 
