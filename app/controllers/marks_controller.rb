@@ -25,7 +25,10 @@ class MarksController < ApplicationController
 
     respond_to do |format|
       if @mark.save
-        format.html { redirect_to @mark, notice: 'Mark was successfully created.' }
+        format.html {
+            flash[:success] = 'La marca se ha creado correctamente.'
+            redirect_to @mark
+        }
         format.json { render :show, status: :created, location: @mark }
       else
         format.html { render :new }
@@ -38,7 +41,10 @@ class MarksController < ApplicationController
   def update
     respond_to do |format|
       if @mark.update(mark_params)
-        format.html { redirect_to @mark, notice: 'Mark was successfully updated.' }
+        format.html {
+            flash[:success] = 'La marca se ha actualizado correctamente.'
+            redirect_to @mark
+        }
         format.json { render :show, status: :ok, location: @mark }
       else
         format.html { render :edit }

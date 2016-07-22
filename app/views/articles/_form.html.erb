@@ -22,6 +22,7 @@
         <div class="form-group">
             <%= f.input :category_id, :collection => Category.all.collect { |c| [ c.name, c.id ] }, as: :select %>
         </div>
+        
         <%= f.fields_for :stock do |ff| %>
             <div class="form-group">
                 <%= ff.input :current_amount, as: :numeric, input_html: {value: @article.stock.current_amount || 0, min: 0} %>
@@ -43,7 +44,7 @@
         <%= f.add_nested_fields_link :article_providers, "Agregar proveedor", class: "btn btn-success" %>
 
         <div class="pull-right">
-            <%= link_to 'Articles', articles_path, class: "btn btn-default" %>
+            <%= link_to 'Artículos', articles_path, class: "btn btn-default" %>
             <%= f.button :submit, class: "btn btn-success" %>
         </div>
     </div>
