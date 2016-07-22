@@ -47,8 +47,31 @@
 
         <div class="pull-right">
             <%= link_to 'Cancelar', root_path, class: "btn btn-danger", data: {confirm: "¿Está seguro que desea cancelar?"} %>
-            <input id="commitBtn"name="commit" type="submit" value="Aceptar" class="btn btn-success", onclick='saveLines();' disabled>
+            <!-- <input id="commitBtn"name="commit" type="submit" value="Aceptar" class="btn btn-success", onclick='saveLines();' disabled> -->
+            <button type="button" id="commitBtn" class="btn btn-info " data-toggle="modal" data-target="#modalSale" onclick='printTotal();' disabled>Aceptar</button>
         </div>
+
+        <!-- Modal confirmation -->
+        <div class="modal fade" id="modalSale" role="dialog">
+          <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title text-center">Confirmar venta:</h4>
+              </div>
+              <div class="modal-body">
+                <h2>Total: $ <span id='totalConfirmation'></span></h2>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Volver</button>
+                  <input name="commit" type="submit" value="Confirmar" class="btn btn-success" >
+              </div>
+            </div>
+            <!-- End modal content -->
+          </div>
+        </div>
+        <!-- End modal confirmation-->
 
     </form>
 

@@ -129,3 +129,9 @@ updateNumberLine = ->
         disableInputsSales()
         updateValues()
         cleanInputs()
+
+
+@printTotal = () ->
+    total = document.getElementById("totalSalePrice").value
+    document.getElementById('totalConfirmation').innerText = total
+    return
