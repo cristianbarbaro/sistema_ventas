@@ -2,7 +2,7 @@
     <div class="container col-md-6 col-md-offset-3">
         <%= f.error_notification %>
         <div class="form-group">
-            <%= f.input :code, readonly: current_page?(new_article_url @article) ? false : true %>
+            <%= f.input :code, readonly: current_page?(new_article_url @article) ? false : true, input_html: { onfocusout: current_page?(new_article_url @article) ? "checkIfExistArticle();" : "" }%>
         </div>
         <div class="form-group">
             <%= f.input :name %>
@@ -53,3 +53,24 @@
     </div>
 
 <% end %>
+
+<!-- Modal information -->
+<div class="modal fade" id="modalCheck" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title text-center">Información:</h4>
+      </div>
+      <div class="modal-body">
+        <h3>Ya existe un producto con el mismo código de barra.</h3>
+      </div>
+      <div class="modal-footer">
+          <button type="button" class="btn btn-success" data-dismiss="modal">Volver</button>
+      </div>
+    </div>
+    <!-- End modal content -->
+  </div>
+</div>
+<!-- End modal confirmation-->
