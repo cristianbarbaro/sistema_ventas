@@ -39,7 +39,7 @@ class ProvidersController < ApplicationController
         if @provider.destroy
             flash[:success] = "El proveedor se ha eliminado correctamente."
         else
-            flash[:alert] = "No se puede eliminar el proveedor porque tiene artículos o categorías asociados."
+            flash[:alert] = "No se puede eliminar el proveedor porque tiene artículos asociados."
         end
         redirect_to providers_url
     end
