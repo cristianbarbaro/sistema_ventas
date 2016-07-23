@@ -55,10 +55,19 @@ class MarksController < ApplicationController
 
   # DELETE /marks/1
   def destroy
-    @mark.destroy
     respond_to do |format|
-      format.html { redirect_to marks_url, notice: 'Mark was successfully destroyed.' }
-      format.json { head :no_content }
+        if @mark.destroy
+            format.html {
+                flash[:success] = 'La marca se ha creado correctamente.'
+                redirect_to marks_url
+            }
+            format.json { head :no_content }
+        else
+            format.html {
+                flash[:alert] = "No se puede eliminar la marca porque tiene artículos asociados."
+                redirect_to marks_url
+            }
+        end
     end
   end
 
