@@ -70,3 +70,5 @@ gem 'will_paginate', '~> 3.1.0'
 gem 'will_paginate-bootstrap'
 # Driver mysql.
 gem 'mysql2'
+# To search in database
+# gem 'ransack'

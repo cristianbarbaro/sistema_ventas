@@ -4,7 +4,13 @@ class ArticlesController < ApplicationController
 
     def index
         respond_to do |format|
-            format.html { @articles = Article.paginate(:page => params[:page]).order(:name) }
+            format.html {
+                if not params[:search].nil?
+                    @articles = Article.search(params[:search]).paginate(:page => params[:page]).order(:name)
+                else
+                    @articles = Article.paginate(:page => params[:page]).order(:name)
+                end
+            }
             format.json {
                 # En formato JSON, verifico si se realiza consulta por el código de barra,
                 # sino es así, retorno todos los artículos como se hiciera por defecto. ¿Es esta la mejor solución?

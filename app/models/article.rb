@@ -19,4 +19,8 @@ class Article < ApplicationRecord
     def get_public_price
         (self.cost_price * self.percentage / 100 ) + self.cost_price
     end
+
+    def self.search(search)
+        self.where("name LIKE ? or description LIKE ?", "%#{search}%", "%#{search}%")
+    end
 end
