@@ -16,3 +16,14 @@
 //= require_tree .
 //= require nested_form_fields
 //= require bootstrap-sprockets
+
+jQuery(function($){
+    if ($('.alert').hasClass('dismissable')) {
+        setTimeout(function(){
+            $('.alert').fadeOut();
+        }, 7500);
+        $('.alert').click(function(){
+            $('.alert').fadeOut();
+        });
+    }
+});

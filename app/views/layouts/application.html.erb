@@ -9,61 +9,11 @@
   </head>
 
   <body style="padding-top: 70px;">
-      <nav class="navbar navbar-inverse navbar-fixed-top">
-          <div class="collapse navbar-collapse">
-              <ul class="nav navbar-nav">
-                  <a class="navbar-brand" href="/">Kiosco</a>
-                  <li class="<%= 'active' if current_page?(root_path) %>"><%= link_to "Inicio", root_path %></li>
-                  <li class="<%= 'active' if current_page?(articles_path) %>"><%= link_to "Articulos", articles_path %></li>
-                  <li class="<%= 'active' if current_page?(stocks_path) %>"><%= link_to "Stock", stocks_path %></li>
-                  <li class="<%= 'active' if current_page?(categories_path) %>"><%= link_to "Categorías", categories_path %></li>
-                  <li class="<%= 'active' if current_page?(providers_path) %>"><%= link_to "Proveedores", providers_path %></li>
-                  <li class="<%= 'active' if current_page?(marks_path) %>"><%= link_to "Marcas", marks_path %></li>
-              </ul>
-              <form class="navbar-form navbar-right" role="search" style="padding-right: 20px;">
-                  <div class="form-group">
-                      <input type="text" class="form-control" placeholder="Buscar">
-                  </div>
-                  <button type="submit" class="btn btn-default">Buscar</button>
-              </form>
-          </div>
-      </nav>
-
+      <%= render "layouts/navbar" %>
       <div class="container col-md-12">
-          <!-- Showing errors/alerts messages -->
-          <% if flash[:success] %>
-            <div class="alert alert-success dismissable text-center" role="alert">
-                <span><%= flash[:success] %></span>
-      			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-      		  	    <span aria-hidden="true">&times;</span>
-      			</button>
-  		    </div>
-          <% end %>
-          <% if flash[:alert] %>
-              <div class="alert alert-danger text-center dismissable text-center" role="alert">
-                  <span><%= flash[:alert] %></span>
-                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        		  	<span aria-hidden="true">&times;</span>
-        		  </button>
-              </div>
-          <% end %>
-          <!-- End of errors/alerts messages -->
+          <%= render "layouts/alerts" %>
           <%= yield %>
       </div>
   </body>
-
-  <!-- Quitar la notificación -->
-  <script type="text/javascript">
-      jQuery(function($){
-          if ($('.alert').hasClass('dismissable')) {
-              setTimeout(function(){
-                  $('.alert').fadeOut();
-              }, 7500);
-              $('.alert').click(function(){
-                  $('.alert').fadeOut();
-              });
-          }
-      });
-  </script>
 
 </html>
