@@ -4,8 +4,33 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: {}
-# column: value
-#
-two: {}
-# column: value
+one:
+    code: 1001
+    name: one
+    cost_price: 10.5
+    percentage: 30
+    final_price: 15
+    description: stringOne
+    mark: one
+    category: one
+
+two:
+    code: 1002
+    name: two
+    cost_price: 10
+    percentage: 30
+    final_price: 13
+    description: stringTwo
+    mark: two
+    category: two
+
+# No tiene ventas asociadas, se permite su borrado.
+three:
+    code: 1001
+    name: three
+    cost_price: 10.5
+    percentage: 30
+    final_price: 15
+    description: stringThree
+    mark: one
+    category: one

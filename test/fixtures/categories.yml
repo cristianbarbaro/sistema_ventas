@@ -2,8 +2,10 @@
 
 one:
   name: MyString
-  description: MyString
 
 two:
   name: MyString
-  description: MyString
+
+# No tiene asociado productos, caso contrario no puede eliminarse.
+three:
+  name: MyString

@@ -2,6 +2,10 @@
 
 one:
   name: MyString
+  contact: AnotherString
+  category: one
 
 two:
   name: MyString
+  contact: evenAnotherString
+  category: one
