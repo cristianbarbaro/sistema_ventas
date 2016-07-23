@@ -8,10 +8,6 @@
         <strong>Contacto:</strong>
         <%= @provider.contact %>
     </p>
-    <p>
-        <strong>Categoría:</strong>
-        <%= get_category_name(@provider.category_id) %>
-    </p>
 
     <div class="pull-right">
         <%= link_to 'Editar', edit_provider_path(@provider), class: "btn btn-success" %>

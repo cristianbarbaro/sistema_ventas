@@ -51,23 +51,19 @@ lacteos = Category.create!({
 uno = Provider.create!({
         name: "Uno",
         contact: "2215529657",
-        category_id: almacen.id
     })
 
 dos = Provider.create!({
         name: "Dos",
-        category_id: lacteos.id
     })
 
 tres = Provider.create!({
         name: "Tres",
         contact: "También podemos meter una dirección.",
-        category_id: almacen.id
     })
 
 cuatro = Provider.create!({
         name: "Cuatro",
-        category_id: cigarrillos.id
     })
 
 #### Artículos
