@@ -31,7 +31,5 @@
     <div class="pull-right">
         <%= link_to 'Nuevo proveedor', new_provider_path, class: "btn btn-success" %>
     </div>
-    <div class="text-center">
-        <%= will_paginate @providers, previous_label: :Anterior, next_label: :Siguiente, renderer: BootstrapPagination::Rails %>
-    </div>
+    <%= render "layouts/pagination", collection: @providers %>
 </div>

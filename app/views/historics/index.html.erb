@@ -23,7 +23,5 @@
             <%= link_to "Atrás", article_path(params[:article_id]), class: "btn btn-default" %>
         </div>
     </div>
-    <div class="text-center">
-        <%= will_paginate @articles, renderer: BootstrapPagination::Rails %>
-    </div>
+    <%= render "layouts/pagination", collection: @historics %>
 </div>

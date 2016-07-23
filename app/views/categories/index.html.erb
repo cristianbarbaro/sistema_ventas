@@ -27,7 +27,5 @@
     <div class="pull-right">
         <%= link_to 'Nueva categoría', new_category_path, class: "btn btn-success" %>
     </div>
-    <div class="text-center">
-        <%= will_paginate @categories, previous_label: :Anterior, next_label: :Siguiente, renderer: BootstrapPagination::Rails %>
-    </div>
+    <%= render "layouts/pagination", collection: @categories %>
 </div>
