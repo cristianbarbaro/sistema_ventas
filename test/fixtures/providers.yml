@@ -1,11 +1,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
+  name: one
   contact: AnotherString
-  category: one
 
 two:
-  name: MyString
+  name: two
   contact: evenAnotherString
-  category: one

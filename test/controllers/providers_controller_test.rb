@@ -30,7 +30,6 @@ class ProvidersControllerTest < ActionDispatch::IntegrationTest
             post providers_url, params: { provider: {
                 name: :four,
                 contact: :stringFour,
-                category_id: @provider.category_id
                 }
             }
         end

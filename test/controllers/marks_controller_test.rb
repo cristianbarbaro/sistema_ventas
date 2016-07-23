@@ -2,7 +2,9 @@ require 'test_helper'
 
 class MarksControllerTest < ActionDispatch::IntegrationTest
   setup do
+    @article = articles(:one)
     @mark = marks(:one)
+    @mark_three = marks(:three) # Not associated with articles
   end
 
   test "should get index" do
@@ -17,7 +19,7 @@ class MarksControllerTest < ActionDispatch::IntegrationTest
 
   test "should create mark" do
     assert_difference('Mark.count') do
-      post marks_url, params: { mark: { name: :three } }
+      post marks_url, params: { mark: { name: :four } }
     end
     assert_redirected_to mark_url(Mark.last)
   end
@@ -39,9 +41,8 @@ class MarksControllerTest < ActionDispatch::IntegrationTest
 
   test "should destroy mark" do
     assert_difference('Mark.count', -1) do
-      delete mark_url(@mark)
+      delete mark_url(@mark_three)
     end
-
     assert_redirected_to marks_url
   end
 end
