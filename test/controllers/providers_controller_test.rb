@@ -1,39 +1,55 @@
 require 'test_helper'
 
 class ProvidersControllerTest < ActionDispatch::IntegrationTest
-  test "should get index" do
-    get providers_index_url
-    assert_response :success
-  end
+    setup do
+        @provider = providers(:one)
+    end
 
-  test "should get show" do
-    get providers_show_url
-    assert_response :success
-  end
+    test "should get index" do
+        get providers_url
+        assert_response :success
+    end
 
-  test "should get new" do
-    get providers_new_url
-    assert_response :success
-  end
+    test "should get show" do
+        get providers_url(@provider)
+        assert_response :success
+    end
 
-  test "should get edit" do
-    get providers_edit_url
-    assert_response :success
-  end
+    test "should get new" do
+        get new_provider_url
+        assert_response :success
+    end
 
-  test "should get create" do
-    get providers_create_url
-    assert_response :success
-  end
+    test "should get edit" do
+        get edit_provider_url(@provider)
+        assert_response :success
+    end
 
-  test "should get update" do
-    get providers_update_url
-    assert_response :success
-  end
+    test "should get create" do
+        assert_difference('Provider.count') do
+            post providers_url, params: { provider: {
+                name: :four,
+                contact: :stringFour,
+                category_id: @provider.category_id
+                }
+            }
+        end
+        assert_redirected_to provider_url(Provider.last)
+    end
 
-  test "should get destroy" do
-    get providers_destroy_url
-    assert_response :success
-  end
+    test "should get update" do
+        patch provider_url(@provider), params: { provider: {
+            name: :four
+            }
+        }
+        assert_redirected_to provider_url(@provider)
+    end
+
+    test "should get destroy" do
+        assert_difference('Provider.count', -1) do
+            delete provider_url(@provider)
+        end
+        assert_redirected_to providers_url
+    end
 
 end
