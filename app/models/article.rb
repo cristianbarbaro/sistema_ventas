@@ -21,6 +21,7 @@ class Article < ApplicationRecord
     end
 
     def self.search(search)
-        self.where("name LIKE ? or description LIKE ?", "%#{search}%", "%#{search}%")
+        self.where(
+            "code = ? or name LIKE ? or description LIKE ?", search, "%#{search}%", "%#{search}%")
     end
 end
