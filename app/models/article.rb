@@ -9,7 +9,8 @@ class Article < ApplicationRecord
     has_many :providers, through: :article_providers
 
     accepts_nested_attributes_for :article_providers, allow_destroy: true
-    accepts_nested_attributes_for :stock, allow_destroy: true
+    accepts_nested_attributes_for :stock, reject_if: :all_blank
+    validates_presence_of :stock
     validates :code, :name, :cost_price, :percentage, :description, :mark_id, :category_id, presence: true
     validates :cost_price, numericality: { greater_than_or_equal_to: 0 }
     validates :final_price, numericality: { greater_than_or_equal_to: 0 }
