@@ -24,7 +24,7 @@ two:
     mark: two
     category: two
 
-# No tiene ventas asociadas, se permite su borrado.
+# No tiene ventas asociadas, se debería permite su borrado.
 three:
     code: 1001
     name: three

@@ -7,3 +7,8 @@ one:
 two:
   name: two
   contact: evenAnotherString
+
+# No associated with articles
+three:
+    name: three
+    contact: ""
