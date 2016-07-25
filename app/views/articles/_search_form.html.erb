@@ -1,0 +1,8 @@
+<div class="container-fluid pull-right">
+    <div class="form-inline">
+        <%= search_form_for @q do |f| %>
+        <%= f.text_field :code_or_description_or_name_cont, class: "form-control", placeholder: "Buscar", onclick: 'this.select();' %>
+        <%= f.submit "Buscar", class: "btn btn-default" %>
+        <% end %>
+    </div>
+</div>

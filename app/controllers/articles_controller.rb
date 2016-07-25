@@ -5,11 +5,8 @@ class ArticlesController < ApplicationController
     def index
         respond_to do |format|
             format.html {
-                if not params[:search].nil?
-                    @articles = Article.search(params[:search]).paginate(:page => params[:page]).order(:name)
-                else
-                    @articles = Article.paginate(:page => params[:page]).order(:name)
-                end
+                @q = Article.ransack(params[:q])
+                @articles  = @q.result.page(params[:page]).order(:name)
             }
             format.json {
                 # En formato JSON, verifico si se realiza consulta por el código de barra,
