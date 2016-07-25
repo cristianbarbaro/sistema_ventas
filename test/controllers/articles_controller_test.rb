@@ -37,6 +37,7 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
             description: @article.description,
             mark_id: @article.mark_id,
             category_id: @article.category_id,
+            stock_attributes: {current_amount: 10, minimum_amount: 0},
             }
         }
     end
@@ -53,6 +54,7 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
             description: @article.description,
             mark_id: @article.mark_id,
             category_id: @article.category_id,
+            stock_attributes: {current_amount: 10, minimum_amount: 0},
             }
         }
     assert_redirected_to article_url(@article)
