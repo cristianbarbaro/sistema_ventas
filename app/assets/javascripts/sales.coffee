@@ -124,7 +124,7 @@ updateNumberLine = ->
     if e.keyCode == 13
         amount =document.getElementById("amountArt").value
         price = document.getElementById("priceArt").value
-        totalPriceArt = amount * price
+        totalPriceArt = amount * setPrecision(price)
         document.getElementById("totalPriceArt").value = totalPriceArt
         disableInputsSales()
         updateValues()
