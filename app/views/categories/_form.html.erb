@@ -3,7 +3,7 @@
         <%= f.error_notification %>
 
         <div class="form-group">
-            <%= f.input :name, required: true %>
+            <%= f.input :name, required: true, autofocus: true %>
         </div>
         <div class="pull-right">
             <%= link_to 'Categorías', categories_path, class: "btn btn-default" %>

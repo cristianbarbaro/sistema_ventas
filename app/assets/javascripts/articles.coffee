@@ -21,3 +21,10 @@
             return false
     xhttp.open("GET", "/articles.json?q=" + code, true)
     xhttp.send()
+
+@removeRequire = (e) ->
+    index = e.getAttribute('data-delete-association-field-name').match(/\d+/)[0]
+    select_id = "#article_article_providers_attributes_#{index}_provider_id"
+    select = $(select_id)
+    jQuery(select).removeAttr("required")
+    return

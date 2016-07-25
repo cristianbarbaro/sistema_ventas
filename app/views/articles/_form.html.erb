@@ -2,7 +2,7 @@
     <div class="container col-md-6 col-md-offset-3">
         <%= f.error_notification %>
         <div class="form-group">
-            <%= f.input :code, readonly: current_page?(new_article_url @article) ? false : true, input_html: { onfocusout: current_page?(new_article_url @article) ? "checkIfExistArticle();" : "" }%>
+            <%= f.input :code, readonly: current_page?(new_article_url @article) ? false : true, input_html: { onfocusout: current_page?(new_article_url @article) ? "checkIfExistArticle();" : "", autofocus: true }%>
         </div>
         <div class="form-group">
             <%= f.input :name %>
@@ -41,7 +41,7 @@
             <%= pp.input :provider_id, :collection => Provider.all.collect {|p| [p.name, p.id] }, label: "Proveedor", as: :select %>
             <%= pp.hidden_field :id %>
             <%= pp.hidden_field :article_id %>
-            <%= pp.remove_nested_fields_link 'Eliminar proveedor', class: "btn btn-danger", data: { confirm: "¿Estás seguro que quieres eliminar este proveedor?"} %>
+            <%= pp.remove_nested_fields_link 'Eliminar proveedor', class: "btn btn-danger", data: { confirm: "¿Estás seguro que quieres eliminar este proveedor?"}, onclick: 'removeRequire(this);' %>
             <hr>
         <% end %>
         <%= f.add_nested_fields_link :article_providers, "Agregar proveedor", class: "btn btn-success" %>
@@ -74,3 +74,12 @@
   </div>
 </div>
 <!-- End modal confirmation-->
+
+<!-- Solucion al problema de los nested attributes cuando se elimina uno de sus forms -->
+<!-- <script type="text/javascript">
+jQuery(function ($) {
+    $(document).on('article_providers:fieldRemoved', function (event) {
+        $('[required]', event.field).removeAttr('required');
+    });
+});
+</script> -->
