@@ -2,7 +2,7 @@ class Article < ApplicationRecord
     belongs_to :category
     belongs_to :mark
     has_one :stock, inverse_of: :article, dependent: :destroy
-    has_many :historics, dependent: :destroy
+    has_many :historics, dependent: :destroy, inverse_of: :article
     has_many :sale_lines, dependent: :restrict_with_error
     has_many :sales, through: :sale_lines
     has_many :article_providers, dependent: :destroy, inverse_of: :article
@@ -11,6 +11,8 @@ class Article < ApplicationRecord
     accepts_nested_attributes_for :article_providers, allow_destroy: true
     accepts_nested_attributes_for :stock, reject_if: :all_blank
     validates_presence_of :stock
+    # accepts_nested_attributes_for :historics, reject_if: :all_blank
+    # validates_presence_of :historics, on: :create
     validates :code, :name, :cost_price, :percentage, :description, :mark_id, :category_id, presence: true
     validates :cost_price, numericality: { greater_than_or_equal_to: 0 }
     validates :final_price, numericality: { greater_than_or_equal_to: 0 }

@@ -89,6 +89,6 @@ class ArticlesController < ApplicationController
 
         def create_historic
             # Active Model Dirty before save (don't works after).
-            Historic.create!({cost_price: params.require(:article)[:cost_price], article_id: @article.id})
+            @article.historics.create({cost_price: params.require(:article)[:cost_price]})
         end
 end
