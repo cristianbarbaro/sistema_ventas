@@ -19,6 +19,11 @@ cigarrillos = Category.create!({
         name: "Cigarrillos"
     })
 
+lacteos = Category.create!({
+        name: "Lacteos"
+    })
+
+# Marks:
 cocacola = Mark.create!({
         name: "Coca-Cola"
     })
@@ -43,10 +48,6 @@ sancor = Mark.create!({
         name: "Sancor"
     })
 
-lacteos = Category.create!({
-        name: "Lacteos"
-    })
-
 ### Proveedores
 uno = Provider.create!({
         name: "Uno",
@@ -67,7 +68,6 @@ cuatro = Provider.create!({
     })
 
 #### Artículos
-
 gaseosa = Article.create!({
         name: "Gaseosa",
         cost_price: 17.50,
@@ -77,6 +77,10 @@ gaseosa = Article.create!({
         description: "Medio litro. 500ml.",
         mark_id: secco.id,
         category_id: bebidas.id,
+        stock_attributes: {
+                minimum_amount: 10,
+                current_amount: 15,
+            },
     })
 gaseosa.historics.create({
         cost_price: gaseosa.cost_price,
@@ -94,6 +98,10 @@ pan = Article.create!({
         description: "Un kilo de mucho amor, mandale manteca.",
         mark_id: panaderia.id,
         category_id: almacen.id,
+        stock_attributes: {
+                minimum_amount: 10,
+                current_amount: 15,
+            },
     })
 pan.historics.create!({
         cost_price: pan.cost_price
@@ -111,6 +119,10 @@ manteca = Article.create!({
         description: "Brve descripcion",
         mark_id: sancor.id,
         category_id: lacteos.id,
+        stock_attributes: {
+                minimum_amount: 10,
+                current_amount: 15,
+            },
     })
 manteca.historics.create!({
         cost_price: manteca.cost_price
@@ -128,6 +140,10 @@ leche = Article.create!({
         description: "Mmm, rico rico",
         mark_id: sancor.id,
         category_id: lacteos.id,
+        stock_attributes: {
+                minimum_amount: 10,
+                current_amount: 15,
+            },
     })
 leche.historics.create!({
         cost_price: leche.cost_price
@@ -160,3 +176,62 @@ leche_stock = Stock.create!({
     minimum_amount: 10,
     current_amount: 10
     })
+
+# Faker data.
+def load_categories
+    25.times do
+        c = Category.create(
+            name: Faker::Commerce.department,
+        )
+    end
+end
+
+def load_providers
+    100.times do
+        c = Provider.create({
+                name: Faker::Name.name,
+                contact: Faker::PhoneNumber.phone_number,
+            })
+    end
+end
+
+def load_marks
+    50.times do
+        c = Mark.create!({
+                name: Faker::Commerce.product_name,
+            })
+    end
+end
+
+def load_articles
+    200.times do
+        cost_price = Faker::Commerce.price
+        percentage = Faker::Number.between(0, 100)
+        final_price = cost_price * percentage / 100 + cost_price
+        c = Article.create!({
+                name: Faker::Company.name,
+                percentage: percentage,
+                cost_price: cost_price,
+                final_price: final_price,
+                code: Faker::Number.number(6),
+                description: Faker::Lorem.sentence(3, true),
+                mark_id: Faker::Number.between(1, 50),
+                category_id: Faker::Number.between(1, 25),
+                stock_attributes: {
+                    minimum_amount: Faker::Number.between(1, 50),
+                    current_amount: Faker::Number.between(1, 50),
+                },
+            })
+            c.historics.create!({
+                cost_price: cost_price
+            })
+            c.article_providers.create!({
+                provider_id: Faker::Number.between(1, 100)
+            })
+    end
+end
+
+load_providers
+load_marks
+load_categories
+load_articles
