@@ -21,12 +21,83 @@ $ cd ~/.rbenv/plugins
 $ git clone https://github.com/sstephenson/rbenv-vars.git
 ```
 
+* Si desea evitar instalación de documentación junto a las gemas, ejecutar:
+
+```
+$ echo "gem: --no-document" > ~/.gemrc
+```
+
 * Editar el archivo .ruby-env con los valores que correspondan y actualizar las variables de entorno
 
 ```
 $ cp .rvbenv-vars.example .rvbenv-vars
+$ rails secret
 $ rbenv vars
 ```
+
+* Clonar este repositorio e instalar el resto de dependencias para que la aplicación funcione.
+
+```
+$ git clone https://github.com/cristianbarbaro/sistema_ventas.git
+$ cd sistema_ventas
+$ bundle install
+```
+
+### Despliegue para producción usando Nginx como proxy
+
+* Instalar Nginx
+
+```
+$ sudo apt-get install nginx
+```
+
+* Configurar la base de datos
+
+```
+$ RAILS_ENV=production rake db:create
+$ RAILS_ENV=production rake db:migrate
+$ RAILS_ENV=production rake assets:precompile
+```
+
+* El archivo `config/puma.rb` ya tiene las configuraciones básicas para funcionar correctamente. Crear carpetas para Puma y descargar archivos necesarios para configurar
+
+```
+mkdir -p shared/pids shared/sockets shared/log
+cd ~
+wget https://raw.githubusercontent.com/puma/puma/master/tools/jungle/upstart/puma-manager.conf
+wget https://raw.githubusercontent.com/puma/puma/master/tools/jungle/upstart/puma.conf
+```
+
+Cambiar el nombre `apps` en `setuid` y `setgid` por el nombre del usuario del sistema.
+
+* Copiar el script en el directorio de los servicios de Upstart. Esto permitirá que Puma inicie con el sistema.
+
+```
+sudo cp puma.conf puma-manager.conf /etc/init
+```
+
+* Configurar `/etc/puma.conf` con los directorios de las aplicaciones que se desean ejecutar en el sistema.
+
+```
+/home/user/appdir/
+```
+
+* Se puede iniciar Puma manualmente y probar su funcionamiento con `sudo start puma-manager`.
+
+* Copiar el contenido del archivo config/nginx.conf en las configuraciones del servidor:
+
+```
+sudo cp config/nginx.conf /etc/nginx/sites-available/default
+```
+
+Cuidado, si hay otras aplicaciones siendo ejecutadas en el sistema, el comando anterior sobreescribirá las configuraciones.
+
+* Reiniciar Nginx y acceder a la ip del servidor:
+
+```
+sudo service nginx restart
+```
+
 
 This README would normally document whatever steps are necessary to get the
 application up and running.
