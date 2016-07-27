@@ -3,7 +3,7 @@ class CreateArticles < ActiveRecord::Migration[5.0]
     create_table :articles do |t|
         t.string :code, unique: true, null: false
         t.string :name, null: false
-        t.string :description, null: false
+        t.string :description
         t.integer :percentage, null: false
         t.decimal :cost_price, precision: 9, scale: 2, null: false
         t.decimal :final_price, precision: 9, scale: 2, null: false
