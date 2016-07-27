@@ -27,20 +27,22 @@ $ git clone https://github.com/sstephenson/rbenv-vars.git
 $ echo "gem: --no-document" > ~/.gemrc
 ```
 
-* Editar el archivo .ruby-env con los valores que correspondan y actualizar las variables de entorno
+* Clonar este repositorio e instalar el resto de dependencias para que la aplicación funcione. (Asumimos que se instala en el directorio `/var/www/` y este último tiene como owner al usuario del sistema).
 
 ```
-$ cp .rvbenv-vars.example .rvbenv-vars
-$ rails secret
-$ rbenv vars
-```
-
-* Clonar este repositorio e instalar el resto de dependencias para que la aplicación funcione.
-
-```
+$ cd /var/www/
 $ git clone https://github.com/cristianbarbaro/sistema_ventas.git
 $ cd sistema_ventas
+$ gem install bundler
 $ bundle install
+```
+
+* Una vez dentro de la carpeta de la aplicación, editar el archivo .ruby-env con los valores que correspondan y actualizar las variables de entorno
+
+```
+$ cp .rbenv-vars.example .rbenv-vars
+$ rails secret
+$ rbenv vars
 ```
 
 ### Despliegue para producción usando Nginx como proxy
@@ -68,7 +70,7 @@ wget https://raw.githubusercontent.com/puma/puma/master/tools/jungle/upstart/pum
 wget https://raw.githubusercontent.com/puma/puma/master/tools/jungle/upstart/puma.conf
 ```
 
-Cambiar el nombre `apps` en `setuid` y `setgid` por el nombre del usuario del sistema.
+Cambiar el nombre `apps` en `setuid` y `setgid` por el nombre del usuario del sistema del archivo `puma.conf`.
 
 * Copiar el script en el directorio de los servicios de Upstart. Esto permitirá que Puma inicie con el sistema.
 
@@ -79,10 +81,13 @@ sudo cp puma.conf puma-manager.conf /etc/init
 * Configurar `/etc/puma.conf` con los directorios de las aplicaciones que se desean ejecutar en el sistema.
 
 ```
-/home/user/appdir/
+/var/www/sistema_ventas/
 ```
 
-* Se puede iniciar Puma manualmente y probar su funcionamiento con `sudo start puma-manager`.
+* Iniciar Puma.
+```
+sudo start puma-manager
+```
 
 * Copiar el contenido del archivo config/nginx.conf en las configuraciones del servidor:
 
