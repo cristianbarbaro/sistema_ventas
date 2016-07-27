@@ -3,7 +3,8 @@ class MarksController < ApplicationController
 
   # GET /marks
   def index
-    @marks = Mark.paginate(page: params[:page])
+    @q = Mark.ransack(params[:q])
+    @marks = @q.result.paginate(:page => params[:page]).order(:name)
   end
 
   # GET /marks/1

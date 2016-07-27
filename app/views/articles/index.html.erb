@@ -2,7 +2,7 @@
     <div class="pull-left">
         <%= link_to 'Nuevo artículo', new_article_path, class: "btn btn-success" %>
     </div>
-    <%= render "search_form", path: articles_path %>
+    <%= render "layouts/search_form", search: :code_or_description_or_name_cont %>
 </div>
 
 <% if @articles.length > 0 %>
