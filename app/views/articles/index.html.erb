@@ -1,4 +1,9 @@
-<%= render "search_form", path: articles_path %>
+<div class="container-fluid">
+    <div class="pull-left">
+        <%= link_to 'Nuevo artículo', new_article_path, class: "btn btn-success" %>
+    </div>
+    <%= render "search_form", path: articles_path %>
+</div>
 
 <% if @articles.length > 0 %>
     <div class="">
@@ -33,11 +38,6 @@
             </tbody>
         </table>
 
-        <div class="container-fluid">
-            <div class="pull-right">
-                <%= link_to 'Nuevo artículo', new_article_path, class: "btn btn-success" %>
-            </div>
-        </div>
         <%= render "layouts/pagination", collection: @articles %>
     </div>
 <!-- When @articles collection is empty -->

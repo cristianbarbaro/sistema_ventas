@@ -1,55 +1,61 @@
 <%= simple_form_for(@article) do |f| %>
-    <div class="container col-md-6 col-md-offset-3">
-        <%= f.error_notification %>
-        <div class="form-group">
-            <%= f.input :code, readonly: current_page?(new_article_url @article) ? false : true, input_html: { onfocusout: current_page?(new_article_url @article) ? "checkIfExistArticle();" : "", autofocus: true }%>
-        </div>
-        <div class="form-group">
-            <%= f.input :name %>
-        </div>
-        <div class="form-group">
-            <%= f.input :cost_price, input_html: {value: @article.cost_price || 0, min: 0, onkeyup: 'calculateFinalPrice(this);'} %>
-        </div>
-        <div class="form-group">
-            <%= f.input :percentage, input_html: {value: @article.percentage || 0, min: 0, onkeyup: 'calculateFinalPrice(this);'} %>
-        </div>
-        <div class="form-group">
-            <%= f.input :final_price, input_html: {value: @article.final_price || 0, min: 0} %>
-        </div>
-        <div class="form-group">
-            <%= f.input :description %>
-        </div>
-        <div class="form-group">
-            <%= f.input :mark_id, :collection => Mark.all.collect { |m| [ m.name, m.id ] }, as: :select %>
-        </div>
-        <div class="form-group">
-            <%= f.input :category_id, :collection => Category.all.collect { |c| [ c.name, c.id ] }, as: :select %>
-        </div>
-
-        <%= f.fields_for :stock do |ff| %>
+    <div class="row">
+        <div class="container col-md-6">
+            <%= f.error_notification %>
             <div class="form-group">
-                <%= ff.input :current_amount, as: :numeric, input_html: {value: @article.stock.current_amount || 0, min: 0} %>
+                <%= f.input :code, readonly: current_page?(new_article_url @article) ? false : true, input_html: { onfocusout: current_page?(new_article_url @article) ? "checkIfExistArticle();" : "", autofocus: true }%>
             </div>
             <div class="form-group">
-                <%= ff.input :minimum_amount, as: :numeric, input_html: {value: @article.stock.minimum_amount || 0, min: 0} %>
+                <%= f.input :name %>
             </div>
-            <%= ff.hidden_field :id %>
-            <%= ff.hidden_field :article_id %>
-        <% end %>
+            <div class="form-group">
+                <%= f.input :cost_price, input_html: {value: @article.cost_price || 0, min: 0, onkeyup: 'calculateFinalPrice(this);'} %>
+            </div>
+            <div class="form-group">
+                <%= f.input :percentage, input_html: {value: @article.percentage || 0, min: 0, onkeyup: 'calculateFinalPrice(this);'} %>
+            </div>
+            <div class="form-group">
+                <%= f.input :final_price, input_html: {value: @article.final_price || 0, min: 0} %>
+            </div>
+        </div>
+        <div class="container col-md-6">
+            <div class="form-group">
+                <%= f.input :description %>
+            </div>
+            <div class="form-group">
+                <%= f.input :mark_id, :collection => Mark.all.collect { |m| [ m.name, m.id ] }, as: :select %>
+            </div>
+            <div class="form-group">
+                <%= f.input :category_id, :collection => Category.all.collect { |c| [ c.name, c.id ] }, as: :select %>
+            </div>
 
-        <%= f.nested_fields_for :article_providers do |pp| %>
-            <%= pp.input :provider_id, :collection => Provider.all.collect {|p| [p.name, p.id] }, label: "Proveedor", as: :select %>
-            <%= pp.hidden_field :id %>
-            <%= pp.hidden_field :article_id %>
-            <%= pp.remove_nested_fields_link 'Eliminar proveedor', class: "btn btn-danger", data: { confirm: "¿Estás seguro que quieres eliminar este proveedor?"}, onclick: 'removeRequire(this);' %>
+            <%= f.fields_for :stock do |ff| %>
+                <div class="form-group">
+                    <%= ff.input :current_amount, as: :numeric, input_html: {value: @article.stock.current_amount || 0, min: 0} %>
+                </div>
+                <div class="form-group">
+                    <%= ff.input :minimum_amount, as: :numeric, input_html: {value: @article.stock.minimum_amount || 0, min: 0} %>
+                </div>
+                <%= ff.hidden_field :id %>
+                <%= ff.hidden_field :article_id %>
+            <% end %>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3 form-inline">
+            <%= f.nested_fields_for :article_providers do |pp| %>
+                <%= pp.input :provider_id, :collection => Provider.all.collect {|p| [p.name, p.id] }, label: "Proveedor", as: :select %>
+                <%= pp.hidden_field :id %>
+                <%= pp.hidden_field :article_id %>
+                <%= pp.remove_nested_fields_link 'Eliminar proveedor', class: "btn btn-danger", data: { confirm: "¿Estás seguro que quieres eliminar este proveedor?"}, onclick: 'removeRequire(this);' %>
             <hr>
-        <% end %>
-        <%= f.add_nested_fields_link :article_providers, "Agregar proveedor", class: "btn btn-success" %>
-
-        <div class="pull-right">
-            <%= link_to 'Artículos', articles_path, class: "btn btn-default" %>
-            <%= f.button :submit, class: "btn btn-success" %>
+            <% end %>
+            <%= f.add_nested_fields_link :article_providers, "Agregar proveedor", class: "btn btn-success" %>
         </div>
+    </div>
+    <div class="pull-right">
+        <%= link_to 'Artículos', articles_path, class: "btn btn-default" %>
+        <%= f.button :submit, class: "btn btn-success" %>
     </div>
 
 <% end %>
