@@ -1,4 +1,9 @@
-<%= render "layouts/search_form", search: :name_cont %>
+<div class="container-fluid">
+    <%= render "layouts/search_form", search: :name_cont %>
+    <div class="pull-right">
+        <%= link_to 'Nueva marca', new_mark_path, class: "btn btn-primary" %>
+    </div>
+</div>
 
 <h3 class="text-center">Marcas</h3>
 
@@ -26,8 +31,5 @@
     </table>
 
     <br>
-    <div class="pull-right">
-        <%= link_to 'Nueva marca', new_mark_path, class: "btn btn-success" %>
-    </div>
     <%= render "layouts/pagination", collection: @marks %>
 </div>
