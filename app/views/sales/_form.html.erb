@@ -61,7 +61,10 @@
                 <h4 class="modal-title text-center">Confirmar venta:</h4>
               </div>
               <div class="modal-body">
-                <h2>Total: $ <span id='totalConfirmation'></span></h2>
+                <!-- <h2>Total: $ <span id='totalConfirmation'></span></h2> -->
+                <h2>Total: $ <input id="totalConfirmation" value="0" type='number' style="border-width: 0px" readonly ></h2>
+                <h2>Entregado: $ <input type="number" id="clientAmount" name="name" min="0" step="any" onkeyup="calculateChangeValue(this);" autofocus="autofocus"></h2>
+                <h2>Vuelto: $ <input id='changeValue' name="name" style="border-width: 0px" value="" readonly></h2>
               </div>
               <div class="modal-footer">
                   <button type="button" class="btn btn-default" data-dismiss="modal">Volver</button>
@@ -82,7 +85,10 @@
         e.preventDefault();
         return false;
         }
-        });
+    });
+    $('.modal').on('shown.bs.modal', function() {
+      $(this).find('[autofocus]').focus();
+    });
     </script>
 
 </div>

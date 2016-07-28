@@ -44,8 +44,9 @@ setPrecision = (number) ->
                 document.getElementById("amountArt").value = 1
                 document.getElementById("totalPriceArt").value = setPrecision(x.final_price)
                 enableInputsSales()
-            # else
-            #     TODO: alert "Producto no encontrado"
+            else if xhttp.readyState == 4 && xhttp.status == 422
+                document.getElementById('searchArt').value = ''
+                alert "El producto no existe en la base de datos."
         xhttp.open("GET", "/articles.json?q=" + article_code, true)
         xhttp.send()
 
@@ -132,6 +133,12 @@ updateNumberLine = ->
 
 
 @printTotal = () ->
-    total = document.getElementById("totalSalePrice").value
-    document.getElementById('totalConfirmation').innerText = total
+    total = $("#totalSalePrice").val()
+    $('#totalConfirmation').val(total)
     return
+
+@calculateChangeValue = () ->
+    client_amount = $('#clientAmount').val()
+    total_amount = $('#totalConfirmation').val()
+    res = parseFloat(client_amount) - parseFloat(total_amount)
+    $("#changeValue").val(res.toFixed(2))
