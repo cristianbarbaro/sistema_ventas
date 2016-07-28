@@ -23,10 +23,10 @@
                 <%= f.input :description %>
             </div>
             <div class="form-group">
-                <%= f.input :mark_id, :collection => Mark.all.collect { |m| [ m.name, m.id ] }, as: :select %>
+                <%= f.input :mark_id, :collection => Mark.all.order(:name).collect { |m| [ m.name, m.id ] }, as: :select %>
             </div>
             <div class="form-group">
-                <%= f.input :category_id, :collection => Category.all.collect { |c| [ c.name, c.id ] }, as: :select %>
+                <%= f.input :category_id, :collection => Category.order(:name).all.collect { |c| [ c.name, c.id ] }, as: :select %>
             </div>
 
             <%= f.fields_for :stock do |ff| %>
@@ -44,7 +44,7 @@
     <div class="row">
         <div class="col-md-6 col-md-offset-3 form-inline">
             <%= f.nested_fields_for :article_providers do |pp| %>
-                <%= pp.input :provider_id, :collection => Provider.all.collect {|p| [p.name, p.id] }, label: "Proveedor", as: :select %>
+                <%= pp.input :provider_id, :collection => Provider.order(:name).all.collect {|p| [p.name, p.id] }, label: "Proveedor", as: :select %>
                 <%= pp.hidden_field :id %>
                 <%= pp.hidden_field :article_id %>
                 <%= pp.remove_nested_fields_link 'Eliminar proveedor', class: "btn btn-danger", data: { confirm: "¿Estás seguro que quieres eliminar este proveedor?"}, onclick: 'removeRequire(this);' %>
@@ -80,12 +80,3 @@
   </div>
 </div>
 <!-- End modal confirmation-->
-
-<!-- Solucion al problema de los nested attributes cuando se elimina uno de sus forms -->
-<!-- <script type="text/javascript">
-jQuery(function ($) {
-    $(document).on('article_providers:fieldRemoved', function (event) {
-        $('[required]', event.field).removeAttr('required');
-    });
-});
-</script> -->
