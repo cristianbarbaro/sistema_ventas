@@ -120,22 +120,36 @@ updateNumberLine = ->
     updateTotalPriceSale(totalArticle*(-1))
 
 
+validatesAmount = () ->
+        inpObj = document.getElementById("amountArt");
+        if (inpObj.checkValidity() == false)
+            alert inpObj.validationMessage
+            return false
+        else
+            return true
+
+
 @addArticle = (e)->
     e = e or window.event
     if e.keyCode == 13
-        amount =document.getElementById("amountArt").value
-        price = document.getElementById("priceArt").value
-        totalPriceArt = amount * setPrecision(price)
-        document.getElementById("totalPriceArt").value = totalPriceArt
-        disableInputsSales()
-        updateValues()
-        cleanInputs()
+        # Valido si el monto de cantidad de productos está dentro de un rango razonable antes de agregarlo a la línea de ventas
+        if validatesAmount()
+            amount =document.getElementById("amountArt").value
+            price = document.getElementById("priceArt").value
+            totalPriceArt = amount * setPrecision(price)
+            document.getElementById("totalPriceArt").value = totalPriceArt
+            disableInputsSales()
+            updateValues()
+            cleanInputs()
+        else
+            document.getElementById("amountArt").focus()
 
 
 @printTotal = () ->
     total = $("#totalSalePrice").val()
     $('#totalConfirmation').val(total)
     return
+
 
 @calculateChangeValue = () ->
     client_amount = $('#clientAmount').val()
