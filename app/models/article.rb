@@ -17,6 +17,7 @@ class Article < ApplicationRecord
     validates :cost_price, numericality: { greater_than_or_equal_to: 0 }
     validates :final_price, numericality: { greater_than_or_equal_to: 0 }
     validates :percentage, numericality: { only_integer: true, greater_than_or_equal_to: 0, less_than_or_equal_to: 100 }
+    validates :code, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
     validates_uniqueness_of :code
 
     def get_public_price

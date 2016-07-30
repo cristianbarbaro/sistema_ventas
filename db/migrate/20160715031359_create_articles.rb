@@ -1,7 +1,7 @@
 class CreateArticles < ActiveRecord::Migration[5.0]
   def change
     create_table :articles do |t|
-        t.string :code, unique: true, null: false
+        t.integer :code, unique: true, null: false
         t.string :name, null: false
         t.string :description
         t.integer :percentage, null: false
