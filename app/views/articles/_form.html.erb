@@ -28,7 +28,7 @@
             <div class="form-group">
                 <%= f.input :category_id, :collection => Category.order(:name).all.collect { |c| [ c.name, c.id ] }, as: :select %>
             </div>
-
+            <%# Nested fields for stock %>
             <%= f.fields_for :stock do |ff| %>
                 <div class="form-group">
                     <%= ff.input :current_amount, as: :numeric, input_html: {value: @article.stock.current_amount || 0, min: 0} %>
@@ -41,8 +41,9 @@
             <% end %>
         </div>
     </div>
+    <%# Nested fields for providers %>
     <div class="row">
-        <div class="col-md-6 col-md-offset-3 form-inline">
+        <div class="col-md-6 form-inline">
             <%= f.nested_fields_for :article_providers do |pp| %>
                 <%= pp.input :provider_id, :collection => Provider.order(:name).all.collect {|p| [p.name, p.id] }, label: "Proveedor", as: :select %>
                 <%= pp.hidden_field :id %>
@@ -50,6 +51,8 @@
                 <%= pp.remove_nested_fields_link 'Eliminar proveedor', class: "btn btn-danger", data: { confirm: "¿Estás seguro que quieres eliminar este proveedor?"}, onclick: 'removeRequire(this);' %>
             <hr>
             <% end %>
+        </div>
+        <div class="col-md-6">
             <%= f.add_nested_fields_link :article_providers, "Agregar proveedor", class: "btn btn-success" %>
         </div>
     </div>
@@ -60,23 +63,4 @@
 
 <% end %>
 
-<!-- Modal information -->
-<div class="modal fade" id="modalCheck" role="dialog">
-  <div class="modal-dialog">
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title text-center">Información:</h4>
-      </div>
-      <div class="modal-body">
-        <h3>Ya existe un producto con el mismo código de barra.</h3>
-      </div>
-      <div class="modal-footer">
-          <button type="button" class="btn btn-success" data-dismiss="modal">Volver</button>
-      </div>
-    </div>
-    <!-- End modal content -->
-  </div>
-</div>
-<!-- End modal confirmation-->
+<%= render 'modal_new_article' %>
