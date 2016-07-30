@@ -3,7 +3,7 @@
         <div class="container col-md-6">
             <%= f.error_notification %>
             <div class="form-group">
-                <%= f.input :code, readonly: current_page?(new_article_url @article) ? false : true, input_html: { onfocusout: current_page?(new_article_url @article) ? "checkIfExistArticle();" : "", autofocus: true }%>
+                <%= f.input :code, input_html: { onfocusout: current_page?(new_article_url @article) ? "checkIfExistArticle();" : "", autofocus: true }%>
             </div>
             <div class="form-group">
                 <%= f.input :name %>
