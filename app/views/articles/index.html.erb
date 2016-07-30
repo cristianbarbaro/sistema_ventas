@@ -1,6 +1,31 @@
 <div class="container-fluid">
-    <%= render "layouts/search_form", search: :code_or_description_or_name_cont %>
-    <div class="pull-right">
+    <!-- <%= render "layouts/search_form", search: :code_or_description_or_name_cont %> -->
+    <div class="container-fluid pull-right">
+        <div class="form-inline">
+            <%= search_form_for @q do |f| %>
+            <%= f.text_field :code_or_description_or_name_cont, class: "form-control", placeholder: "Buscar", onclick: 'this.select();' %>
+            <!-- <%= f.label "Marca:" %> -->
+            <!-- <%= f.select :mark_id_eq, options_from_collection_for_select(Mark.all, :id, :name), include_blank: true, class: "form-control" %> -->
+            <select name="q[mark_id_eq]" id="q_mark_id_eq" class="form-control">
+                <option value="">Seleccione marca</option>
+                <% Mark.all.order(:name).each do |m| %>
+                    <option value="<%= m.id %>"><%= m.name %></input>
+                <% end %>
+            </select>
+            <!-- <%= f.label "Categoría:" %> -->
+            <!-- <%= f.select :category_id_eq, options_from_collection_for_select(Category.all, :id, :name), input_html: {class: "form-control"}, include_blank: true %> -->
+            <select name="q[category_id_eq]" id="q_category_id_eq" class="form-control">
+                <option value="">Seleccione categoría</option>
+                <% Category.all.order(:name).each do |c| %>
+                    <option value="<%= c.id %>" ><%= c.name %></input>
+                <% end %>
+            </select>
+            <%= f.submit "Buscar", class: "btn btn-default" %>
+            <% end %>
+        </div>
+    </div>
+
+    <div class="pull-left">
         <%= link_to 'Nuevo artículo', new_article_path, class: "btn btn-primary" %>
     </div>
 </div>

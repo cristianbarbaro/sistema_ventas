@@ -6,7 +6,8 @@ class ArticlesController < ApplicationController
         respond_to do |format|
             format.html {
                 @q = Article.ransack(params[:q])
-                @articles  = @q.result.page(params[:page]).order(:name)
+                # @articles  = @q.result.page(params[:page]).order(:name)
+                @articles  = @q.result.includes(:mark, :category).page(params[:page]).order(:name)
             }
             format.json {
                 # En formato JSON, verifico si se realiza consulta por el código de barra,
