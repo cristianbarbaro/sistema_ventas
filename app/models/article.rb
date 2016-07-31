@@ -28,4 +28,11 @@ class Article < ApplicationRecord
         self.where(
             "code = ? or name LIKE ? or description LIKE ?", search, "%#{search}%", "%#{search}%")
     end
+
+    private
+        # Convierto codigo en string para poder buscar en Ransack usando LIKE de SQL.
+        ransacker :code do
+            Arel.sql("CONVERT(#{table_name}.code, CHAR(14))")
+        end
+
 end
