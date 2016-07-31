@@ -4,7 +4,7 @@
     cost = parseFloat(cost)
     percentage = parseFloat(percentage)
     final = (cost * percentage / 100) + cost
-    final_element = $('#article_final_price').val(final.toFixed(0))
+    final_element = $('#article_final_price').val(Math.round(final))
 
 @checkIfExistArticle = () ->
     if window.XMLHttpRequest
