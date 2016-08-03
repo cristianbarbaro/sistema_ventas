@@ -2,8 +2,8 @@
     <div class="container-fluid pull-right">
         <%= search_form_for @q, html: {class: "form-inline"} do |f| %>
             <%= f.search_field :code_or_description_or_name_cont, class: "form-control", placeholder: "Buscar", onclick: 'this.select();' %>
-            <%= f.collection_select :mark_id_eq, Mark.order(:name), :id, :name, {:prompt => "Seleccione marca"}, {class: "form-control"} %>
-            <%= f.collection_select :category_id_eq, Category.order(:name), :id, :name, {:prompt => "Seleccione categoría"}, {class: "form-control"} %>
+            <%= f.collection_select :mark_id_eq, Mark.order(:name), :id, :name, {prompt: "Seleccione marca", include_blank: true}, {class: "form-control"} %>
+            <%= f.collection_select :category_id_eq, Category.order(:name), :id, :name, {prompt: "Seleccione categoría", include_blank: true}, {class: "form-control"} %>
             <%= f.submit "Buscar", class: "btn btn-default" %>
         <% end %>
     </div>
