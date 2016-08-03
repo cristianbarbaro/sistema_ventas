@@ -71,7 +71,9 @@ checkAmountLines = ->
 
 updateTotalPriceSale = (valueToAdd) ->
     partialPrice = document.getElementById("totalSalePrice").value
-    document.getElementById("totalSalePrice").value = setPrecision(partialPrice) + setPrecision(valueToAdd)
+    newPrice = setPrecision(partialPrice) + setPrecision(valueToAdd)
+    document.getElementById("totalSalePrice").value = newPrice
+    document.getElementById("totalSalePricePrint").innerHTML = newPrice
     # Cada vez que actualice el total, verifico si hay líneas suficientes para habilitar o no los botones.
     # Una medida de seguridad para no enviar formularios vacíos. Se desea evitar eso lo más posible.
     checkAmountLines()

@@ -1,9 +1,5 @@
 <div class="col-lg-12">
-    <!-- <input type="text" name="name" id="searchArt" value="" onkeypress="searchArticle(event);"> -->
     <form class="" id="new_sale" action="/sales" method="post">
-        <div class="container-fluid pull-left">
-            <h3>Total: $ <input id="totalSalePrice" value="0" type='number' name="sale[total_price]" style="border-width: 0px" readonly ></h3>
-        </div>
         <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
         <table class="table table-condensed table-responsive" id="linesList">
             <thead>
@@ -45,10 +41,19 @@
             </tbody>
         </table>
 
-        <div class="pull-right">
-            <%= link_to 'Cancelar', root_path, class: "btn btn-danger", data: {confirm: "¿Está seguro que desea cancelar?"} %>
-            <!-- <input id="commitBtn"name="commit" type="submit" value="Aceptar" class="btn btn-success", onclick='saveLines();' disabled> -->
-            <button type="button" id="commitBtn" class="btn btn-info " data-toggle="modal" data-target="#modalSale" onclick='printTotal();' disabled>Aceptar</button>
+        <div class="container-fluid">
+            <div class="pull-right">
+                <%= link_to 'Cancelar', root_path, class: "btn btn-danger", data: {confirm: "¿Está seguro que desea cancelar?"} %>
+                <!-- <input id="commitBtn"name="commit" type="submit" value="Aceptar" class="btn btn-success", onclick='saveLines();' disabled> -->
+                <button type="button" id="commitBtn" class="btn btn-info " data-toggle="modal" data-target="#modalSale" onclick='printTotal();' disabled>Aceptar</button>
+            </div>
+        </div>
+
+        <div class="container-fluid">
+            <div class="pull-right">
+                <h2>Total: $ <span id="totalSalePricePrint">0.00</span></h2>
+                <input id="totalSalePrice" value="0" type='hidden' name="sale[total_price]" style="border-width: 0px" readonly >
+            </div>
         </div>
 
         <!-- Modal confirmation -->
