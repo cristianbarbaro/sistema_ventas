@@ -33,22 +33,28 @@ setPrecision = (number) ->
     e = e or window.event
     if e.keyCode == 13
         article_code = document.getElementById('searchArt').value
-        element = document.getElementById('showForm')
-        xhttp.onreadystatechange = ->
-            if xhttp.readyState == 4 && xhttp.status == 200
-                x = JSON.parse(xhttp.response)
-                document.getElementById("article_id").value = x.id
-                document.getElementById("nameArt").value = x.name
-                document.getElementById("descriptionArt").value = x.description
-                document.getElementById("priceArt").value = setPrecision(x.final_price)
-                document.getElementById("amountArt").value = 1
-                document.getElementById("totalPriceArt").value = setPrecision(x.final_price)
-                enableInputsSales()
-            else if xhttp.readyState == 4 && xhttp.status == 422
-                document.getElementById('searchArt').value = ''
-                alert "El producto no existe en la base de datos."
-        xhttp.open("GET", "/articles.json?q=" + article_code, true)
-        xhttp.send()
+        commitBtn = document.getElementById("commitBtn")
+        # Si el input está vacío y hay al menos una linea, podemos confirmar la venta.
+        if article_code == "" and not commitBtn.disabled
+            commitBtn.click()
+        # Si el código del input no es vacío, lo analizo como siempre.
+        else if article_code != ""
+            element = document.getElementById('showForm')
+            xhttp.onreadystatechange = ->
+                if xhttp.readyState == 4 && xhttp.status == 200
+                    x = JSON.parse(xhttp.response)
+                    document.getElementById("article_id").value = x.id
+                    document.getElementById("nameArt").value = x.name
+                    document.getElementById("descriptionArt").value = x.description
+                    document.getElementById("priceArt").value = setPrecision(x.final_price)
+                    document.getElementById("amountArt").value = 1
+                    document.getElementById("totalPriceArt").value = setPrecision(x.final_price)
+                    enableInputsSales()
+                else if xhttp.readyState == 4 && xhttp.status == 422
+                    document.getElementById('searchArt').value = ''
+                    alert "El producto no existe en la base de datos."
+            xhttp.open("GET", "/articles.json?q=" + article_code, true)
+            xhttp.send()
 
 
 cleanInputs = ->
