@@ -159,8 +159,12 @@ validatesAmount = () ->
     return
 
 
-@calculateChangeValue = () ->
+@calculateChangeValue = (e) ->
+    e = e or window.event
     client_amount = $('#clientAmount').val()
     total_amount = $('#totalConfirmation').val()
-    res = parseFloat(client_amount) - parseFloat(total_amount)
-    $("#changeValue").val(res.toFixed(2))
+    if e.keyCode == 13
+        $('#salesSubmit').click()
+    else
+        res = parseFloat(client_amount) - parseFloat(total_amount)
+        $("#changeValue").val(res.toFixed(2))
