@@ -29,6 +29,10 @@ class Article < ApplicationRecord
             "code = ? or name LIKE ? or description LIKE ?", search, "%#{search}%", "%#{search}%")
     end
 
+    def create_historic(new_cost_price)
+        self.historics.create({cost_price: new_cost_price})
+    end
+
     private
         # Convierto codigo en string para poder buscar en Ransack usando LIKE de SQL.
         ransacker :code do

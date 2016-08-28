@@ -42,7 +42,7 @@ class ArticlesController < ApplicationController
     def create
         @article = Article.new(article_params)
         if @article.save
-            create_historic
+            @article.create_historic params.require(:article)[:cost_price]
             flash[:success] = 'El artículo se ha creado exitosamente.'
             redirect_to @article
         else
@@ -55,7 +55,7 @@ class ArticlesController < ApplicationController
         if @article.update(article_params)
             # @article.historics.create!({cost_price: params.require(:article)[:cost_price], article_id: @article.id})
             if old_price != @article.cost_price
-                create_historic
+                @article.create_historic params.require(:article)[:cost_price]
             end
             flash[:success] = 'El artículo se ha actualizado correctamente.'
             redirect_to @article
@@ -73,6 +73,40 @@ class ArticlesController < ApplicationController
         redirect_to articles_url
     end
 
+    # GET /update_prices
+    def update_prices
+        @providers = Provider.all
+    end
+
+    # POST /update_prices
+    def update_prices_post
+        percentage = params[:percentage].to_f
+        if params[:provider_id].nil?
+            provider = nil
+        else
+            provider = Provider.find(params[:provider_id])
+        end
+        if provider
+            articles = provider.articles
+            # Qué tan copada puede ser esta iteración?
+            articles.each do |a|
+                old_price = a.cost_price
+                a.cost_price = ( old_price * percentage / 100 ) + old_price
+                final_price = (a.cost_price * a.percentage / 100) + a.cost_price
+                a.final_price = final_price.round
+                a.save
+                # Creamos el histórico de precios
+                if old_price != a.cost_price
+                    a.create_historic(a.cost_price)
+                end
+            end
+            flash[:success] = 'Los precios del proveedor se han actualizado correctamente.'
+        else
+            flash[:alert] = 'No se ha encontrado al proveedor buscado.'
+        end
+        redirect_to update_prices_url
+    end
+
     private
         def set_article
             @article = Article.find(params[:id])
@@ -85,8 +119,4 @@ class ArticlesController < ApplicationController
                                     stock_attributes: [:id, :article_id, :current_amount, :minimum_amount])
         end
 
-        def create_historic
-            # Active Model Dirty before save (don't works after).
-            @article.historics.create({cost_price: params.require(:article)[:cost_price]})
-        end
 end
