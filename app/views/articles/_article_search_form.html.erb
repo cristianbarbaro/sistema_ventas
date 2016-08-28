@@ -4,6 +4,7 @@
             <%= f.search_field :code_or_description_or_name_cont, class: "form-control", placeholder: "Buscar", onclick: 'this.select();' %>
             <%= f.collection_select :mark_id_eq, Mark.order(:name), :id, :name, {prompt: "Seleccione marca", include_blank: true}, {class: "form-control"} %>
             <%= f.collection_select :category_id_eq, Category.order(:name), :id, :name, {prompt: "Seleccione categoría", include_blank: true}, {class: "form-control"} %>
+            <%= f.collection_select :providers_id_eq, Provider.order(:name), :id, :name, {prompt: "Seleccione proveedor", include_blank: true}, {class: "form-control"} %>
             <%= f.submit "Buscar", class: "btn btn-default" %>
         <% end %>
     </div>
