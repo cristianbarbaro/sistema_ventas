@@ -1,0 +1,61 @@
+<h3 class="text-center">Listado de ventas</h3>
+<div class="col-md-6 col-md-offset-3">
+    <h4>Total: $ <%= @total_interval %></h4>
+    <!-- https://eonasdan.github.io/bootstrap-datetimepicker/ -->
+    <form class="form-group" action="<%= sales_path %>" method="GET">
+        <div class="" class="">
+            Día: <input type="date" name="day" value="<%= Date.today %>" data-date-inline-picker="true">
+            <!-- Inicio: <select class="" name="initial_hour">
+                <option value="" disabled selected></option>
+                <% (0..23).each do |h| %>
+                    <option value="<%= h %>"><%= h %></option>
+                <% end %>
+            </select>
+            Final: <select class="" name="final_hour">
+                <option value="" disabled selected></option>
+                <% (0..23).each do |h| %>
+                    <option value="<%= h %>"><%= h %></option>
+                <% end %>
+            </select> -->
+            Inicio: <input type="time" name="initial_hour" value="00:00">
+            Final: <input type="time" name="final_hour" value="23:59">
+            <input type="submit" name="" value="Buscar">
+        </div>
+        <!-- Fecha final: <input type="date" name="final_date" value=""> -->
+    </form>
+    <!-- <form class="form-group" action="<%= sales_path %>" id='datetimepicker2' method="get">
+        <div class='input-group date' id='datetimepicker2'>
+            <input type='text' class="form-control" />
+            <span class="input-group-addon">
+                <span class="glyphicon glyphicon-calendar"></span>
+            </span>
+        </div>
+    </form> -->
+    <table class="table table-condensed table-hover">
+      <thead>
+        <tr>
+            <th>Hora</th>
+            <th>Fecha</th>
+            <th>Cantidad líneas</th>
+            <th>Total</th>
+        </tr>
+      </thead>
+
+      <tbody>
+          <% if not @sales.nil? %>
+            <% @sales.each do |sale| %>
+              <tr>
+                <td><%= sale.created_at.strftime("%H:%M:%S") %></td>
+                <td><%= sale.created_at.strftime("%d/%m/%Y") %></td>
+                <td><%= sale.articles.count %></td>
+                <td>$ <%= sale.total_price %></td>
+              </tr>
+            <% end %>
+        <% end %>
+      </tbody>
+    </table>
+
+
+    <br>
+    <%#= render "layouts/pagination", collection: @sales %>
+</div>
