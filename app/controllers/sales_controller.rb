@@ -31,9 +31,13 @@ class SalesController < ApplicationController
             @sales = Sale.where("date(created_at) = ? and time(created_at) >= ? and time(created_at) <= ?", day, initial, final)
             @total_interval = @sales.sum(:total_price)
         end
+        # @q = Sale.ransack(params[:q])
+        # @sales = @q.result.paginate(:page => params[:page])
+
     end
 
     def show
+        @sale = Sale.find(params[:id])
     end
 
     def create

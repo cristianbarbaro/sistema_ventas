@@ -38,6 +38,7 @@
             <th>Fecha</th>
             <th>Cantidad líneas</th>
             <th>Total</th>
+            <th></th>
         </tr>
       </thead>
 
@@ -49,6 +50,7 @@
                 <td><%= sale.created_at.strftime("%d/%m/%Y") %></td>
                 <td><%= sale.articles.count %></td>
                 <td>$ <%= sale.total_price %></td>
+                <td><%= link_to 'Ver más', sale, target: '_blank' %></td>
               </tr>
             <% end %>
         <% end %>
