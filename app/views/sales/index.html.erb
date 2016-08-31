@@ -2,35 +2,13 @@
 <div class="col-md-6 col-md-offset-3">
     <h4>Total: $ <%= @total_interval %></h4>
     <!-- https://eonasdan.github.io/bootstrap-datetimepicker/ -->
-    <form class="form-group" action="<%= sales_path %>" method="GET">
-        <div class="" class="">
-            Día: <input type="date" name="day" value="<%= Date.today %>" data-date-inline-picker="true">
-            <!-- Inicio: <select class="" name="initial_hour">
-                <option value="" disabled selected></option>
-                <% (0..23).each do |h| %>
-                    <option value="<%= h %>"><%= h %></option>
-                <% end %>
-            </select>
-            Final: <select class="" name="final_hour">
-                <option value="" disabled selected></option>
-                <% (0..23).each do |h| %>
-                    <option value="<%= h %>"><%= h %></option>
-                <% end %>
-            </select> -->
-            Inicio: <input type="time" name="initial_hour" value="00:00">
-            Final: <input type="time" name="final_hour" value="23:59">
-            <input type="submit" name="" value="Buscar">
-        </div>
-        <!-- Fecha final: <input type="date" name="final_date" value=""> -->
-    </form>
-    <!-- <form class="form-group" action="<%= sales_path %>" id='datetimepicker2' method="get">
-        <div class='input-group date' id='datetimepicker2'>
-            <input type='text' class="form-control" />
-            <span class="input-group-addon">
-                <span class="glyphicon glyphicon-calendar"></span>
-            </span>
-        </div>
-    </form> -->
+    <%= search_form_for @q, html: {class: "form-inline"} do |f| %>
+        <%= f.label "Inicio:" %>
+        <%= f.datetime_field :created_at_gt, class: "form-control", "data-date-inline-picker" => true %>
+        <%= f.label "Final:" %>
+        <%= f.datetime_field :created_at_lt, class: "form-control", "data-date-inline-picker" => true %>
+        <%= f.submit "Buscar", class: "btn btn-default" %>
+    <% end %>
     <table class="table table-condensed table-hover">
       <thead>
         <tr>
