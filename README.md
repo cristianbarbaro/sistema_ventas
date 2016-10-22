@@ -14,13 +14,6 @@ $ rbenv install 2.3.0
 $ rbenv global 2.3.0
 ```
 
-* Instalar rbenv-vars para variables de entorno.
-
-```
-$ cd ~/.rbenv/plugins
-$ git clone https://github.com/sstephenson/rbenv-vars.git
-```
-
 * Si desea evitar instalación de documentación junto a las gemas, ejecutar:
 
 ```

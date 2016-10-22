@@ -80,3 +80,5 @@ gem 'will_paginate-bootstrap'
 gem 'mysql2'
 # To search in database
 gem 'ransack'
+
+gem 'dotenv-rails'

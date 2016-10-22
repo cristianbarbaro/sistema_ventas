@@ -1,0 +1,21 @@
+version: '2'
+
+services:
+  ventas:
+    build: .
+    command: /bin/sh -c "rm -f /var/www/sistema_ventas/tmp/pids/server.pid && bundle exec rails server -b 0.0.0.0"
+    volumes:
+      - .:/var/www/sistema_ventas
+    ports:
+      - "3000:3000"
+    links:
+      - db_ventas
+    restart: always
+  db_ventas:
+    image: mysql:5.6
+    ports:
+      - "3306:3306"
+    volumes:
+      - './data:/var/lib/mysql'
+    environment:
+      MYSQL_ROOT_PASSWORD: cristian2
