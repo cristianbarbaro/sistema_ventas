@@ -3,6 +3,7 @@ version: '2'
 services:
   ventas:
     build: .
+    container_name: ventas
     command: /bin/sh -c "rm -f /var/www/sistema_ventas/tmp/pids/server.pid && bundle exec rails server -b 0.0.0.0"
     volumes:
       - .:/var/www/sistema_ventas
@@ -10,9 +11,9 @@ services:
       - "3000:3000"
     links:
       - db_ventas
-    restart: always
   db_ventas:
     image: mysql:5.6
+    container_name: db_ventas
     ports:
       - "3306:3306"
     volumes:
