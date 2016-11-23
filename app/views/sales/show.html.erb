@@ -19,8 +19,9 @@
                 <li><strong>Nombre artículo: <%= line.article.name %></li></strong>
                     <ul>
                         <li>Código artículo: <%= line.article.code %>.</li>
-                        <li>Precio unitario: $ <%= line.article_final_price_unit %>.</li>
+                        <li>Precio unitario final: $ <%= line.article_final_price_unit %>.</li>
                         <li>Cantidad vendida: <%= line.article_amount %> unidades.</li>
+                        <li>Total por producto: $ <%= line.article_amount * line.article_final_price_unit %>.</li>
                         <li>Categoría de artículo: <%= line.article.category.name %>.</li>
                     </ul>
             <% end %>

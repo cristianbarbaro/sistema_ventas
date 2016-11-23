@@ -10,7 +10,9 @@ class SalesController < ApplicationController
             @sales = @q.result
         else
             @q = Sale.ransack(params[:q])
-            @sales = @q.result
+            @sales = @q.result.uniq
+            check_category_field params[:q][:sale_lines_article_category_id_eq]
+            check_article_field params[:q][:sale_lines_article_id_eq]
         end
         @total_interval = @sales.sum(:total_price)
     end
@@ -35,4 +37,39 @@ class SalesController < ApplicationController
             params.require(:sale).permit(:total_price,
                 sale_lines_attributes: [:id, :article_id, :article_amount, :article_final_price_unit])
         end
+
+        def check_category_field (category_id)
+          @category_id = category_id
+          if ! @category_id.empty?
+              prices_articles = @sales.flat_map { |sale|
+                sale.sale_lines.collect { |s|
+                  next if s.article.category_id != @category_id.to_i
+                    s.article_final_price_unit.to_f * s.article_amount
+                }
+              }.compact
+              if prices_articles.empty?
+                @total_per_categories = 0
+              else
+                @total_per_categories = prices_articles.inject(&:+)
+              end
+          end
+
+          def check_article_field (article_id)
+            @article_id = article_id
+            if ! @article_id.empty?
+                prices_articles = @sales.flat_map { |sale|
+                  sale.sale_lines.collect { |s|
+                    next if s.article.id != @article_id.to_i
+                      s.article_final_price_unit.to_f * s.article_amount
+                  }
+                }.compact
+                if prices_articles.empty?
+                  @total_per_articles = 0
+                else
+                  @total_per_articles = prices_articles.inject(&:+)
+                end
+            end
+        end
+
+      end
 end
