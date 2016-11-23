@@ -82,3 +82,5 @@ gem 'mysql2'
 gem 'ransack'
 
 gem 'dotenv-rails'
+
+gem 'devise'

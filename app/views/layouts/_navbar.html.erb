@@ -9,6 +9,16 @@
             <li class="<%= 'active' if current_page?(marks_path) %>"><%= link_to "Marcas", marks_path %></li>
             <li class="<%= 'active' if current_page?(stocks_path) %>"><%= link_to "Stock", stocks_path %></li>
             <li class="<%= 'active' if current_page?(update_prices_path) %>"><%= link_to "Actualizar precios", update_prices_path %></li>
+            <li class="<%= 'active' if current_page?(sales_path) %>"><%= link_to "Listar ventas", sales_path %></li>
+        </ul>
+        <ul class="pull-right nav navbar-nav">
+          <li>
+            <% if user_signed_in? %>
+            <%= link_to('Cerrar sesión', destroy_user_session_path, :method => :delete) %>
+            <% else %>
+            <%= link_to('Iniciar sesión', new_user_session_path)  %>
+            <% end %>
+          </li>
         </ul>
     </div>
 </nav>
