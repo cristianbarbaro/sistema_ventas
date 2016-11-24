@@ -18,7 +18,7 @@ class UsersController < ApplicationController
   def update
       if @user.update(user_params)
           flash[:success] = 'El usuario se ha actualizado correctamente.'
-          redirect_to @user
+          redirect_to admin_user_path @user
       else
           render :edit
       end
@@ -30,7 +30,7 @@ class UsersController < ApplicationController
       else
           flash[:alert] = "No se pudo eliminar el usuario. Vuelva a intentarlo."
       end
-      redirect_to users_url
+      redirect_to admin_users_url
   end
 
   private

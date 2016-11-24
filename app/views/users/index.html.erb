@@ -27,8 +27,8 @@
               <%= user.admin ? "Si" : "No" %>
             </td>
             <td>
-                <%= link_to '', edit_user_path(user), class:'glyphicon glyphicon-pencil btn btn-xs btn-default', title: 'Editar rol' %>
-                <%= link_to '', user, class:'glyphicon glyphicon-trash btn btn-xs btn-danger', title: 'Borrar', method: :delete, data: { confirm: '¿Estás seguro que quieres eliminar el elemento?' } %>
+                <%= link_to '', edit_admin_user_path(user), class:'glyphicon glyphicon-pencil btn btn-xs btn-default', title: 'Editar rol' %>
+                <%= link_to '', admin_user_path(user), class:'glyphicon glyphicon-trash btn btn-xs btn-danger', title: 'Borrar', method: :delete, data: { confirm: '¿Estás seguro que quieres eliminar el elemento?' } %>
             </td>
           </tr>
         <% end %>

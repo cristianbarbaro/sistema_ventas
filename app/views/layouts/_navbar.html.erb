@@ -21,7 +21,7 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= current_user.username %> <span class="caret"></span></a>
               <ul class="dropdown-menu">
                 <% if current_user.admin? %>
-                  <li><a href="<%= users_path %>">Listar usuarios</a></li>
+                  <li><a href="<%= admin_users_path %>">Listar usuarios</a></li>
                 <% end %>
                 <li><a href="<%= edit_user_registration_path %>">Editar cuenta</a></li>
                 <li><%= link_to('Cerrar sesión', destroy_user_session_path, :method => :delete) %></li>
