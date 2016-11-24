@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
+
+  authenticate :user do
     root 'sales#new'
 
     resources :marks
@@ -17,4 +19,5 @@ Rails.application.routes.draw do
     get 'update_prices', to: 'articles#update_prices'
     post 'update_prices', to: 'articles#update_prices_post'
     # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  end
 end

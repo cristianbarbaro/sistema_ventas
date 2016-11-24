@@ -1,4 +1,5 @@
 class SalesController < ApplicationController
+    before_action :authorized_admin, only: [:index]
 
     def new
         @sale = Sale.new
