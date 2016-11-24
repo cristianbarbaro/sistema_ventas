@@ -231,6 +231,20 @@ def load_articles
     end
 end
 
+administrador = User.create!({
+      username: "administrador",
+      password: "administrador",
+      email: "admin@admin.com",
+      admin: true
+  })
+
+vendedor = User.create!({
+      username: "vendedor",
+      password: "vendedor",
+      email: "ventas@ventas.com",
+      admin: false
+  })
+
 load_providers
 load_marks
 load_categories

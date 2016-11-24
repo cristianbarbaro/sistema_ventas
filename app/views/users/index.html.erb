@@ -1,0 +1,40 @@
+<div class="container-fluid">
+    <%#= render "layouts/search_form", search: :name_cont %>
+    <div class="pull-right">
+        <%#= link_to 'Nuevo proveedor', new_provider_path, class: "btn btn-primary" %>
+    </div>
+</div>
+
+<h3 class="text-center">Usuarios</h3>
+
+<div class="col-md-8 col-md-offset-2">
+    <table class="table table-condensed table-hover">
+      <thead>
+        <tr>
+          <th style="width: 30%">Nombre usuario</th>
+          <th style="width: 40%">Email</th>
+          <th style="width: 10%">Admin</th>
+          <th style="width: 20%">Acciones</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @users.each do |user| %>
+          <tr>
+            <td><%= user.username %></td>
+            <td><%= user.email %></td>
+            <td>
+              <%= user.admin ? "Si" : "No" %>
+            </td>
+            <td>
+                <%= link_to '', edit_user_path(user), class:'glyphicon glyphicon-pencil btn btn-xs btn-default', title: 'Editar rol' %>
+                <%= link_to '', user, class:'glyphicon glyphicon-trash btn btn-xs btn-danger', title: 'Borrar', method: :delete, data: { confirm: '¿Estás seguro que quieres eliminar el elemento?' } %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <br>
+    <%#= render "layouts/pagination", collection: @users %>
+</div>

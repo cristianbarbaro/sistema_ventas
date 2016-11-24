@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     resources :providers
     resources :stocks, only: [:index]
     resources :sales, only: [:new, :create, :index, :show]
+    resources :users, except: [:new, :create]
     # Update prices for providers (in mass).
     get 'update_prices', to: 'articles#update_prices'
     post 'update_prices', to: 'articles#update_prices_post'

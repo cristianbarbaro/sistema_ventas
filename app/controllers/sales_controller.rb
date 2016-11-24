@@ -1,5 +1,4 @@
 class SalesController < ApplicationController
-    before_action :authenticate_user!, only: [:index, :show]
 
     def new
         @sale = Sale.new
