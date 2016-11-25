@@ -63,7 +63,7 @@ wget https://raw.githubusercontent.com/puma/puma/master/tools/jungle/upstart/pum
 wget https://raw.githubusercontent.com/puma/puma/master/tools/jungle/upstart/puma.conf
 ```
 
-Cambiar el nombre `apps` en `setuid` y `setgid` por el nombre del usuario del sistema del archivo `puma.conf`.
+Cambiar el nombre `apps` en `setuid` y `setgid` en el archivo `puma.conf` por el nombre del usuario del sistema que desplegará la aplicación.
 
 * Copiar el script en el directorio de los servicios de Upstart. Esto permitirá que Puma inicie con el sistema.
 
@@ -71,7 +71,7 @@ Cambiar el nombre `apps` en `setuid` y `setgid` por el nombre del usuario del si
 sudo cp puma.conf puma-manager.conf /etc/init
 ```
 
-* Configurar `/etc/puma.conf` con los directorios de las aplicaciones que se desean ejecutar en el sistema.
+* Configurar `/etc/puma.conf` (si no existe, crearlo) con los directorios de las aplicaciones que se desean ejecutar en el sistema. En nuestro caso, nos quedará así:
 
 ```
 /var/www/sistema_ventas/
