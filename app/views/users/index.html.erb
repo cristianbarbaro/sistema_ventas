@@ -1,0 +1,36 @@
+<h3 class="text-center">Usuarios</h3>
+
+<div class="col-md-8 col-md-offset-2">
+    <table class="table table-condensed table-hover">
+      <thead>
+        <tr>
+          <th style="width: 30%">Nombre usuario</th>
+          <th style="width: 40%">Email</th>
+          <th style="width: 10%">Admin</th>
+          <th style="width: 20%">Acciones</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @users.each do |user| %>
+          <tr>
+            <td><%= user.username %></td>
+            <td><%= user.email %></td>
+            <td>
+              <%= user.admin ? "Si" : "No" %>
+            </td>
+            <td>
+              <% if current_user.id != user.id %>
+                <%= link_to '', edit_admin_user_path(user), class:'glyphicon glyphicon-pencil btn btn-xs btn-default', title: 'Editar rol' %>
+              <% else %>
+                <div class="glyphicon glyphicon-pencil btn btn-xs btn-default" disabled></div>
+              <% end %>
+                <%= link_to '', admin_user_path(user), class:'glyphicon glyphicon-trash btn btn-xs btn-danger', title: 'Borrar', method: :delete, data: { confirm: '¿Estás seguro que quieres eliminar el elemento?' } %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <br>
+</div>

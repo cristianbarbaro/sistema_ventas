@@ -11,7 +11,8 @@ default: &default
   timeout: 5000
   username: root
   password: cristian2
-  socket: /var/run/mysqld/mysqld.sock
+  host: <%= ENV['DATABASE_HOST'] %>
+  port: <%= ENV['DATABASE_PORT'] %>
 
 development:
   <<: *default

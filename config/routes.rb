@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  devise_for :users
+
+  authenticate :user do
     root 'sales#new'
 
     resources :marks
@@ -8,9 +11,13 @@ Rails.application.routes.draw do
     end
     resources :providers
     resources :stocks, only: [:index]
-    resources :sales, only: [:new, :create]
+    resources :sales, only: [:new, :create, :index, :show]
+    scope 'admin', as: 'admin' do
+      resources :users, except: [:new, :create]
+    end
     # Update prices for providers (in mass).
     get 'update_prices', to: 'articles#update_prices'
     post 'update_prices', to: 'articles#update_prices_post'
     # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  end
 end

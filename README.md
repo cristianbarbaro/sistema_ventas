@@ -4,7 +4,7 @@
 
 ```
 $ sudo apt-get install -y autoconf bison build-essential lib{ssl,yaml,sqlite3}-dev libreadline6{,-dev} zlib1g{,-dev}
-$ sudo apt-get install nodejs git mysql-server libmysqlclient-dev
+$ sudo apt-get install nodejs git mysql-server libmysqlclient-dev sendmail
 $ git clone https://github.com/sstephenson/rbenv.git ~/.rbenv
 $ git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
 $ echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
@@ -12,13 +12,6 @@ $ echo 'eval "$(rbenv init -)"' >> ~/.bashrc
 $ source ~/.bashrc
 $ rbenv install 2.3.0
 $ rbenv global 2.3.0
-```
-
-* Instalar rbenv-vars para variables de entorno.
-
-```
-$ cd ~/.rbenv/plugins
-$ git clone https://github.com/sstephenson/rbenv-vars.git
 ```
 
 * Si desea evitar instalación de documentación junto a las gemas, ejecutar:

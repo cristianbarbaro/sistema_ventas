@@ -23,3 +23,9 @@
 # Ignore .env
 .env
 .rbenv-vars
+
+# Ignore assets:
+public/assets
+
+# Ignore data mysql container:
+data/

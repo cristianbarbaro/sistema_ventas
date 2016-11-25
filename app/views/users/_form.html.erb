@@ -1,0 +1,21 @@
+<%= simple_form_for @user, url: admin_user_path do |f| %>
+    <div class="container col-md-4 col-md-offset-4">
+        <%= f.error_notification %>
+
+        <p>
+            <strong>Nombre de usuario:</strong>
+            <%= @user.username %>
+        </p>
+        <p>
+            <strong>Correo electrónico:</strong>
+            <%= @user.email %>
+        </p>
+        <div class="form-group">
+            <%= f.input :admin, autofocus: true %>
+        </div>
+        <div class="pull-right">
+            <%= f.button :submit, class: "btn btn-success" %>
+        </div>
+    </div>
+
+<% end %>
