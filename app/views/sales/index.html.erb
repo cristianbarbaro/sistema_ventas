@@ -2,21 +2,30 @@
 <div class="col-md-6 col-md-offset-3">
     <h4><b>Total ventas listadas: $ <%= @total_interval %></b></h4>
     <!-- https://eonasdan.github.io/bootstrap-datetimepicker/ -->
-    <%= search_form_for @q, html: {class: "form-inline"} do |f| %>
-        <div class="text-center">
+    <div class="container-fluid">
+      <%= search_form_for @q, html: {class: ""} do |f| %>
+        <div class="form-inline">
           <%= f.label "Inicio:" %>
           <%= f.datetime_field :created_at_gt, class: "form-control", "data-date-inline-picker" => true, placeholder: "dd-mm-aaaa hh:mm" %>
           <%= f.label "Final:" %>
           <%= f.datetime_field :created_at_lt, class: "form-control", "data-date-inline-picker" => true, placeholder: "dd-mm-aaaa hh:mm" %>
         </div>
-        <div style="padding-top: 10px; padding-bottom: 10px;">
-          <%= f.collection_select :sale_lines_article_category_id_eq, Category.order(:name), :id, :name, {prompt: "Seleccione categoría", include_blank: true}, {class: "form-control"} %>
-          <%= f.collection_select :sale_lines_article_id_eq, Article.order(:name), :id, :name, {prompt: "Seleccione artículo", include_blank: true}, {class: "form-control"} %>
-          <%= f.submit "Buscar", class: "btn btn-success" %>
+        <div class="container-fluid" style="padding-top: 10px; padding-bottom: 10px;">
+          <div class="col-md-5">
+            <%= f.collection_select :sale_lines_article_category_id_eq, Category.order(:name), :id, :name, {prompt: "Seleccione categoría", include_blank: true}, {class: "form-control"} %>
+          </div>
+          <div class="col-md-5">
+            <%= f.collection_select :sale_lines_article_id_eq, Article.order(:name), :id, :name, {prompt: "Seleccione artículo", include_blank: true}, {class: "form-control"} %>
+          </div>
+          <div class="col-md-2">
+            <%= f.submit "Buscar", class: "btn btn-success" %>
+          </div>
         </div>
+        <div class="container-fluid">
+          <a href="sales" class="btn btn-danger pull-right">Borrar formulario</a>
+        </div>
+      </div>
     <% end %>
-
-    <a href="sales" class="btn btn-primary pull-right">Borrar formulario</a>
 
     <% if (not @category_id.nil?) && (not @category_id.empty?) %>
       <h4>Total vendido en categoría <%= Category.find(@category_id).name %>: $ <%= @total_per_categories %></h4>
