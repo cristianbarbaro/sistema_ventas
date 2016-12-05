@@ -260,7 +260,7 @@ es:
       locked: "Your account is locked."
       last_attempt: "You have one more attempt before your account is locked."
       not_found_in_database: "Invalid %{authentication_keys} or password."
-      timeout: "Your session expired. Please sign in again to continue."
+      timeout: "Tu sesión ha expirado. Por favor, inicia sesión nuevamente para poder continuar."
       unauthenticated: "Debes registrarte o iniciar sesión para continuar."
       unconfirmed: "You have to confirm your email address before continuing."
     mailer:
