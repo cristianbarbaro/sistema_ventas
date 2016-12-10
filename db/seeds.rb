@@ -232,14 +232,14 @@ def load_articles
 end
 
 administrador = User.create!({
-      username: "administrador",
+      name: "administrador",
       password: "administrador",
       email: "admin@admin.com",
       admin: true
   })
 
 vendedor = User.create!({
-      username: "vendedor",
+      name: "vendedor",
       password: "vendedor",
       email: "ventas@ventas.com",
       admin: false
