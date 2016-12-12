@@ -1,6 +1,6 @@
 ### Pasos iniciales
 
-* Instalación de Ruby (usando *rbenv*) y otras dependencias:
+* Instalación de Ruby (usando *rbenv*) y otras dependencias (usaremos la versión `2.3.0` de Ruby y Ubuntu 14.04):
 
 ```
 $ sudo apt-get install -y autoconf bison build-essential lib{ssl,yaml,sqlite3}-dev libreadline6{,-dev} zlib1g{,-dev}
@@ -30,13 +30,37 @@ $ gem install bundler
 $ bundle install
 ```
 
-* Una vez dentro de la carpeta de la aplicación, editar el archivo .ruby-env con los valores que correspondan y actualizar las variables de entorno
+* Una vez dentro de la carpeta de la aplicación, editar el archivo .env con los valores que correspondan y configurar las variables de entorno.
 
 ```
-$ cp .rbenv-vars.example .rbenv-vars
+$ cp .env-example .env
 $ rails secret
-$ rbenv vars
 ```
+
+### Ejecución en modo de desarrollo (saltar a la siguiente sección para despliegue en producción)
+
+* Colocarse en la carpeta del proyecto.
+* Cambiar al branch de desarrollo.
+
+```
+$ cd sistema_ventas
+$ git checkout develop
+```
+
+* Crear, configurar y cargar datos de pruebas en la base de datos.
+
+```
+$ rake db:reset
+```
+
+* Ejecutar el servidor.
+
+```
+$ rails s -b 0.0.0.0
+```
+
+* Acceder a http://localhost:3000.
+
 
 ### Despliegue para producción usando Nginx como proxy
 
@@ -77,7 +101,7 @@ sudo cp puma.conf puma-manager.conf /etc/init
 /var/www/sistema_ventas/
 ```
 
-* Iniciar Puma.
+* Iniciar Puma. (En Ubuntu 16.04 se requiere la instalación de `upstart`)
 ```
 sudo start puma-manager
 ```
@@ -85,6 +109,7 @@ sudo start puma-manager
 * Copiar el contenido del archivo config/nginx.conf en las configuraciones del servidor:
 
 ```
+cd /var/www/sistema_ventas/
 sudo cp config/nginx.conf /etc/nginx/sites-available/default
 ```
 
@@ -97,30 +122,24 @@ sudo service nginx restart
 ```
 
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### Corriendo los tests
 
-Things you may want to cover:
+En nuestra aplicación hay varios _tests_ implementados, no todos, de controladores y modelos usando el módulo `MiniTest`. Acá veremos cómo ejecutarlos.
 
-* Ruby version
- ```
-2.3.0
+* Para correr todos los tests, basta con el siguiente comando:
+
+```
+$ rails test
 ```
 
-* System dependencies
-gem install bundle
-gem install rails
+* Para correr los tests relacionados con los modelos:
 
-* Configuration
+```
+$ rails test test/models
+```
 
-* Database creation
+* Para correr los tests relacionados con los controladores:
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+```
+$ rails test test/controllers
+```
