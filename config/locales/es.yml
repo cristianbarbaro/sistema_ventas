@@ -259,7 +259,7 @@ es:
       invalid: "%{authentication_keys} o contraseña inválidos."
       locked: "Your account is locked."
       last_attempt: "You have one more attempt before your account is locked."
-      not_found_in_database: "Invalid %{authentication_keys} or password."
+      not_found_in_database: "%{authentication_keys} o contraseña inválidos."
       timeout: "Tu sesión ha expirado. Por favor, inicia sesión nuevamente para poder continuar."
       unauthenticated: "Debes registrarte o iniciar sesión para continuar."
       unconfirmed: "You have to confirm your email address before continuing."
