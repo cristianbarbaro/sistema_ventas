@@ -64,6 +64,16 @@ $ rails s -b 0.0.0.0
 
 ### Despliegue para producción usando Nginx como proxy
 
+* En este branch, deben ejecutarse algunos pasos extras:
+
+* Configurar el archivo `puma.rb` para correr en producción (en el branch `production` ya está configurado automáticamente).
+
+```
+cp config/puma-prod.rb config/puma.rb
+```
+
+* Es necesario configurar los parámetros en el archivo `.env` para poder usar las API de Google y Facebook.
+
 * Instalar Nginx
 
 ```
