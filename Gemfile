@@ -84,3 +84,5 @@ gem 'ransack'
 gem 'dotenv-rails'
 
 gem 'devise'
+# PDF
+gem 'prawn-rails'

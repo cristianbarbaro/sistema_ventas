@@ -31,7 +31,11 @@
                 <% end %>
             </tbody>
         </table>
-
+        <% if not params[:q].nil? %>
+          <%= link_to 'Ver en PDF', articles_path(:format => :pdf, utf8: params[:utf8], :'q[code_or_description_or_name_cont]' => params[:q]['code_or_description_or_name_cont'], :'q[mark_id_eq]' => params[:q]['mark_id_eq'], :'q[category_id_eq]' => params[:q]['category_id_eq'], :'q[providers_id_eq]' => params[:q]['providers_id_eq']), class:'btn btn-xs btn-info pull-right', title: 'PDF', target: '_blank' %>
+        <% else %>
+          <%= link_to 'Ver en PDF', articles_path(:format => :pdf), class:'btn btn-xs btn-info pull-right', title: 'PDF', target: '_blank' %>
+        <% end %>
         <%= render "layouts/pagination", collection: @articles %>
     </div>
 <!-- When @articles collection is empty -->
