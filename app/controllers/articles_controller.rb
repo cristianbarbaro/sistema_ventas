@@ -23,6 +23,10 @@ class ArticlesController < ApplicationController
                     @articles = Article.paginate(:page => params[:page]).order(:name)
                 end
             }
+            format.pdf {
+                @q = Article.ransack(params[:q])
+                @articles  = @q.result.includes(:mark, :category).order(:name)
+            }
         end
     end
 

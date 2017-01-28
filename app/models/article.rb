@@ -33,6 +33,10 @@ class Article < ApplicationRecord
         self.historics.create({cost_price: new_cost_price})
     end
 
+    def last_update_price()
+      self.historics.last.created_at
+    end
+
     private
         # Convierto codigo en string para poder buscar en Ransack usando LIKE de SQL.
         ransacker :code do
