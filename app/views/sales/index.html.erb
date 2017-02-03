@@ -1,28 +1,30 @@
 <h3 class="text-center">Listado de ventas</h3>
 <div class="col-md-6 col-md-offset-3">
-    <h4><b>Total ventas listadas: $ <%= @total_interval %></b></h4>
-    <!-- https://eonasdan.github.io/bootstrap-datetimepicker/ -->
     <div class="container-fluid">
+      <h4><b>Total ventas listadas: $ <%= @total_interval %></b></h4>
+    </div>
+    <!-- https://eonasdan.github.io/bootstrap-datetimepicker/ -->
+    <div class="container-fluid no-padding">
       <%= search_form_for @q, html: {class: ""} do |f| %>
-        <div class="form-inline">
-          <%= f.label "Inicio:" %>
-          <%= f.datetime_field :created_at_gt, class: "form-control", "data-date-inline-picker" => true, placeholder: "dd-mm-aaaa hh:mm" %>
-          <%= f.label "Final:" %>
-          <%= f.datetime_field :created_at_lt, class: "form-control", "data-date-inline-picker" => true, placeholder: "dd-mm-aaaa hh:mm" %>
+        <div class="container-fluid">
+          <div class="form-inline">
+            <%= f.label "Inicio:" %>
+            <%= f.datetime_field :created_at_gt, class: "form-control", "data-date-inline-picker" => true, placeholder: "dd-mm-aaaa hh:mm" %>
+            <%= f.label "Final:" %>
+            <%= f.datetime_field :created_at_lt, class: "form-control", "data-date-inline-picker" => true, placeholder: "dd-mm-aaaa hh:mm" %>
+          </div>
         </div>
-        <div class="container-fluid" style="padding-top: 10px; padding-bottom: 10px;">
-          <div class="col-md-5">
+        <div class="container-fluid text-center" style="padding-top: 10px; padding-bottom: 10px;">
+          <div class="col-md-5 no-padding">
             <%= f.collection_select :sale_lines_article_category_id_eq, Category.order(:name), :id, :name, {prompt: "Seleccione categoría", include_blank: true}, {class: "form-control"} %>
           </div>
-          <div class="col-md-5">
+          <div class="col-md-5 no-padding">
             <%= f.collection_select :sale_lines_article_id_eq, Article.order(:name), :id, :name, {prompt: "Seleccione artículo", include_blank: true}, {class: "form-control"} %>
           </div>
-          <div class="col-md-2">
-            <%= f.submit "Buscar", class: "btn btn-success" %>
+          <div class="col-md-2 no-padding">
+            <%= f.button "", class: "btn btn-success glyphicon glyphicon-search" %>
+            <a href="sales" class="btn btn-danger glyphicon glyphicon-remove"></a>
           </div>
-        </div>
-        <div class="container-fluid">
-          <a href="sales" class="btn btn-danger pull-right">Borrar formulario</a>
         </div>
       </div>
     <% end %>

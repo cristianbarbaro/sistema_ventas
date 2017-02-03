@@ -1,18 +1,18 @@
 <div class="container-fluid">
     <%= render "layouts/search_form", search: :name_cont %>
     <div class="pull-right">
-        <%= link_to 'Nueva marca', new_mark_path, class: "btn btn-primary" %>
+        <%= link_to 'Nueva marca', new_mark_path, class: "btn btn-success" %>
     </div>
 </div>
 
 <h3 class="text-center">Marcas</h3>
 
 <div class="col-md-6 col-md-offset-3">
-    <table class="table table-condensed table-hover">
-      <thead>
+    <table class="table table-condensed table-bordered">
+      <thead class="bg-primary">
         <tr>
-          <th style="width: 75%">Nombre</th>
-          <th style="width: 25%">Acciones</th>
+          <th class="text-center" style="width: 75%">Nombre</th>
+          <th class="text-center" style="width: 25%">Acciones</th>
         </tr>
       </thead>
 
@@ -20,7 +20,7 @@
         <% @marks.each do |mark| %>
           <tr>
             <td><%= mark.name %></td>
-            <td>
+            <td class="text-center">
                 <%= link_to '', mark, class:'glyphicon glyphicon-eye-open btn btn-xs btn-default', title: 'Ver' %>
                 <%= link_to '', edit_mark_path(mark), class:'glyphicon glyphicon-pencil btn btn-xs btn-default', title: 'Editar' %>
                 <%= link_to '', mark, class:'glyphicon glyphicon-trash btn btn-xs btn-danger', method: :delete, data: { confirm: '¿Estás seguro que quieres eliminar el elemento?' }, title: 'Borrar' %>
