@@ -1,17 +1,25 @@
 <div class="container col-md-4 col-md-offset-4">
-    <h3 class="text-center">Información de proveedor</h3>
-    <p>
+  <div class="container-fluid">
+    <div class="panel panel-primary">
+      <div class="panel panel-heading text-center">
+        <b class="text-center">Información del proveedor</b>
+      </div>
+      <div class="panel-body">
+      <p>
         <strong>Nombre:</strong>
         <%= @provider.name %>
-    </p>
-    <p>
+      </p>
+      <p>
         <strong>Contacto:</strong>
         <%= @provider.contact %>
-    </p>
-
-    <div class="pull-right">
-        <%= link_to 'Nuevo proveedor', new_provider_path, class: "btn btn-primary" %>
-        <%= link_to 'Editar', edit_provider_path(@provider), class: "btn btn-success" %>
-        <%= link_to 'Proveedores', providers_path, class: "btn btn-default" %>
+      </p>
     </div>
+    </div>
+    <div class="pull-right">
+      <%= link_to 'Nuevo proveedor', new_provider_path, class: "btn btn-primary" %>
+      <%= link_to 'Editar', edit_provider_path(@provider), class: "btn btn-success" %>
+      <%= link_to 'Proveedores', providers_path, class: "btn btn-default" %>
+    </div>
+  </div>
+
 </div>
