@@ -1,13 +1,13 @@
 <h3 class="text-center">Usuarios</h3>
 
 <div class="col-md-8 col-md-offset-2">
-    <table class="table table-condensed table-hover">
-      <thead>
+    <table class="table table-condensed table-bordered">
+      <thead class="bg-primary">
         <tr>
-          <th style="width: 30%">Nombre usuario</th>
-          <th style="width: 40%">Email</th>
-          <th style="width: 10%">Admin</th>
-          <th style="width: 20%">Acciones</th>
+          <th class="text-center" style="width: 30%">Nombre usuario</th>
+          <th class="text-center" style="width: 40%">Email</th>
+          <th class="text-center" style="width: 10%">Admin</th>
+          <th class="text-center" style="width: 20%">Acciones</th>
         </tr>
       </thead>
 
@@ -19,7 +19,7 @@
             <td>
               <%= user.admin ? "Si" : "No" %>
             </td>
-            <td>
+            <td class="text-center">
               <% if current_user.id != user.id %>
                 <%= link_to '', edit_admin_user_path(user), class:'glyphicon glyphicon-pencil btn btn-xs btn-default', title: 'Editar rol' %>
               <% else %>

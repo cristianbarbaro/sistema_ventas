@@ -1,19 +1,19 @@
 <h3 class="text-center">Histórico <%= get_article(params[:article_id]).name %></h3>
 
 <div class="col-md-6 col-md-offset-3">
-    <table class="table table-condensed table-hover">
-      <thead>
+    <table class="table table-condensed table-bordered">
+      <thead class="bg-primary">
         <tr>
-          <th>Fecha modificación</th>
-          <th>Valor actualizado</th>
+          <th class="text-center">Fecha modificación</th>
+          <th class="text-center">Valor actualizado</th>
         </tr>
       </thead>
 
       <tbody>
         <% @historics.each do |h| %>
           <tr>
-            <td><%= h.created_at.strftime("%d-%m-%Y") %></td>
-            <td><%= h.cost_price %></td>
+            <td class="text-center"><%= h.created_at.strftime("%d-%m-%Y") %></td>
+            <td class="text-center">$ <%= h.cost_price %></td>
           </tr>
         <% end %>
       </tbody>

@@ -2,15 +2,15 @@
 <% if @articles.length > 0 %>
     <div class="">
         <h3 class="text-center">Artículos</h3>
-        <table class="table table-condensed table-hover">
-            <thead>
+        <table class="table table-condensed table-bordered">
+            <thead class="bg-primary">
                 <tr>
-                    <th>Código</th>
-                    <th>Nombre</th>
-                    <th>Descripción</th>
-                    <th>Marca</th>
-                    <th>Precio público</th>
-                    <th>Acciones</th>
+                    <th class="text-center">Código</th>
+                    <th class="text-center">Nombre</th>
+                    <th class="text-center">Descripción</th>
+                    <th class="text-center">Marca</th>
+                    <th class="text-center">Precio público</th>
+                    <th class="text-center">Acciones</th>
                 </tr>
             </thead>
 
@@ -22,7 +22,7 @@
                     <td style="text-overflow:ellipsis;overflow:hidden;white-space:nowrap"><%= article.description %></td>
                     <td><%= get_mark_name(article.mark_id) %></td>
                     <td>$ <%= article.final_price %></td>
-                    <td>
+                    <td class="text-center">
                         <%= link_to '', article, class:'glyphicon glyphicon-eye-open btn btn-xs btn-default', title: 'Ver' %>
                         <%= link_to '', edit_article_path(article), class:'glyphicon glyphicon-pencil btn btn-xs btn-default', title: 'Editar' %>
                         <%= link_to '', article, class:'glyphicon glyphicon-trash btn btn-xs btn-danger', method: :delete, data: { confirm: '¿Estás seguro que quieres eliminar el elemento?' }, title: 'Borrar' %>
