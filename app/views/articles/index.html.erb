@@ -21,7 +21,7 @@
                     <td><%= article.name %></td>
                     <td style="text-overflow:ellipsis;overflow:hidden;white-space:nowrap"><%= article.description %></td>
                     <td><%= get_mark_name(article.mark_id) %></td>
-                    <td>$ <%= article.final_price %></td>
+                    <td>$ <%= get_final_price(article.id) %></td>
                     <td class="text-center">
                         <%= link_to '', article, class:'glyphicon glyphicon-eye-open btn btn-xs btn-default', title: 'Ver' %>
                         <%= link_to '', edit_article_path(article), class:'glyphicon glyphicon-pencil btn btn-xs btn-default', title: 'Editar' %>
