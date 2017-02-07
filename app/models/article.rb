@@ -20,11 +20,6 @@ class Article < ApplicationRecord
     validates :code, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
     validates_uniqueness_of :code
 
-    def self.search(search)
-        self.where(
-            "code = ? or name LIKE ? or description LIKE ?", search, "%#{search}%", "%#{search}%")
-    end
-
     def create_historic(new_cost_price)
         self.historics.create({cost_price: new_cost_price})
     end
