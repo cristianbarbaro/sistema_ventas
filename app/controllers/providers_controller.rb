@@ -4,7 +4,7 @@ class ProvidersController < ApplicationController
 
     def index
         @q = Provider.ransack(params[:q])
-        @providers = @q.result.paginate(page: params[:page]).order(:name)
+        @providers = @q.result.paginate(page: params[:page]).order(sort_column + " " + sort_direction)
     end
 
     def show
@@ -52,5 +52,9 @@ class ProvidersController < ApplicationController
 
         def provider_params
             params.require(:provider).permit(:name, :contact)
+        end
+
+        def sort_column
+          Provider.column_names.include?(params[:sort]) ? params[:sort] : "name"
         end
 end

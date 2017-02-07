@@ -3,13 +3,13 @@
     <div class="">
         <h3 class="text-center">Artículos</h3>
         <table class="table table-condensed table-bordered table-hover">
-            <thead class="bg-primary">
+            <thead class="">
                 <tr>
-                    <th class="text-center">Código</th>
-                    <th class="text-center">Nombre</th>
-                    <th class="text-center">Descripción</th>
+                    <th class="text-center"><%= sortable "code", "Código" %></th>
+                    <th class="text-center"><%= sortable "name", "Nombre" %></th>
+                    <th class="text-center"><%= sortable "description", "Descripción" %></th>
                     <th class="text-center">Marca</th>
-                    <th class="text-center">Precio público</th>
+                    <th class="text-center"><%= sortable "final_price", "Precio público" %></th>
                     <th class="text-center">Acciones</th>
                 </tr>
             </thead>
