@@ -1,13 +1,18 @@
 <div class="container-fluid">
     <%= render "layouts/search_form", search: :name_cont %>
-    <div class="pull-right">
-        <%= link_to 'Nuevo proveedor', new_provider_path, class: "btn btn-success" %>
-    </div>
 </div>
-
-<h3 class="text-center">Proveedores</h3>
+<hr>
 
 <div class="col-md-8 col-md-offset-2">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <strong>Proveedores</strong>
+      <div class="pull-right">
+        <div class="btn-right">
+          <%= link_to 'Nuevo proveedor', new_provider_path, class: "btn btn-success btn-xs" %>
+        </div>
+      </div>
+    </div>
     <table class="table table-condensed table-bordered table-hover">
       <thead class="">
         <tr>
@@ -31,6 +36,7 @@
         <% end %>
       </tbody>
     </table>
+  </div>
 
     <br>
     <%= render "layouts/pagination", collection: @providers %>
