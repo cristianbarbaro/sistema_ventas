@@ -7,7 +7,7 @@ class ArticlesController < ApplicationController
             format.html {
                 @q = Article.ransack(params[:q])
                 # @articles  = @q.result.page(params[:page]).order(:name)
-                @articles  = @q.result.includes(:mark, :category).page(params[:page]).order(sort_column + " " + sort_direction)
+                @articles  = @q.result.includes(:mark, :category).page(params[:page]).order(:name)
             }
             format.json {
                 # En formato JSON, verifico si se realiza consulta por el código de barra,
@@ -20,12 +20,12 @@ class ArticlesController < ApplicationController
                         @article
                     end
                 else
-                    @articles = Article.paginate(:page => params[:page]).order(sort_column + " " + sort_direction)
+                    @articles = Article.paginate(:page => params[:page]).order(:name)
                 end
             }
             format.pdf {
                 @q = Article.ransack(params[:q])
-                @articles  = @q.result.includes(:mark, :category).order(sort_column + " " + sort_direction)
+                @articles  = @q.result.includes(:mark, :category).order(:name)
             }
         end
     end
@@ -121,9 +121,5 @@ class ArticlesController < ApplicationController
                                     :mark_id, :category_id, :code, :final_price,
                                     article_providers_attributes: [:id, :article_id, :provider_id, :_destroy],
                                     stock_attributes: [:id, :article_id, :current_amount, :minimum_amount])
-        end
-
-        def sort_column
-          Article.column_names.include?(params[:sort]) ? params[:sort] : "name"
         end
 end

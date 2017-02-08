@@ -16,8 +16,8 @@
     <table class="table table-condensed table-bordered table-hover">
       <thead class="">
         <tr>
-          <th class="text-center" style="width: 40%"><%= sortable "name", "Nombre" %></th>
-          <th class="text-center" style="width: 40%"><%= sortable "contact", "Contacto" %></th>
+          <th class="text-center" style="width: 40%"><%= sort_link(@q, :name, default_order: :desc) %></th>
+          <th class="text-center" style="width: 40%"><%= sort_link(@q, :contact) %></th>
           <th class="text-center" style="width: 20%">Acciones</th>
         </tr>
       </thead>

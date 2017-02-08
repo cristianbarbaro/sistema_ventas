@@ -13,11 +13,11 @@
         <table class="table table-condensed table-bordered table-hover">
           <thead class="">
             <tr>
-              <th class="text-center"><%= sortable "code", "Código" %></th>
-              <th class="text-center"><%= sortable "name", "Nombre" %></th>
-              <th class="text-center"><%= sortable "description", "Descripción" %></th>
-              <th class="text-center">Marca</th>
-              <th class="text-center"><%= sortable "final_price", "Precio público" %></th>
+              <th class="text-center"><%= sort_link(@q, :code) %></th>
+              <th class="text-center"><%= sort_link(@q, :name, default_order: :desc) %></th>
+              <th class="text-center"><%= sort_link(@q, :description) %></th>
+              <th class="text-center"><%= sort_link(@q, :mark_name, "Marca") %></th>
+              <th class="text-center"><%= sort_link(@q, :final_price) %></th>
               <th class="text-center">Acciones</th>
             </tr>
           </thead>

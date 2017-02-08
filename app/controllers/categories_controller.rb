@@ -3,7 +3,7 @@ class CategoriesController < ApplicationController
 
     def index
         @q = Category.ransack(params[:q])
-        @categories = @q.result.paginate(:page => params[:page]).order(sort_column + " " + sort_direction)
+        @categories = @q.result.paginate(:page => params[:page]).order(:name)
     end
 
     def show
@@ -51,9 +51,5 @@ class CategoriesController < ApplicationController
 
         def set_category
             @category = Category.find(params[:id])
-        end
-
-        def sort_column
-          Category.column_names.include?(params[:sort]) ? params[:sort] : "name"
         end
 end

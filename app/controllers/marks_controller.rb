@@ -4,7 +4,7 @@ class MarksController < ApplicationController
   # GET /marks
   def index
     @q = Mark.ransack(params[:q])
-    @marks = @q.result.paginate(:page => params[:page]).order(sort_column + " " + sort_direction)
+    @marks = @q.result.paginate(:page => params[:page]).order(:name)
   end
 
   # GET /marks/1
@@ -81,9 +81,5 @@ class MarksController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def mark_params
       params.require(:mark).permit(:name)
-    end
-
-    def sort_column
-      Provider.column_names.include?(params[:sort]) ? params[:sort] : "name"
     end
 end

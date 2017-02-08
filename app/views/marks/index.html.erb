@@ -16,7 +16,7 @@
       <table class="table table-condensed table-bordered table-hover">
       <thead class="">
         <tr>
-          <th class="text-center" style="width: 75%"><%= sortable "name", "Nombre" %></th>
+          <th class="text-center" style="width: 75%"><%= sort_link(@q, :name, default_order: :desc) %></th>
           <th class="text-center" style="width: 25%">Acciones</th>
         </tr>
       </thead>
