@@ -21,7 +21,7 @@
                     <input type="hidden" id="totalLines" value="0">
                     <input type="hidden" id="article_id" value="">
                     <td>
-                        <input type="number" class="form-control" id="searchArt" autofocus="autofocus" onkeypress="searchArticle(event);">
+                        <input type="number" class="form-control" id="searchArt" autofocus="autofocus" onkeypress="searchArticle(event);" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Ingrese código de producto y presione tecla Enter.">
                     </td>
                     <td>
                         <input type="number" class="form-control" id="amountArt" min="1" max="100"
@@ -97,6 +97,7 @@
     $('.modal').on('shown.bs.modal', function() {
       $(this).find('[autofocus]').focus();
     });
+    $('#searchArt').popover();
     </script>
 
 </div>
