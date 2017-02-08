@@ -1,18 +1,23 @@
 <div class="container-fluid">
     <%= render "layouts/search_form", search: :name_cont %>
-    <div class="pull-right">
-        <%= link_to 'Nuevo proveedor', new_provider_path, class: "btn btn-success" %>
-    </div>
 </div>
-
-<h3 class="text-center">Proveedores</h3>
+<hr>
 
 <div class="col-md-8 col-md-offset-2">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <strong>Proveedores</strong>
+      <div class="pull-right">
+        <div class="btn-right">
+          <%= link_to 'Nuevo proveedor', new_provider_path, class: "btn btn-success btn-xs" %>
+        </div>
+      </div>
+    </div>
     <table class="table table-condensed table-bordered table-hover">
-      <thead class="bg-primary">
+      <thead class="">
         <tr>
-          <th class="text-center" style="width: 40%">Nombre</th>
-          <th class="text-center" style="width: 40%">Contacto</th>
+          <th class="text-center" style="width: 40%"><%= sort_link(@q, :name, default_order: :desc) %></th>
+          <th class="text-center" style="width: 40%"><%= sort_link(@q, :contact) %></th>
           <th class="text-center" style="width: 20%">Acciones</th>
         </tr>
       </thead>
@@ -31,6 +36,7 @@
         <% end %>
       </tbody>
     </table>
+  </div>
 
     <br>
     <%= render "layouts/pagination", collection: @providers %>

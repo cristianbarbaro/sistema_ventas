@@ -1,43 +1,51 @@
 <%= render 'article_search_form' %>
+<hr>
 <% if @articles.length > 0 %>
-    <div class="">
-        <h3 class="text-center">Artículos</h3>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <strong>Artículos</strong>
+        <div class="pull-right">
+            <div class="btn-right">
+                <%= link_to 'Nuevo artículo', new_article_path, class: "btn btn-success btn-xs" %>
+            </div>
+        </div>
+      </div>
         <table class="table table-condensed table-bordered table-hover">
-            <thead class="bg-primary">
-                <tr>
-                    <th class="text-center">Código</th>
-                    <th class="text-center">Nombre</th>
-                    <th class="text-center">Descripción</th>
-                    <th class="text-center">Marca</th>
-                    <th class="text-center">Precio público</th>
-                    <th class="text-center">Acciones</th>
-                </tr>
-            </thead>
+          <thead class="">
+            <tr>
+              <th class="text-center"><%= sort_link(@q, :code) %></th>
+              <th class="text-center"><%= sort_link(@q, :name, default_order: :desc) %></th>
+              <th class="text-center"><%= sort_link(@q, :description) %></th>
+              <th class="text-center"><%= sort_link(@q, :mark_name, "Marca") %></th>
+              <th class="text-center"><%= sort_link(@q, :final_price) %></th>
+              <th class="text-center">Acciones</th>
+            </tr>
+          </thead>
 
-            <tbody>
-                <% @articles.each do |article| %>
-                <tr>
-                    <td><%= article.code %></td>
-                    <td><%= article.name %></td>
-                    <td style="text-overflow:ellipsis;overflow:hidden;white-space:nowrap"><%= article.description %></td>
-                    <td><%= get_mark_name(article.mark_id) %></td>
-                    <td>$ <%= article.final_price %></td>
-                    <td class="text-center">
-                        <%= link_to '', article, class:'glyphicon glyphicon-eye-open btn btn-xs btn-default', title: 'Ver' %>
-                        <%= link_to '', edit_article_path(article), class:'glyphicon glyphicon-pencil btn btn-xs btn-default', title: 'Editar' %>
-                        <%= link_to '', article, class:'glyphicon glyphicon-trash btn btn-xs btn-danger', method: :delete, data: { confirm: '¿Estás seguro que quieres eliminar el elemento?' }, title: 'Borrar' %>
-                    </td>
-                </tr>
-                <% end %>
-            </tbody>
+          <tbody>
+            <% @articles.each do |article| %>
+            <tr>
+              <td><%= article.code %></td>
+              <td><%= article.name %></td>
+              <td style="text-overflow:ellipsis;overflow:hidden;white-space:nowrap"><%= article.description %></td>
+              <td><%= get_mark_name(article.mark_id) %></td>
+              <td>$ <%= get_final_price(article.id) %></td>
+              <td class="text-center">
+                <%= link_to '', article, class:'glyphicon glyphicon-eye-open btn btn-xs btn-default', title: 'Ver' %>
+                <%= link_to '', edit_article_path(article), class:'glyphicon glyphicon-pencil btn btn-xs btn-default', title: 'Editar' %>
+                <%= link_to '', article, class:'glyphicon glyphicon-trash btn btn-xs btn-danger', method: :delete, data: { confirm: '¿Estás seguro que quieres eliminar el elemento?' }, title: 'Borrar' %>
+              </td>
+            </tr>
+            <% end %>
+          </tbody>
         </table>
-        <% if not params[:q].nil? %>
-          <%= link_to 'Ver en PDF', articles_path(:format => :pdf, utf8: params[:utf8], :'q[code_or_description_or_name_cont]' => params[:q]['code_or_description_or_name_cont'], :'q[mark_id_eq]' => params[:q]['mark_id_eq'], :'q[category_id_eq]' => params[:q]['category_id_eq'], :'q[providers_id_eq]' => params[:q]['providers_id_eq']), class:'btn btn-xs btn-info pull-right', title: 'PDF', target: '_blank' %>
-        <% else %>
-          <%= link_to 'Ver en PDF', articles_path(:format => :pdf), class:'btn btn-xs btn-info pull-right', title: 'PDF', target: '_blank' %>
-        <% end %>
-        <%= render "layouts/pagination", collection: @articles %>
     </div>
+    <% if not params[:q].nil? %>
+    <%= link_to 'Ver en PDF', articles_path(:format => :pdf, utf8: params[:utf8], :'q[code_or_description_or_name_cont]' => params[:q]['code_or_description_or_name_cont'], :'q[mark_id_eq]' => params[:q]['mark_id_eq'], :'q[category_id_eq]' => params[:q]['category_id_eq'], :'q[providers_id_eq]' => params[:q]['providers_id_eq']), class:'btn btn-xs btn-info pull-right', title: 'PDF', target: '_blank' %>
+    <% else %>
+    <%= link_to 'Ver en PDF', articles_path(:format => :pdf), class:'btn btn-xs btn-info pull-right', title: 'PDF', target: '_blank' %>
+    <% end %>
+    <%= render "layouts/pagination", collection: @articles %>
 <!-- When @articles collection is empty -->
 <% else %>
     <div class="container">

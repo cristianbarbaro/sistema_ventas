@@ -13,7 +13,7 @@
         <% @historics.each do |h| %>
           <tr>
             <td class="text-center"><%= h.created_at.strftime("%d-%m-%Y") %></td>
-            <td class="text-center">$ <%= h.cost_price %></td>
+            <td class="text-center">$ <%= get_historic_cost_price(h.id) %></td>
           </tr>
         <% end %>
       </tbody>

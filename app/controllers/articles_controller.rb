@@ -122,5 +122,4 @@ class ArticlesController < ApplicationController
                                     article_providers_attributes: [:id, :article_id, :provider_id, :_destroy],
                                     stock_attributes: [:id, :article_id, :current_amount, :minimum_amount])
         end
-
 end

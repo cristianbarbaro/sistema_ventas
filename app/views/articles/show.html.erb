@@ -21,7 +21,7 @@
           </p>
           <p>
               <strong>Precio de costo:</strong>
-              $ <%= @article.cost_price %>
+              $ <%= get_cost_price(@article.id) %>
           </p>
           <p>
               <strong>Historial de precios:</strong>
@@ -33,7 +33,7 @@
           </p>
           <p>
               <strong>Precio venta:</strong>
-              $ <%= @article.final_price %>
+              $ <%= get_final_price(@article.id) %>
           </p>
           <p>
               <strong>Categoría:</strong>

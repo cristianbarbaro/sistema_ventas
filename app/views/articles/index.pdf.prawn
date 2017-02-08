@@ -7,7 +7,7 @@ prawn_document do |pdf|
         row = []
       end
       cell1 = pdf.make_cell(:content => article.name[0..25], :align => :center, :size => 9, :font_style => :bold)
-      cell2 = pdf.make_cell("$ " + article.final_price.to_s, :align => :center, :text_color => '000000', :size => 28, :font_style => :bold, :padding => [0, 0, -10, 0])
+      cell2 = pdf.make_cell("$ " + get_final_price(article.id).to_s, :align => :center, :text_color => '000000', :size => 28, :font_style => :bold, :padding => [0, 0, -10, 0])
       cell3 = pdf.make_cell(article.description[0..30] + "\n" + article.code.to_s + " | " + article.last_update_price.strftime("%d/%m/%Y"), :align => :left, :size => 8)
 
       subtable = pdf.make_table([ [cell1], [cell2], [cell3] ],

@@ -1,17 +1,22 @@
 <div class="container-fluid">
     <%= render "layouts/search_form", search: :name_cont %>
-    <div class="pull-right">
-        <%= link_to 'Nueva marca', new_mark_path, class: "btn btn-success" %>
-    </div>
 </div>
-
-<h3 class="text-center">Marcas</h3>
+<hr>
 
 <div class="col-md-6 col-md-offset-3">
-    <table class="table table-condensed table-bordered table-hover">
-      <thead class="bg-primary">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <strong class="text-center">Marcas</strong>
+        <div class="pull-right">
+          <div class="btn-right">
+            <%= link_to 'Nueva marca', new_mark_path, class: "btn btn-success btn-xs" %>
+          </div>
+        </div>
+      </div>
+      <table class="table table-condensed table-bordered table-hover">
+      <thead class="">
         <tr>
-          <th class="text-center" style="width: 75%">Nombre</th>
+          <th class="text-center" style="width: 75%"><%= sort_link(@q, :name, default_order: :desc) %></th>
           <th class="text-center" style="width: 25%">Acciones</th>
         </tr>
       </thead>
@@ -29,6 +34,7 @@
         <% end %>
       </tbody>
     </table>
+    </div>
 
     <br>
     <%= render "layouts/pagination", collection: @marks %>

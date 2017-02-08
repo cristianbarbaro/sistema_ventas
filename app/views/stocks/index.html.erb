@@ -1,8 +1,10 @@
-<h3 class="text-center">Stock</h3>
-
 <div class="col-md-8 col-md-offset-2">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <strong class="text-center">Stock</strong>
+    </div>
     <table class="table table-condensed table-bordered table-hover">
-      <thead class="bg-primary">
+      <thead class="">
         <tr>
           <th class="text-center">Artículo</th>
           <th class="text-center">Código de artículo</th>
@@ -22,6 +24,7 @@
         <% end %>
       </tbody>
     </table>
+  </div>
 
     <%= render "layouts/pagination", collection: @stocks %>
 </div>
