@@ -1,6 +1,5 @@
 <%= render 'article_search_form' %>
 <hr>
-<% if @articles.length > 0 %>
     <div class="panel panel-default">
       <div class="panel-heading">
         <strong>Artículos</strong>
@@ -40,14 +39,16 @@
           </tbody>
         </table>
     </div>
-    <% if not params[:q].nil? %>
-    <%= link_to 'Ver en PDF', articles_path(:format => :pdf, utf8: params[:utf8], :'q[code_or_description_or_name_cont]' => params[:q]['code_or_description_or_name_cont'], :'q[mark_id_eq]' => params[:q]['mark_id_eq'], :'q[category_id_eq]' => params[:q]['category_id_eq'], :'q[providers_id_eq]' => params[:q]['providers_id_eq']), class:'btn btn-xs btn-info pull-right', title: 'PDF', target: '_blank' %>
-    <% else %>
-    <%= link_to 'Ver en PDF', articles_path(:format => :pdf), class:'btn btn-xs btn-info pull-right', title: 'PDF', target: '_blank' %>
+    <% if @articles.length > 0 %>
+      <% if not params[:q].nil? %>
+        <%= link_to 'Ver en PDF', articles_path(:format => :pdf, utf8: params[:utf8], :'q[code_or_description_or_name_cont]' => params[:q]['code_or_description_or_name_cont'], :'q[mark_id_eq]' => params[:q]['mark_id_eq'], :'q[category_id_eq]' => params[:q]['category_id_eq'], :'q[providers_id_eq]' => params[:q]['providers_id_eq']), class:'btn btn-xs btn-info pull-right', title: 'PDF', target: '_blank' %>
+      <% else %>
+        <%= link_to 'Ver en PDF', articles_path(:format => :pdf), class:'btn btn-xs btn-info pull-right', title: 'PDF', target: '_blank' %>
+      <% end %>
     <% end %>
     <%= render "layouts/pagination", collection: @articles %>
-<!-- When @articles collection is empty -->
-<% else %>
+<!-- When @articles collection is empty and ransack not -->
+<% if @articles.length == 0 and not params[:q].nil? %>
     <div class="container">
         <h3 class="text-center">No se encontraron artículos.</h3>
     </div>
