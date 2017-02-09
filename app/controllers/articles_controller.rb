@@ -55,10 +55,12 @@ class ArticlesController < ApplicationController
     end
 
     def update
-        old_price = @article.cost_price
+        @old_cost_price = @article.cost_price
+        @old_percentage = @article.percentage
+        @old_final_price = @article.final_price
         if @article.update(article_params)
             # @article.historics.create!({cost_price: params.require(:article)[:cost_price], article_id: @article.id})
-            if old_price != @article.cost_price
+            if article_prices_changed?
                 @article.create_historic params.require(:article)[:cost_price]
             end
             flash[:success] = 'El artículo se ha actualizado correctamente.'
@@ -121,5 +123,13 @@ class ArticlesController < ApplicationController
                                     :mark_id, :category_id, :code, :final_price,
                                     article_providers_attributes: [:id, :article_id, :provider_id, :_destroy],
                                     stock_attributes: [:id, :article_id, :current_amount, :minimum_amount])
+        end
+
+        def article_prices_changed?
+          if @old_cost_price != @article.cost_price or @old_percentage != @article.percentage or @old_final_price != @article.final_price
+            true
+          else
+            false
+          end
         end
 end
