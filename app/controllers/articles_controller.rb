@@ -6,11 +6,10 @@ class ArticlesController < ApplicationController
         respond_to do |format|
             format.html {
                 @q = Article.ransack(params[:q])
-                # @articles  = @q.result.page(params[:page]).order(:name)
                 @articles  = @q.result.includes(:mark, :category).page(params[:page]).order(:name)
             }
             format.json {
-                # En formato JSON, verifico si se realiza consulta por el código de barra,
+                # En formato JSON, verifico si se realiza consulta por el código de barra (usado en el index de Sales),
                 # sino es así, retorno todos los artículos como se hiciera por defecto. ¿Es esta la mejor solución?
                 if not params[:q].nil?
                     @article = Article.find_by(code: params[:q])
@@ -20,12 +19,11 @@ class ArticlesController < ApplicationController
                         @article
                     end
                 else
-                    @articles = Article.paginate(:page => params[:page]).order(:name)
+                    @articles = get_articles
                 end
             }
             format.pdf {
-                @q = Article.ransack(params[:q])
-                @articles  = @q.result.includes(:mark, :category).order(:name)
+              @articles = get_articles
             }
         end
     end
@@ -131,5 +129,10 @@ class ArticlesController < ApplicationController
           else
             false
           end
+        end
+
+        def get_articles
+          @q = Article.ransack(params[:q])
+          @q.result.includes(:mark, :category).order(:name)
         end
 end
