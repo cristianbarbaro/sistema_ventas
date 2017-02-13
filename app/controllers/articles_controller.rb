@@ -1,6 +1,6 @@
 class ArticlesController < ApplicationController
     before_action :set_article, only: [:show, :edit, :update, :destroy]
-    before_action :set_return_to, only: [:show, :edit, :update_prices, :index]
+    before_action :set_return_to_previous_url, only: [:show, :edit, :update_prices, :index]
     helper ArticlesHelper
 
     def index
@@ -63,7 +63,7 @@ class ArticlesController < ApplicationController
                 @article.create_historic params.require(:article)[:cost_price]
             end
             flash[:success] = 'El artículo se ha actualizado correctamente.'
-            redirect_to return_to
+            redirect_to return_to_previous_url
         else
             render :edit
         end
@@ -101,7 +101,7 @@ class ArticlesController < ApplicationController
         end
         length = ids_array.length
         flash[:success] = "Los precios de los #{length} productos se han actualizado correctamente."
-        redirect_to return_to
+        redirect_to return_to_previous_url
     end
 
     private
@@ -129,11 +129,4 @@ class ArticlesController < ApplicationController
           @q.result.includes(:mark, :category).order(:name)
         end
 
-        def set_return_to
-          session[:return_to] = request.referer
-        end
-
-        def return_to
-          session.delete(:return_to)
-        end
 end
