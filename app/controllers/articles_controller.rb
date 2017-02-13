@@ -79,36 +79,28 @@ class ArticlesController < ApplicationController
 
     # GET /update_prices
     def update_prices
-        @providers = Provider.all
+        @articles = get_articles
     end
 
     # POST /update_prices
     def update_prices_post
         percentage = params[:percentage].to_f
-        if params[:provider_id].nil?
-            provider = nil
-        else
-            provider = Provider.find(params[:provider_id])
+        ids_array = params[:article_id]
+        ids_array.each do |id|
+          a = Article.find(id)
+          old_price = a.cost_price
+          a.cost_price = ( old_price * percentage / 100 ) + old_price
+          final_price = (a.cost_price * a.percentage / 100) + a.cost_price
+          a.final_price = final_price.round
+          a.save
+          # Creamos el histórico de precios
+          if old_price != a.cost_price
+              a.create_historic(a.cost_price)
+          end
         end
-        if provider
-            articles = provider.articles
-            # Qué tan copada puede ser esta iteración?
-            articles.each do |a|
-                old_price = a.cost_price
-                a.cost_price = ( old_price * percentage / 100 ) + old_price
-                final_price = (a.cost_price * a.percentage / 100) + a.cost_price
-                a.final_price = final_price.round
-                a.save
-                # Creamos el histórico de precios
-                if old_price != a.cost_price
-                    a.create_historic(a.cost_price)
-                end
-            end
-            flash[:success] = 'Los precios del proveedor se han actualizado correctamente.'
-        else
-            flash[:alert] = 'No se ha encontrado al proveedor buscado.'
-        end
-        redirect_to update_prices_url
+        length = ids_array.length
+        flash[:success] = "Los precios de los #{length} productos se han actualizado correctamente."
+        # redirect_to articles_path
     end
 
     private
