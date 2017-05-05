@@ -30,7 +30,7 @@ class ProvidersController < ApplicationController
     def update
         if @provider.update(provider_params)
             flash[:success] = 'El proveedor se ha actualizado correctamente.'
-            redirect_to @provider
+            redirect_to return_to_previous_url
         else
             render :edit
         end

@@ -1,16 +1,16 @@
 class ArticlesController < ApplicationController
     before_action :set_article, only: [:show, :edit, :update, :destroy]
+    before_action :set_return_to_previous_url, only: [:show, :edit, :update_prices, :index]
     helper ArticlesHelper
 
     def index
         respond_to do |format|
             format.html {
                 @q = Article.ransack(params[:q])
-                # @articles  = @q.result.page(params[:page]).order(:name)
                 @articles  = @q.result.includes(:mark, :category).page(params[:page]).order(:name)
             }
             format.json {
-                # En formato JSON, verifico si se realiza consulta por el código de barra,
+                # En formato JSON, verifico si se realiza consulta por el código de barra (usado en el index de Sales),
                 # sino es así, retorno todos los artículos como se hiciera por defecto. ¿Es esta la mejor solución?
                 if not params[:q].nil?
                     @article = Article.find_by(code: params[:q])
@@ -20,12 +20,11 @@ class ArticlesController < ApplicationController
                         @article
                     end
                 else
-                    @articles = Article.paginate(:page => params[:page]).order(:name)
+                    @articles = get_articles
                 end
             }
             format.pdf {
-                @q = Article.ransack(params[:q])
-                @articles  = @q.result.includes(:mark, :category).order(:name)
+              @articles = get_articles
             }
         end
     end
@@ -64,7 +63,7 @@ class ArticlesController < ApplicationController
                 @article.create_historic params.require(:article)[:cost_price]
             end
             flash[:success] = 'El artículo se ha actualizado correctamente.'
-            redirect_to @article
+            redirect_to return_to_previous_url
         else
             render :edit
         end
@@ -81,36 +80,28 @@ class ArticlesController < ApplicationController
 
     # GET /update_prices
     def update_prices
-        @providers = Provider.all
+        @articles = get_articles
     end
 
     # POST /update_prices
     def update_prices_post
         percentage = params[:percentage].to_f
-        if params[:provider_id].nil?
-            provider = nil
-        else
-            provider = Provider.find(params[:provider_id])
+        ids_array = params[:article_id]
+        ids_array.each do |id|
+          a = Article.find(id)
+          old_price = a.cost_price
+          a.cost_price = ( old_price * percentage / 100 ) + old_price
+          final_price = (a.cost_price * a.percentage / 100) + a.cost_price
+          a.final_price = final_price.round
+          a.save
+          # Creamos el histórico de precios
+          if old_price != a.cost_price
+              a.create_historic(a.cost_price)
+          end
         end
-        if provider
-            articles = provider.articles
-            # Qué tan copada puede ser esta iteración?
-            articles.each do |a|
-                old_price = a.cost_price
-                a.cost_price = ( old_price * percentage / 100 ) + old_price
-                final_price = (a.cost_price * a.percentage / 100) + a.cost_price
-                a.final_price = final_price.round
-                a.save
-                # Creamos el histórico de precios
-                if old_price != a.cost_price
-                    a.create_historic(a.cost_price)
-                end
-            end
-            flash[:success] = 'Los precios del proveedor se han actualizado correctamente.'
-        else
-            flash[:alert] = 'No se ha encontrado al proveedor buscado.'
-        end
-        redirect_to update_prices_url
+        length = ids_array.length
+        flash[:success] = "Los precios de los #{length} productos se han actualizado correctamente."
+        redirect_to return_to_previous_url
     end
 
     private
@@ -132,4 +123,10 @@ class ArticlesController < ApplicationController
             false
           end
         end
+
+        def get_articles
+          @q = Article.ransack(params[:q])
+          @q.result.includes(:mark, :category).order(:name)
+        end
+
 end

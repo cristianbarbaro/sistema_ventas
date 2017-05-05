@@ -42,8 +42,10 @@
     <% if @articles.length > 0 %>
       <% if not params[:q].nil? %>
         <%= link_to 'Ver en PDF', articles_path(:format => :pdf, utf8: params[:utf8], :'q[code_or_description_or_name_cont]' => params[:q]['code_or_description_or_name_cont'], :'q[mark_id_eq]' => params[:q]['mark_id_eq'], :'q[category_id_eq]' => params[:q]['category_id_eq'], :'q[providers_id_eq]' => params[:q]['providers_id_eq']), class:'btn btn-xs btn-info pull-right', title: 'PDF', target: '_blank' %>
+        <%= link_to 'Actualizar precios', update_prices_path(utf8: params[:utf8], :'q[code_or_description_or_name_cont]' => params[:q]['code_or_description_or_name_cont'], :'q[mark_id_eq]' => params[:q]['mark_id_eq'], :'q[category_id_eq]' => params[:q]['category_id_eq'], :'q[providers_id_eq]' => params[:q]['providers_id_eq']), class:'btn btn-xs btn-danger pull-left', title: 'Actualizar precios de artículos listados' %>
       <% else %>
         <%= link_to 'Ver en PDF', articles_path(:format => :pdf), class:'btn btn-xs btn-info pull-right', title: 'PDF', target: '_blank' %>
+        <%= link_to 'Actualizar precios', update_prices_path, class:'btn btn-xs btn-danger pull-left', title: 'Actualizar precios de artículos listados' %>
       <% end %>
     <% end %>
     <%= render "layouts/pagination", collection: @articles %>
