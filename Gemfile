@@ -84,8 +84,9 @@ gem 'ransack'
 gem 'dotenv-rails'
 
 gem 'devise'
-
 # OmniAuth Facebook:
 gem 'omniauth-facebook'
 # gem 'omniauth-google'
 gem "omniauth-google-oauth2"
+# PDF
+gem 'prawn-rails'

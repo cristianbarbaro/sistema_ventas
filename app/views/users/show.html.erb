@@ -1,19 +1,27 @@
 <div class="container col-md-4 col-md-offset-4">
-    <h3 class="text-center">Información de usuario:</h3>
-    <p>
-        <strong>Nombre de usuario:</strong>
-        <%= @user.name %>
-    </p>
-    <p>
-        <strong>Correo electrónico:</strong>
-        <%= @user.email %>
-    </p>
-    <p>
-        <strong>Administrador:</strong>
-        <%= @user.admin ? "Si" : "No" %>
-    </p>
-
-    <div class="pull-right">
-        <%= link_to 'Usuarios', admin_users_path, class: "btn btn-default" %>
+  <div class="container-fluid">
+    <div class="panel panel-primary">
+      <div class="panel-heading text-center">
+        <b class="text-center">Información de usuario</b>
+      </div>
+      <div class="panel-body">
+        <p>
+          <strong>Nombre de usuario:</strong>
+          <%= @user.username %>
+        </p>
+        <p>
+          <strong>Correo electrónico:</strong>
+          <%= @user.email %>
+        </p>
+        <p>
+          <strong>Administrador:</strong>
+          <%= @user.admin ? "Si" : "No" %>
+        </p>
+      </div>
     </div>
+    <div class="pull-right">
+      <%= link_to 'Usuarios', admin_users_path, class: "btn btn-default" %>
+    </div>
+  </div>
+
 </div>

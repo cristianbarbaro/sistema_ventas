@@ -1,35 +1,43 @@
 <div class="container col-md-4 col-md-offset-4">
-    <h3 class="text-center">Detalles de venta número <%= @sale.id %>:</h3>
-    <p>
-        <strong>Fecha:</strong>
-        <%= @sale.created_at.strftime("%d/%m/%Y") %>
-    </p>
-    <p>
-        <strong>Hora:</strong>
-        <%= @sale.created_at.strftime("%H:%M:%S") %>
-    </p>
-    <p>
-        <strong>Monto total venta:</strong>
-        $ <%= @sale.total_price %>
-    </p>
-    <p>
-        <strong>Productos vendidos:</strong>
-        <ul>
+  <div class="container-fluid">
+    <div class="panel panel-primary">
+      <div class="panel-heading text-center">
+        <b class="text-center">Detalles venta número <%= @sale.id %></b>
+      </div>
+      <div class="panel-body">
+        <p>
+          <strong>Fecha:</strong>
+          <%= @sale.created_at.strftime("%d/%m/%Y") %>
+        </p>
+        <p>
+          <strong>Hora:</strong>
+          <%= @sale.created_at.strftime("%H:%M:%S") %>
+        </p>
+        <p>
+          <strong>Monto total venta:</strong>
+          $ <%= @sale.total_price %>
+        </p>
+        <p>
+          <strong>Productos vendidos:</strong>
+          <ul>
             <% @sale.sale_lines.each do |line| %>
-                <li><strong>Nombre artículo: <%= line.article.name %></li></strong>
-                    <ul>
-                        <li>Código artículo: <%= line.article.code %>.</li>
-                        <li>Precio unitario final: $ <%= line.article_final_price_unit %>.</li>
-                        <li>Cantidad vendida: <%= line.article_amount %> unidades.</li>
-                        <li>Total por producto: $ <%= line.article_amount * line.article_final_price_unit %>.</li>
-                        <li>Categoría de artículo: <%= line.article.category.name %>.</li>
-                    </ul>
+            <li><strong>Nombre artículo: <%= line.article.name %></li></strong>
+            <ul>
+              <li>Código artículo: <%= line.article.code %>.</li>
+              <li>Precio unitario final: $ <%= line.article_final_price_unit %>.</li>
+              <li>Cantidad vendida: <%= line.article_amount %> unidades.</li>
+              <li>Total por producto: $ <%= line.article_amount * line.article_final_price_unit %>.</li>
+              <li>Categoría de artículo: <%= line.article.category.name %>.</li>
+            </ul>
             <% end %>
-        </ul>
-    </p>
-
-    <div class="pull-right">
-        <%= link_to 'Ventas', sales_path, class: "btn btn-success" %>
-        <input type="button" value="Cerrar" onclick="self.close()" class="btn btn-danger">
+          </ul>
+        </p>
+      </div>
     </div>
+    <div class="pull-right">
+      <%= link_to 'Ventas', sales_path, class: "btn btn-success" %>
+      <input type="button" value="Cerrar" onclick="self.close()" class="btn btn-danger">
+    </div>
+  </div>
+
 </div>

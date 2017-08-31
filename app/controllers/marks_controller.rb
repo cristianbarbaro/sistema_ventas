@@ -44,7 +44,7 @@ class MarksController < ApplicationController
       if @mark.update(mark_params)
         format.html {
             flash[:success] = 'La marca se ha actualizado correctamente.'
-            redirect_to @mark
+            redirect_to return_to_previous_url
         }
         format.json { render :show, status: :ok, location: @mark }
       else

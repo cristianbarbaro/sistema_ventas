@@ -9,13 +9,13 @@
                 <%= f.input :name %>
             </div>
             <div class="form-group">
-                <%= f.input :cost_price, input_html: {value: @article.cost_price || 0, min: 0, onkeyup: 'calculateFinalPrice(this);'} %>
+                <%= f.input :cost_price, input_html: {value: get_cost_price(@article.id) || 0, min: 0, onkeyup: 'calculateFinalPrice(this);'} %>
             </div>
             <div class="form-group">
                 <%= f.input :percentage, input_html: {value: @article.percentage || 0, min: 0, onkeyup: 'calculateFinalPrice(this);'} %>
             </div>
             <div class="form-group">
-                <%= f.input :final_price, input_html: {value: @article.final_price || 0, min: 0} %>
+                <%= f.input :final_price, input_html: {value: get_final_price(@article.id) || 0, min: 0} %>
             </div>
         </div>
         <div class="container col-md-6">

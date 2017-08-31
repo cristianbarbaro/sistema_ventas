@@ -1,13 +1,22 @@
 <div class="container col-md-4 col-md-offset-4">
-    <h3 class="text-center">Información de categoria</h3>
-    <p>
-        <strong>Nombre:</strong>
-        <%= @category.name %>
-    </p>
+  <div class="container-fluid">
+    <div class="panel panel-primary">
+      <div class="panel-heading text-center">
+        <b class="text-center">Información de categoria</b>
+      </div>
+      <div class="panel-body">
+        <p>
+          <strong>Nombre:</strong>
+          <%= @category.name %>
+        </p>
 
-    <div class="pull-right">
-        <%= link_to 'Nueva categoría', new_category_path, class: "btn btn-primary" %>
-        <%= link_to 'Editar', edit_category_path(@category), class: "btn btn-success" %>
-        <%= link_to 'Categorías', categories_path, class: "btn btn-default" %>
+      </div>
     </div>
+    <div class="pull-right">
+      <%= link_to 'Nueva categoría', new_category_path, class: "btn btn-primary" %>
+      <%= link_to 'Editar', edit_category_path(@category), class: "btn btn-success" %>
+      <%= link_to 'Categorías', categories_path, class: "btn btn-default" %>
+    </div>
+  </div>
+
 </div>

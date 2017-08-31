@@ -1,24 +1,21 @@
 <div class="col-md-6 col-md-offset-3">
     <h3 class="text-center">Actualizar precios</h3>
+    <div class="alert alert-danger">
+      <strong>Advertencia</strong>: Estás por modificar el precio de costo a <strong><%= @articles.length %></strong> artículos. El precio final se calcula en base al nuevo precio de costo y al porcentaje que tenga definido cada producto previamente cargado.
+    </div>
     <form class="" action="/update_prices" method="post">
         <%# Autenticación por token %>
         <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-        <div class="form-group">
-            <label for="prov">Seleccione un proveedor: </label>
-            <select class="form-control" name="provider_id" id="prov" required>
-                <option disabled selected value></option>
-                <% @providers.order(:name).each do |pr| %>
-                <option value="<%= pr.id %>"><%= pr.name %></option>
-                <% end %>
-            </select>
-        </div>
+        <% @articles.each do |article| %>
+          <input type="hidden" name="article_id[]" value="<%= article.id %>">
+        <% end %>
         <div class="form-group">
             <label for="amount_upd">Ingrese porcentaje (Ingresar valor negativo, resta al precio actual):</label>
             <input type="number" name="percentage" value="0" min="-100" max="1000" id="amount_upd" class="form-control">
         </div>
         <div class="pull-right">
-            <%= link_to 'Cancelar', root_path, class: "btn btn-default" %>
-            <input type="submit" name="commit" value="Actualizar" class="btn btn-success">
+            <%= link_to 'Cancelar', articles_path, class: "btn btn-default" %>
+            <input type="submit" name="commit" value="Actualizar" class="btn btn-success" onclick="confirm('¿Estás seguro que quieres editar el precio a <%= @articles.length %> artículos?');">
         </div>
     </form>
 

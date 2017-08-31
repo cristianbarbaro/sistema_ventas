@@ -10,4 +10,16 @@ module ArticlesHelper
     def get_mark_name(mark_id)
         Mark.find(mark_id).name
     end
+
+    def get_final_price(article_id)
+      if not article_id.nil?
+        ActionController::Base.helpers.number_with_precision(Article.find(article_id).final_price, precision: 2, separator: '.')
+      end
+    end
+
+    def get_cost_price(article_id)
+      if not article_id.nil?
+        ActionController::Base.helpers.number_with_precision(Article.find(article_id).cost_price, precision: 2, separator: '.')
+      end
+    end
 end
