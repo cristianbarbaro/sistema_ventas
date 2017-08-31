@@ -29,3 +29,5 @@ public/assets
 
 # Ignore data mysql container:
 data/
+
+docker-compose.yml
