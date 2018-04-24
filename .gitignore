@@ -31,3 +31,5 @@ public/assets
 data/
 
 docker-compose.yml
+
+.vagrant
