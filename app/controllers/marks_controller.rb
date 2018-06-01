@@ -1,5 +1,6 @@
 class MarksController < ApplicationController
   before_action :set_mark, only: [:show, :edit, :update, :destroy]
+  before_action :authorized_admin
 
   # GET /marks
   def index

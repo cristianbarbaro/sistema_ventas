@@ -1,5 +1,6 @@
 class CategoriesController < ApplicationController
     before_action :set_category, only: [:show, :edit, :update, :destroy]
+    before_action :authorized_admin
 
     def index
         @q = Category.ransack(params[:q])

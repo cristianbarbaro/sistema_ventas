@@ -1,6 +1,7 @@
 class ArticlesController < ApplicationController
     before_action :set_article, only: [:show, :edit, :update, :destroy]
     before_action :set_return_to_previous_url, only: [:show, :edit, :update_prices, :index]
+    before_action :authorized_admin, except: [:index]
     helper ArticlesHelper
 
     def index
