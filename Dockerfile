@@ -15,7 +15,8 @@ WORKDIR $APPDIR
 
 COPY Gemfile Gemfile.lock $APPDIR
 
-RUN bundle install
+RUN gem install bundler && \
+  bundle install
 
 COPY . $APPDIR
 

@@ -17,6 +17,10 @@
           <strong>Administrador:</strong>
           <%= @user.admin ? "Si" : "No" %>
         </p>
+        <p>
+        <strong>Activado:</strong>
+          <%= @user.deactivated ? "No" : "Si" %>
+        </p>
       </div>
     </div>
     <div class="pull-right">

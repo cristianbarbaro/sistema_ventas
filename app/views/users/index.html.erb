@@ -7,6 +7,7 @@
           <th class="text-center" style="width: 30%">Nombre usuario</th>
           <th class="text-center" style="width: 40%">Email</th>
           <th class="text-center" style="width: 10%">Admin</th>
+          <th class="text-center" style="width: 10%">Activado</th>          
           <th class="text-center" style="width: 20%">Acciones</th>
         </tr>
       </thead>
@@ -18,6 +19,9 @@
             <td><%= user.email %></td>
             <td class="text-center">
               <%= user.admin ? "Sí" : "No" %>
+            </td>
+            <td class="text-center">
+              <%= user.deactivated ? "No" : "Si" %>
             </td>
             <td class="text-center">
               <%= link_to '', admin_user_path(user), class:'glyphicon glyphicon-eye-open btn btn-xs btn-default', title: 'Ver' %>

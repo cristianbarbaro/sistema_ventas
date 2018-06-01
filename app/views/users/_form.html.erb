@@ -11,7 +11,10 @@
             <%= @user.email %>
         </p>
         <div class="form-group">
-            <%= f.input :admin, autofocus: true %>
+            <%= f.input :admin, label: "Administrador" %>
+        </div>
+        <div class="form-group">
+            <%= f.input :deactivated, label: "Desactivar" %>
         </div>
         <div class="pull-right">
             <%= f.button :submit, class: "btn btn-success" %>

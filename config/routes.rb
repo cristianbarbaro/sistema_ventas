@@ -3,6 +3,10 @@ Rails.application.routes.draw do
 
   authenticate :user do
     root 'sales#new'
+    
+  #  devise_scope :user do
+  #    get "users/sign_up" => "devise/registrations#new"
+  #  end
 
     resources :marks
     resources :categories
