@@ -5,9 +5,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable,
          :authentication_keys => [:username]
 
-  def destroy
-    update_attributes(deactivated: true) unless deactivated
-  end
+  #def destroy
+  #  update_attributes(deactivated: true) unless deactivated
+  #end
 
   def active_for_authentication?
     super && !deactivated
