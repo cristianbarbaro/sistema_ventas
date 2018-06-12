@@ -26,7 +26,11 @@ class SalesController < ApplicationController
           check_category_field params[:q][:sale_lines_article_category_id_eq]
           check_article_field params[:q][:sale_lines_article_id_eq]
         end
-        @total_interval = @sales.sum(:total_price)
+        @total_interval = 0
+        @sales.each do |sale|
+          @total_interval = @total_interval + sale.total_price
+        end
+        #@total_interval = @sales.sum(:total_price)
     end
 
     def show
