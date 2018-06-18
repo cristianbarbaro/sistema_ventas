@@ -38,7 +38,7 @@ class SalesController < ApplicationController
     end
 
     def create
-        @sale = Sale.new(sales_params)
+        @sale = Sale.new(sales_params.merge(user_id: current_user.id))
         if @sale.save!
             flash[:success] = 'La venta se ha guardado exitosamente.'
             redirect_to :root

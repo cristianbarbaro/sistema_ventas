@@ -18,6 +18,10 @@
           $ <%= @sale.total_price %>
         </p>
         <p>
+          <strong>Venta realizada por:</strong>
+          <%= @sale.user.username %>
+        </p>
+        <p>
           <strong>Productos vendidos:</strong>
           <ul>
             <% @sale.sale_lines.each do |line| %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_01_153223) do
+ActiveRecord::Schema.define(version: 2018_06_18_175531) do
 
   create_table "article_providers", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "article_id"
@@ -78,6 +78,8 @@ ActiveRecord::Schema.define(version: 2018_06_01_153223) do
     t.decimal "total_price", precision: 9, scale: 2, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
+    t.index ["user_id"], name: "index_sales_on_user_id"
   end
 
   create_table "stocks", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -110,4 +112,5 @@ ActiveRecord::Schema.define(version: 2018_06_01_153223) do
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
+  add_foreign_key "sales", "users"
 end

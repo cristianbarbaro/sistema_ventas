@@ -5,6 +5,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable,
          :authentication_keys => [:username]
 
+  has_many :articles
+
   #def destroy
   #  update_attributes(deactivated: true) unless deactivated
   #end
