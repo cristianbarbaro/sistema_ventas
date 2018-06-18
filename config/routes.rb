@@ -10,7 +10,7 @@ Rails.application.routes.draw do
         resources :historics, only: [:index]
     end
     resources :providers
-    resources :stocks, only: [:index]
+    resources :stocks, only: [:index, :edit, :update]
     resources :sales, only: [:new, :create, :index, :show]
     scope 'admin', as: 'admin' do
       resources :users, except: [:new, :create]

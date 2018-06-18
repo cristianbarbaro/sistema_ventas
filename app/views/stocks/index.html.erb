@@ -10,6 +10,7 @@
           <th class="text-center">Código de artículo</th>
           <th class="text-center">Stock actual</th>
           <th class="text-center">Stock mínimo</th>
+          <th class="text-center">Acciones</th>
         </tr>
       </thead>
 
@@ -20,6 +21,7 @@
             <td><%= link_to get_article(s.article_id).code, get_article(s.article_id) %></td>
             <td><%= s.current_amount %></td>
             <td><%= s.minimum_amount %></td>
+            <td><%= link_to '', edit_stock_path(s), class:'glyphicon glyphicon-pencil btn btn-xs btn-default', title: 'Editar' %></td>
           </tr>
         <% end %>
       </tbody>
