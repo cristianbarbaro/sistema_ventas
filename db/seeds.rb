@@ -235,14 +235,16 @@ administrador = User.create!({
       username: "administrador",
       password: "administrador",
       email: "admin@admin.com",
-      admin: true
+      admin: true,
+      deactivated: false
   })
 
 vendedor = User.create!({
       username: "vendedor",
       password: "vendedor",
       email: "ventas@ventas.com",
-      admin: false
+      admin: false,
+      deactivated: false
   })
 
 load_providers
