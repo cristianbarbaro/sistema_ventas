@@ -9,14 +9,21 @@ services:
       - .:/var/www/sistema_ventas
     ports:
       - "3000:3000"
-    links:
+    depends_on:
       - db_ventas
+    environment:
+      TZ: America/Argentina/Buenos_Aires 
+    restart: always
   db_ventas:
     image: mysql:5.6
     container_name: db_ventas
+    command: --innodb_use_native_aio=0
     ports:
       - "3306:3306"
     volumes:
       - './data:/var/lib/mysql'
     environment:
       MYSQL_ROOT_PASSWORD: ${DATABASE_PASSWORD}
+      TZ: America/Argentina/Buenos_Aires 
+    restart: always
+    

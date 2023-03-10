@@ -73,7 +73,7 @@ gem 'nested_form_fields'
 # Validates dates.
 gem 'date_validator'
 # Paginator.
-gem 'will_paginate', github: 'jonatack/will_paginate'
+gem 'will_paginate', '~> 3.3'
 # Integration with Bootstrap.
 gem 'will_paginate-bootstrap'
 # Driver mysql.
