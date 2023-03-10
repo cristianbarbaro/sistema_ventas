@@ -13,6 +13,8 @@ module Src
     # -- all .rb files in that directory are automatically loaded.
     # config.web_console.whitelisted_ips = '10.0.0.1'
     config.i18n.default_locale = :es
+    config.time_zone = 'Buenos Aires'
+    config.active_record.default_timezone = 'Buenos Aires'
   end
 end
 

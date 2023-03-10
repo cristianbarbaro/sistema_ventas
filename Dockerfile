@@ -1,11 +1,11 @@
-FROM ruby:2.3
+FROM ruby:2.7
 
 ENV APPDIR /var/www/sistema_ventas/
 
 RUN apt-get update \
   && apt-get install -y \
     build-essential \
-    mysql-client \
+    default-mysql-client \
     nodejs \
     vim \
   && useradd user \
