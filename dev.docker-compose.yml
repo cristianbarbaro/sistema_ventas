@@ -9,10 +9,17 @@ services:
       - .:/var/www/sistema_ventas
     ports:
       - "3000:3000"
-    links:
+    depends_on:
       - db_ventas
+    environment:
+      TZ: America/Argentina/Buenos_Aires
+      RAILS_ENV: develpment
+      RAILS_SERVE_STATIC_FILES: false
+      RAILS_LOG_TO_STDOUT: false
+      RUBYOPT: -W:no-deprecated
+    restart: always
   db_ventas:
-    image: mysql:5.6
+    image: mysql:5.7
     container_name: db_ventas
     ports:
       - "3306:3306"
@@ -20,3 +27,5 @@ services:
       - './data:/var/lib/mysql'
     environment:
       MYSQL_ROOT_PASSWORD: ${DATABASE_PASSWORD}
+      TZ: America/Argentina/Buenos_Aires 
+    restart: always

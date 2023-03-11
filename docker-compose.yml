@@ -4,7 +4,7 @@ services:
   ventas:
     build: .
     container_name: ventas
-    command: /bin/sh -c "export RUBYOPT='-W:no-deprecated' && rm -f /var/www/sistema_ventas/tmp/pids/server.pid && bundle exec rails server -b 0.0.0.0"
+    command: /bin/sh -c "rm -f /var/www/sistema_ventas/tmp/pids/server.pid && bundle exec puma -C config/puma-prod.rb"
     volumes:
       - .:/var/www/sistema_ventas
     ports:
@@ -12,7 +12,11 @@ services:
     depends_on:
       - db_ventas
     environment:
-      TZ: America/Argentina/Buenos_Aires 
+      TZ: America/Argentina/Buenos_Aires
+      RAILS_ENV: production
+      RAILS_SERVE_STATIC_FILES: true
+      RAILS_LOG_TO_STDOUT: false
+      RUBYOPT: -W:no-deprecated
     restart: always
   db_ventas:
     image: mysql:5.7
@@ -25,4 +29,14 @@ services:
       MYSQL_ROOT_PASSWORD: ${DATABASE_PASSWORD}
       TZ: America/Argentina/Buenos_Aires 
     restart: always
+  web_ventas:
+    image: nginx:1.23
+    container_name: web_ventas
+    volumes:
+      - .:/var/www/sistema_ventas
+      - ./config/nginx.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - "80:80"
+    restart: always
+    
     
