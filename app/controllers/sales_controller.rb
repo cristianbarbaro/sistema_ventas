@@ -37,6 +37,12 @@ class SalesController < ApplicationController
     def create
         @sale = Sale.new(sales_params)
         if @sale.save!
+            # luego de crearse las líneas, debemos actualizar el stock:
+            @sale.sale_lines.each do | line |
+              @stock = line.article.stock
+              new_amount = @stock.current_amount - line.article_amount
+              @stock.update({current_amount: new_amount})
+            end
             flash[:success] = 'La venta se ha guardado exitosamente.'
             redirect_to :root
         else

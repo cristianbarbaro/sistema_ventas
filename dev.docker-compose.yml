@@ -13,7 +13,7 @@ services:
       - db_ventas
     environment:
       TZ: America/Argentina/Buenos_Aires
-      RAILS_ENV: develpment
+      RAILS_ENV: development
       RAILS_SERVE_STATIC_FILES: false
       RAILS_LOG_TO_STDOUT: false
       RUBYOPT: -W:no-deprecated
