@@ -143,3 +143,25 @@ $ rails test test/models
 ```
 $ rails test test/controllers
 ```
+
+### Ejecución de entorno de producción en Docker Compose:
+
+* Configurar el archivo `.env` con las variables necesarias.
+
+* Ejecutar `docker compose up`
+
+```
+docker compose up -d
+```
+
+* La primera vez que se ejecuta la aplicación es necesario generar la base de datos con los datos por defecto dentro del contenedor que corre la app de rails:
+
+```
+$ docker exec -it ventas bash
+
+/var/www/sistema_ventas$ rake db:create
+/var/www/sistema_ventas$ rake db:migrate
+/var/www/sistema_ventas$ rake assets:precompile
+/var/www/sistema_ventas$ rake db:seed
+
+```
