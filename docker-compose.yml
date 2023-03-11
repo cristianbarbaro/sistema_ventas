@@ -7,8 +7,6 @@ services:
     command: /bin/sh -c "rm -f /var/www/sistema_ventas/tmp/pids/server.pid && bundle exec puma -C config/puma-prod.rb"
     volumes:
       - .:/var/www/sistema_ventas
-    ports:
-      - "3000:3000"
     depends_on:
       - db_ventas
     environment:
