@@ -33,3 +33,7 @@ data/
 docker-compose.yml
 
 .vagrant
+
+shared/log/
+shared/pids/
+shared/sockets
