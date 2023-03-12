@@ -2,7 +2,7 @@ version: '2'
 
 services:
   ventas:
-    image: cristianbarbaro/sv:0.1
+    image: cristianbarbaro/sv:0.2
     container_name: ventas
     command: /bin/sh -c "rm -f /var/www/sistema_ventas/tmp/pids/server.pid && bundle exec rails server -b 0.0.0.0"
     volumes:
@@ -19,7 +19,7 @@ services:
       RUBYOPT: -W:no-deprecated
     restart: always
   db_ventas:
-    image: mysql:5.7
+    image: mariadb:10.7.8
     container_name: db_ventas
     ports:
       - "3306:3306"

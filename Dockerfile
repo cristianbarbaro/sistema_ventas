@@ -7,7 +7,7 @@ RUN apt-get update \
     build-essential \
     default-mysql-client \
     nodejs \
-    vim \
+  && rm -rf /var/lib/apt/lists/* \
   && useradd user \
   && mkdir -p $APPDIR
 
