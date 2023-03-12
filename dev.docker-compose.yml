@@ -2,7 +2,7 @@ version: '2'
 
 services:
   ventas:
-    build: .
+    image: cristianbarbaro/sv:0.1
     container_name: ventas
     command: /bin/sh -c "rm -f /var/www/sistema_ventas/tmp/pids/server.pid && bundle exec rails server -b 0.0.0.0"
     volumes:
